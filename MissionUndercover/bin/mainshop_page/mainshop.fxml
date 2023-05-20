@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="321.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainshop_page.Controller">
+   <children>
+      <Label layoutX="137.0" layoutY="25.0" lineSpacing="1.0" prefHeight="42.0" prefWidth="73.0" style="-fx-border-style: crazy;" text="商店" textAlignment="CENTER">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="32.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.2090643346309662" green="0.43421053886413574" blue="0.23908382654190063" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <MenuButton layoutX="7.0" layoutY="3.0" mnemonicParsing="false" style="-fx-background-radius: 30;" text="設定">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <Button layoutX="260.0" layoutY="2.0" mnemonicParsing="false" onAction="#leave1" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="離開" />
+      <Separator layoutX="-43.0" layoutY="78.0" prefHeight="33.0" prefWidth="364.0" />
+      <ImageView fitHeight="70.0" fitWidth="58.0" layoutX="21.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/時數.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="74.0" layoutX="25.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/獵人.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="58.0" layoutX="21.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/經驗值.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="97.0" layoutY="115.0" text="獵人卡">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="198.0" text="加時器">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="282.0" text="經驗加成">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="144.0" text="- 玩家被票選出局可帶走場上一人" />
+      <Label layoutX="97.0" layoutY="228.0" text="- 增加討論時間" />
+      <Label layoutX="97.0" layoutY="312.0" text="- 經驗值加倍獎勵" />
+      <Button layoutX="112.0" layoutY="406.0" mnemonicParsing="false" onAction="#leave2" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="返回玩家資訊" />
+      <Label layoutX="32.0" layoutY="354.0" lineSpacing="1.0" prefHeight="42.0" prefWidth="73.0" style="-fx-border-style: crazy;" textAlignment="CENTER">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="15.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.2090643346309662" green="0.43421053886413574" blue="0.23908382654190063" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button layoutX="14.0" layoutY="354.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: green; -fx-background-radius: 0;" text="金幣">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
