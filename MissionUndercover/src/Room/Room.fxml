@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane minHeight="800.0" minWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+   <children>
+      <Label fx:id="P1Name" layoutX="33.0" layoutY="105.0" text="等待加入...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P2Name" layoutX="33.0" layoutY="207.0" text="等待加入...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P3Name" layoutX="33.0" layoutY="308.0" text="等待加入...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P4Name" layoutX="664.0" layoutY="103.0" text="等待加入...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P5Name" layoutX="664.0" layoutY="197.0" text="等待加入...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P6Name" layoutX="664.0" layoutY="321.0" text="等待加入...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="chatRoomInput" layoutX="53.0" layoutY="721.0" prefHeight="32.0" prefWidth="331.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="chatRoom" editable="false" layoutX="53.0" layoutY="465.0" prefHeight="244.0" prefWidth="331.0" text="&#10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="P3Des" layoutX="193.0" layoutY="321.0" text="描述">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P1Des" layoutX="193.0" layoutY="103.0" text="描述">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P2Des" layoutX="193.0" layoutY="205.0" text="描述">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P6Des" layoutX="592.0" layoutY="321.0" text="描述">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P5Des" layoutX="592.0" layoutY="198.0" text="描述">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="P4Des" layoutX="592.0" layoutY="103.0" text="描述">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="chatRoomInputOK" layoutX="395.0" layoutY="722.0" mnemonicParsing="false" text="輸入">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="BackBtn" layoutX="40.0" layoutY="36.0" mnemonicParsing="false" text="返回" />
+      <TextField fx:id="DesInput" layoutX="472.0" layoutY="506.0" prefHeight="32.0" prefWidth="252.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button fx:id="DesInputOK" layoutX="735.0" layoutY="507.0" mnemonicParsing="false" text="輸入">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="ready" layoutX="354.0" layoutY="400.0" mnemonicParsing="false" text="準備">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
