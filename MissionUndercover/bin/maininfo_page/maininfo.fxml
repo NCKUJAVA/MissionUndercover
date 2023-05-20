@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="321.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maininfo_page.Controller">
+   <children>
+      <Button layoutX="12.0" layoutY="116.0" mnemonicParsing="false" onAction="#level" prefHeight="43.0" prefWidth="118.0" style="-fx-background-color: green; -fx-background-radius: 0;" text="玩家等級A">
+         <font>
+            <Font name="System Italic" size="19.0" />
+         </font></Button>
+      <Label layoutX="111.0" layoutY="29.0" lineSpacing="1.0" prefHeight="42.0" prefWidth="125.0" style="-fx-border-style: crazy;" text="玩家資訊" textAlignment="CENTER">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="30.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.2090643346309662" green="0.43421053886413574" blue="0.23908382654190063" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button layoutX="12.0" layoutY="209.0" mnemonicParsing="false" onAction="#coin" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: green; -fx-background-radius: 0;" text="金幣">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="9.0" layoutY="298.0" mnemonicParsing="false" onAction="#props" prefHeight="42.0" prefWidth="82.0" style="-fx-background-color: green; -fx-background-radius: 0;" text="道具">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <MenuButton layoutX="7.0" layoutY="3.0" mnemonicParsing="false" style="-fx-background-radius: 30;" text="設定">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <Button layoutX="260.0" layoutY="2.0" mnemonicParsing="false" onAction="#leave" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="離開" />
+      <Separator layoutX="-46.0" layoutY="167.0" prefHeight="33.0" prefWidth="367.0" />
+      <Separator layoutX="-54.0" layoutY="267.0" prefHeight="33.0" prefWidth="376.0" />
+      <Separator layoutX="-43.0" layoutY="78.0" prefHeight="33.0" prefWidth="364.0" />
+      <ImageView fitHeight="33.0" fitWidth="36.0" layoutX="143.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/lock.png.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="74.0" layoutX="100.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/獵人.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="58.0" layoutX="168.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/時數.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="58.0" layoutX="240.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/經驗值.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="181.0" layoutY="119.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="125.0" style="-fx-border-style: crazy;" text="距離等級B還有x Exp" textAlignment="CENTER">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="12.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.2090643346309662" green="0.43421053886413574" blue="0.23908382654190063" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>
