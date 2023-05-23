@@ -138,3 +138,5 @@ public class ForgotPageController
         System.out.println("switch to start page");
 	}
 }
+
+

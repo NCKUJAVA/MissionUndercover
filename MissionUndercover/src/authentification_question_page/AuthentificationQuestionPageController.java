@@ -79,7 +79,9 @@ public class AuthentificationQuestionPageController implements Initializable
 		StatusLabel.setText("安全性驗證問題設定");
 		QuestionText=QuestionComboBox.getValue();
 		AnswerText=AnswerTextField.getText();
-		if(AnswerText.compareTo("")==0 || QuestionText.compareTo("")==0)
+		System.out.println(QuestionText);
+		System.out.println(AnswerText);
+		if(AnswerText.compareTo("")==0 || QuestionText == null)
 		{
 			StatusLabel.setText("安全驗證問題與答案皆不可為空");
 		}else
@@ -178,3 +180,7 @@ public class AuthentificationQuestionPageController implements Initializable
 		QuestionComboBox.getItems().add("您的JAVA期中考分數為何?");	
 	}
 }
+
+
+
+

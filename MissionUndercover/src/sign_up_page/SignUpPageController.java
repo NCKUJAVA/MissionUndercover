@@ -116,9 +116,15 @@ public class SignUpPageController
 			while(resultSet.next())
 			{
 				String column1Value = resultSet.getString("account");
+				String column2Value = resultSet.getString("name");
 				if(AccountText.compareTo(column1Value)==0)
 				{
-					AccountCheckLabel.setText("Account已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+					AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+					all_info_ok=0;
+				}
+				if(NameText.compareTo(column2Value)==0)
+				{
+					NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
 					all_info_ok=0;
 				}
 			}
