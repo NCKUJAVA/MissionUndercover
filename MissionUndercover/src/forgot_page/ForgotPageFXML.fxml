@@ -6,25 +6,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="480.0" prefWidth="753.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<AnchorPane prefHeight="480.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forgot_page.ForgotPageController">
    <children>
-      <Label fx:id="StatusLabel" layoutX="91.0" layoutY="37.0" prefHeight="98.0" prefWidth="549.0" style="-fx-alignment: center;;" text="請在下方欄位填入您的帳號並按下發送鍵，我們會發送驗證碼至您的註冊信箱">
+      <Label fx:id="StatusLabel" layoutX="30.0" layoutY="14.0" prefHeight="42.0" prefWidth="228.0" style="-fx-alignment: center;;" text="忘記密碼之修改步驟如下:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="AccountTextField" layoutX="199.0" layoutY="135.0" prefHeight="41.0" prefWidth="354.0" />
-      <Button fx:id="SendVerificationCodeButton" layoutX="320.0" layoutY="189.0" mnemonicParsing="false" onAction="#SendVerificationCode" prefHeight="61.0" prefWidth="111.0" text="傳送驗證碼" />
-      <Button fx:id="CheckVerificationCodeButton" layoutX="300.0" layoutY="336.0" mnemonicParsing="false" onAction="#verify_and_insert" prefHeight="62.0" prefWidth="151.0" text="驗證並開始修改密碼" />
-      <Button fx:id="BackToLogInPageButton" layoutX="38.0" layoutY="426.0" mnemonicParsing="false" onAction="#BackToLogInPage" prefHeight="42.0" prefWidth="105.0" text="返回登入介面" />
-      <TextField fx:id="VerificationCodeTextField1" layoutX="199.0" layoutY="287.0" prefHeight="41.0" prefWidth="354.0" />
-      <Label fx:id="AccountLabel" layoutX="100.0" layoutY="140.0" prefHeight="30.0" prefWidth="98.0" style="-fx-alignment: center;;" text="帳戶">
+      <TextField fx:id="AccountTextField" layoutX="376.0" layoutY="83.0" prefHeight="41.0" prefWidth="354.0" />
+      <Button fx:id="ShowQuestionButton" layoutX="469.0" layoutY="136.0" mnemonicParsing="false" onAction="#ShowQuestion" prefHeight="62.0" prefWidth="166.0" text="顯示安全驗證問題" />
+      <Button fx:id="CheckAnswerButton" layoutX="477.0" layoutY="403.0" mnemonicParsing="false" onAction="#CheckANswer" prefHeight="62.0" prefWidth="151.0" text="驗證並開始修改密碼" />
+      <Button fx:id="BackToLogInPageButton" layoutX="38.0" layoutY="426.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0" prefWidth="105.0" text="返回登入介面" />
+      <TextField fx:id="AnswerTextField" layoutX="376.0" layoutY="353.0" prefHeight="41.0" prefWidth="354.0" />
+      <Label fx:id="AccountLabel" layoutX="379.0" layoutY="47.0" prefHeight="30.0" prefWidth="354.0" style="-fx-alignment: center;;" text="請輸入您的帳號">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="VerificationCodeLabel" layoutX="100.0" layoutY="292.0" prefHeight="30.0" prefWidth="98.0" style="-fx-alignment: center;;" text="驗證碼">
+      <Label fx:id="StatusLabel1" layoutX="30.0" layoutY="62.0" prefHeight="42.0" prefWidth="309.0" text="1.輸入您的帳號，並點擊「顯示問題按鈕」">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="StatusLabel11" layoutX="30.0" layoutY="104.0" prefHeight="42.0" prefWidth="228.0" text="2.系統會顯示安全驗證問題">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="StatusLabel111" layoutX="30.0" layoutY="146.0" prefHeight="42.0" prefWidth="228.0" text="3.輸入問題之答案">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="StatusLabel1111" layoutX="30.0" layoutY="188.0" prefHeight="42.0" prefWidth="286.0" text="4.若回答正確，將導向至修改密碼頁面">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="QuestionLabel" layoutX="376.0" layoutY="237.0" prefHeight="42.0" prefWidth="354.0" style="-fx-alignment: center; -fx-background-color: yellow;" text="安全驗證問題將顯示在此處">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="AnswerLabel" layoutX="377.0" layoutY="312.0" prefHeight="42.0" prefWidth="354.0" style="-fx-alignment: center;" text="請輸入您註冊時設定之答案">
          <font>
             <Font size="16.0" />
          </font>

@@ -19,11 +19,6 @@
          </font>
       </Label>
       <TextField fx:id="AccountTextField" layoutX="155.0" layoutY="130.0" prefHeight="46.0" prefWidth="330.0" />
-      <Label layoutX="275.0" layoutY="378.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center;" text="電子信箱" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <Label layoutX="275.0" layoutY="290.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center;" text="遊戲暱稱" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
@@ -36,8 +31,7 @@
       </Label>
       <TextField fx:id="PasswordTextField" layoutX="156.0" layoutY="219.0" prefHeight="46.0" prefWidth="330.0" />
       <TextField fx:id="NameTextField" layoutX="156.0" layoutY="318.0" prefHeight="46.0" prefWidth="330.0" />
-      <TextField fx:id="EmailTextField" layoutX="156.0" layoutY="402.0" prefHeight="46.0" prefWidth="330.0" />
-      <Button fx:id="SignUpButton" layoutX="270.0" layoutY="466.0" mnemonicParsing="false" onAction="#signup" prefHeight="79.0" prefWidth="109.0" style="-fx-border-radius: 30px;" text="註冊">
+      <Button fx:id="SignUpButton" layoutX="270.0" layoutY="426.0" mnemonicParsing="false" onAction="#signup" prefHeight="79.0" prefWidth="109.0" style="-fx-border-radius: 30px;" text="註冊">
          <font>
             <Font size="20.0" />
          </font>
@@ -50,6 +44,5 @@
       <Label fx:id="AccountCheckLabel" layoutX="496.0" layoutY="131.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
       <Label fx:id="PasswordCheckLabel" layoutX="496.0" layoutY="219.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
       <Label fx:id="NameCheckLabel" layoutX="496.0" layoutY="318.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Label fx:id="EmailCheckLabel" layoutX="496.0" layoutY="403.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
    </children>
 </AnchorPane>

@@ -7,7 +7,6 @@ public class Player {
 	private int exp = 0;
 	private int[] items = {0,0,0,0,0,0};
 	private Boolean ready = false;
-	
 	public Player(String name, int level, int exp, int coin){
 		this.coin = coin;
 		this.level = level;
