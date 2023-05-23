@@ -3,12 +3,25 @@
 /change_password_page/
 /forgot_page/
 /sign_up_page/
+<<<<<<< HEAD
+/maininfo_page/
+/mainshop_page/
+/mainwindow_page/
+=======
 /Player/
+<<<<<<< HEAD
 /start_page/
+=======
+>>>>>>> branch 'main' of https://github.com/NCKUJAVA/MissionUndercover.git
+>>>>>>> 21571852337717e17fcb6af72ceaffcbe5771745
 /Room/
 /RoomChoice/
 /UserPackage/
 /application/
+<<<<<<< HEAD
 /maininfo_page/
 /mainshop_page/
 /mainwindow_page/
+=======
+/start_page/
+>>>>>>> 21571852337717e17fcb6af72ceaffcbe5771745

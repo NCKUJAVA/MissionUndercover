@@ -69,7 +69,7 @@
       </Label>
       <ImageView fitHeight="123.0" fitWidth="130.0" layoutX="101.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Desktop/NCKU/Java%20Software/finalproject/image/undercover.png" />
+            <Image url="@../../images/undercover.png" />
          </image>
       </ImageView>
       <Button layoutX="108.0" layoutY="396.0" mnemonicParsing="false" onAction="#getShop" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="道具商店" />
