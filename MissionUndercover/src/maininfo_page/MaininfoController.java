@@ -44,7 +44,7 @@ public class MaininfoController implements Initializable {
         // 顯示其他玩家資訊的程式碼
         //AccountLabel.setText(String.valueOf(player1.getCoin()));
     }
-    
+    /*
 	public void level(ActionEvent e) {
 		System.out.println("level");
 	}
@@ -56,7 +56,7 @@ public class MaininfoController implements Initializable {
 	public void props(ActionEvent e) {
 		System.out.println("props");
 	}
-
+	*/
 	
 	public void leave(ActionEvent e) throws IOException {
 		System.out.println("leave");
