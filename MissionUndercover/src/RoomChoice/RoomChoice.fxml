@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="700.0" maxWidth="700.0" minHeight="700.0" minWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RoomChoice.RoomChoice">
+   <children>
+      <Label layoutX="83.0" layoutY="81.0" text="誰是臥底">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="541.0" layoutY="74.0" mnemonicParsing="false" onAction="#createRoom" text="創立房間">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="339.0" layoutY="74.0" mnemonicParsing="false" onAction="#addRoom" text="加入房間">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="24.0" layoutY="23.0" mnemonicParsing="false" text="返回">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tableView" layoutY="193.0" prefHeight="508.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="RoomId" prefWidth="202.0" text="房間id" />
+          <TableColumn fx:id="people" minWidth="0.0" prefWidth="230.0" text="房內人數(?/6)" />
+            <TableColumn fx:id="status" minWidth="0.0" prefWidth="267.0" text="房間狀態" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
