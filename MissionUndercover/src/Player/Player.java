@@ -14,6 +14,10 @@ public class Player {
 		this.exp = exp;
 	}
 	
+	public Player() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getCoin() {
 		return coin;
 	}
@@ -47,6 +51,9 @@ public class Player {
 			this.items[i] = items[i];
 		}
 	}
+    public void addCoins(int amount) {
+        coin += amount;
+    }
 	
 	public void setReady(Boolean b) {
 		ready = b;

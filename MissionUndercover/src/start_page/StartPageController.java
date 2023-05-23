@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.EventObject;
 import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
@@ -112,8 +113,16 @@ public class StartPageController
 										user_coin_bonus);
 					LogInStatusLabel.setText("帳號密碼正確\n歡迎"+user.getName());
 					check_user_info=1;
+					
+					Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+			        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			        scene = new Scene(root);
+			        stage.setScene(scene);
+			        stage.show();
+			        System.out.println("switch to mainwindow");
+					
 				}
-
+				
 			}
 			
 			
@@ -172,6 +181,17 @@ public class StartPageController
 		}
 		return null;
 	}
-
+	
+	public void goMainwindow(EventObject e) throws IOException {
+		System.out.println("leave");
+		
+		Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("switch to mainwindow");
+        
+	}
 
 }
