@@ -17,5 +17,7 @@ module MissionUndercover {
 	
 	opens start_page to javafx.graphics, javafx.fxml;
 	opens sign_up_page to javafx.graphics, javafx.fxml;
-	opens email_verification_page to javafx.graphics, javafx.fxml;
+	opens authentification_question_page to javafx.graphics, javafx.fxml;
+	opens forgot_page to javafx.graphics, javafx.fxml;
+	opens change_password_page to javafx.graphics, javafx.fxml;
 }

@@ -87,7 +87,8 @@ public class StartPageController
 				{
 					
 					String user_name = resultSet.getString("name");
-					String user_email = resultSet.getString("email");
+					String user_question = resultSet.getString("question");
+					String user_answer = resultSet.getString("answer");
 					int user_coin=Integer.parseInt(resultSet.getString("coin"));
 					int user_exp=Integer.parseInt(resultSet.getString("exp"));
 					int user_level=Integer.parseInt(resultSet.getString("level"));
@@ -97,8 +98,19 @@ public class StartPageController
 					int user_coin_bonus=Integer.parseInt(resultSet.getString("coin_bonus"));
 					
 					
-					User user = new User(user_account,user_password,user_name,user_email,user_coin,user_exp,user_level,user_hunter,user_sec_bonus,user_exp_bonus,user_coin_bonus);
-					LogInStatusLabel.setText("帳號密碼正確，歡迎"+user.getName());
+					User user = new User(user_account,
+										user_password,
+										user_name,
+										user_question,
+										user_answer,
+										user_coin,
+										user_exp,
+										user_level,
+										user_hunter,
+										user_sec_bonus,
+										user_exp_bonus,
+										user_coin_bonus);
+					LogInStatusLabel.setText("帳號密碼正確\n歡迎"+user.getName());
 					check_user_info=1;
 				}
 
@@ -130,15 +142,15 @@ public class StartPageController
 	}
     
     @FXML
-	public void forgot(ActionEvent e)
+	public void forgot(ActionEvent e) throws Exception
 	{
 		System.out.println("forgot");
-        String inputText = AccountTextField.getText();
-        System.out.println("Account:"+inputText);
-        
-
-	    inputText = PasswordTextField.getText();
-	    System.out.println("Password:"+inputText);
+        Parent root = FXMLLoader.load(getClass().getResource("/forgot_page/ForgotPageFXML.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("switch to forgot page");
 	    
 	}
     

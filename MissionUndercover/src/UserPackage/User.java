@@ -6,7 +6,8 @@ public class User
 	private String account;
 	private String password;
 	private String name;
-	private String email;
+	private String question;
+	private String answer;
 	private int coin;
 	private int exp;
 	private int level;
@@ -15,12 +16,13 @@ public class User
 	private int exp_bonus;
 	private int coin_bonus;
 	
-	public User(String user_account,String user_password,String user_name,String user_email,int user_coin,int user_exp,int user_level,int user_hunter,int user_sec_bonus,int user_exp_bonus,int user_coin_bonus)
+	public User(String user_account,String user_password,String user_name,String user_question,String user_answer,int user_coin,int user_exp,int user_level,int user_hunter,int user_sec_bonus,int user_exp_bonus,int user_coin_bonus)
 	{
 		account=user_account;
 		password=user_password;
 		name=user_name;
-		email=user_email;
+		question=user_question;
+		answer=user_answer;
 		coin=user_coin;
 		exp=user_exp;
 		level=user_level;
@@ -43,9 +45,14 @@ public class User
 		return this.name;
 	}
 	
-	public String getEmail()
+	public String getQuestion()
 	{
-		return this.email;
+		return this.question;
+	}
+	
+	public String getAnswer()
+	{
+		return this.answer;
 	}
 	
 	public int getCoin()
@@ -81,6 +88,16 @@ public class User
 	public int getCoinBonus()
 	{
 		return this.coin_bonus;
+	}
+	
+	public void setQuestion(String user_question)
+	{
+		this.question=user_question;
+	}
+	
+	public void setAnswer(String user_answer)
+	{
+		this.answer=user_answer;
 	}
 	
 }
