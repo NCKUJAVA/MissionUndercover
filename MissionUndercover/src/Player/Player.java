@@ -13,6 +13,7 @@ public class Player {
 	private int exp = 0;
 	private int[] items = {0,0,0,0,0,0};
 	private Boolean ready = false;
+
 	private Socket socket;
 	private String chatRoom = "";
 	BufferedReader in;
@@ -68,7 +69,7 @@ public class Player {
 		this.name = name;
 		this.exp = exp;
 	}
-	
+
 	public int getCoin() {
 		return coin;
 	}
@@ -102,6 +103,9 @@ public class Player {
 			this.items[i] = items[i];
 		}
 	}
+    public void addCoins(int amount) {
+        coin += amount;
+    }
 	
 	public void setReady(Boolean b) {
 		ready = b;

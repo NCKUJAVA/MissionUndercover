@@ -23,48 +23,89 @@ import java.sql.Statement;
 import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
+import change_password_page.ChangePasswordPageController;
 public class ForgotPageController 
 {
 	@FXML
-	private Label StatusLabel;
+	private Label AccountLabel;
+	@FXML
+	private Label QuestionLabel;
+	@FXML
+	private Label AnswerLabel;
 	@FXML
 	private TextField AccountTextField;
 	@FXML
-	private Button SendVerificationCodeButton;
+	private TextField AnswerTextField;
 	@FXML
-	private TextField VerificationCodeTextField;
+	private Button ShowQuestionButton;
 	@FXML
-	private Button CheckVerificationCodeButton;
+	private Button CheckAnswerButton;
 	@FXML
 	private Button BackToLogInPageButton;
     private Stage stage;
     
     private Scene scene;
-    
-	int randomNumber;
-	String randomNumberString;
-	
+    String AccountText="";
+    String AnswerText="";
+	String RealAnswer="";
+	String old_pwd="";
     Connection connection;
     PreparedStatement prestatement;
     Statement statement;
     ResultSet resultSet;
-    
+    int AccountCheck=0;
     @FXML
-    public void SendVerificationCode(ActionEvent e) throws Exception
+    public void ShowQuestion(ActionEvent e) throws Exception
     {
+    	AccountText=AccountTextField.getText();
     	connection = getConnection();
 		String sql = "SELECT * FROM user";
 		statement = connection.createStatement();
 		resultSet = statement.executeQuery(sql);
 		while(resultSet.next())
 		{
-			String column1Value = resultSet.getString("user_account");
+			String column1Value = resultSet.getString("account");
 			if(AccountText.compareTo(column1Value)==0)
 			{
-				AccountCheckLabel.setText("Account已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
-				all_info_ok=0;
+				AccountCheck=1;
+				AccountLabel.setText("帳號正確，請回答安全驗證問題");
+				String question=resultSet.getString("question");
+				QuestionLabel.setText(question);
+				RealAnswer=resultSet.getString("answer");
+				old_pwd=resultSet.getString("password");
+				ShowQuestionButton.setDisable(true);
+				break;
+				
 			}
 		}
+		if(AccountCheck==0)
+		{
+			AccountLabel.setText("帳號錯誤，請重新輸入");
+		}
+		statement.close();
+		resultSet.close();
+		connection.close();
+    }
+    
+    public void CheckANswer(ActionEvent e) throws Exception
+    {
+    	AnswerText=AnswerTextField.getText();
+    	if(AnswerText.compareTo(RealAnswer)!=0)
+    	{
+    		AnswerLabel.setText("答案錯誤，請重新輸入");
+    	}else
+    	{
+    		AnswerLabel.setText("答案正確");
+    		System.out.println("change password");
+    		ChangePasswordPageController.passUserAccount(AccountText,old_pwd);
+            Parent root = FXMLLoader.load(getClass().getResource("/change_password_page/ChangePasswordPageFXML.fxml"));
+            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            System.out.println("switch to change password page");
+    	}
+    	
     }
     
 	public static Connection getConnection() throws Exception
@@ -85,4 +126,17 @@ public class ForgotPageController
 		}
 		return null;
 	}
+    @FXML
+	public void back(ActionEvent event) throws IOException
+	{
+		System.out.println("back");
+        Parent root = FXMLLoader.load(getClass().getResource("/start_page/StartPageFXML.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("switch to start page");
+	}
 }
+
+

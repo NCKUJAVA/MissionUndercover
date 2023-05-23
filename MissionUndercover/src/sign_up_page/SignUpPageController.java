@@ -23,7 +23,7 @@ import java.sql.Statement;
 import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
-import email_verification_page.EmailVerificationPageController;
+import authentification_question_page.AuthentificationQuestionPageController;
 
 public class SignUpPageController
 {
@@ -48,8 +48,7 @@ public class SignUpPageController
     @FXML
     private Label NameCheckLabel;
     
-    @FXML
-    private Label EmailCheckLabel;
+
     
     @FXML
     private Button SignUpButton;
@@ -78,7 +77,7 @@ public class SignUpPageController
 		AccountCheckLabel.setText("");
 		PasswordCheckLabel.setText("");
 		NameCheckLabel.setText("");
-		EmailCheckLabel.setText("");
+
         
 		String AccountText = AccountTextField.getText();
         System.out.println("Account:"+AccountText);
@@ -89,9 +88,7 @@ public class SignUpPageController
 	    
 	    String NameText = NameTextField.getText();
 	    System.out.println("Name:"+NameText);
-	    
-	    String EmailText = EmailTextField.getText();
-	    System.out.println("Email:"+EmailText);
+
 	    
 	    
 	    if(AccountText.length()==0)
@@ -109,11 +106,7 @@ public class SignUpPageController
 	    	all_info_ok=0;
 	    	NameCheckLabel.setText("Name不可為空");
 	    }
-	    if(EmailText.length()==0)
-	    {
-	    	all_info_ok=0;
-	    	EmailCheckLabel.setText("Email不可為空");
-	    }
+
 	    if(all_info_ok==1)
 	    {
 	    	connection = getConnection();
@@ -123,9 +116,15 @@ public class SignUpPageController
 			while(resultSet.next())
 			{
 				String column1Value = resultSet.getString("account");
+				String column2Value = resultSet.getString("name");
 				if(AccountText.compareTo(column1Value)==0)
 				{
-					AccountCheckLabel.setText("Account已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+					AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+					all_info_ok=0;
+				}
+				if(NameText.compareTo(column2Value)==0)
+				{
+					NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
 					all_info_ok=0;
 				}
 			}
@@ -138,24 +137,24 @@ public class SignUpPageController
 	    	AccountCheckLabel.setText("OK!");
 	    	PasswordCheckLabel.setText("OK!");
 	    	NameCheckLabel.setText("OK!");
-	    	EmailCheckLabel.setText("OK!");
+
 //	    	long currentSeconds = LocalDateTime.now().getSecond();
 //
 //	        // 使用当前秒数作为种子创建Random对象
 //	    	Random random = new Random();
 //	        int randomNumber = random.nextInt(900000) + 100000;
 //	        String user_id_text=Integer.toString(randomNumber);
-	        User user = new User(AccountText,PasswordText,NameText,EmailText,0,0,0,0,0,0,0);
-	        EmailVerificationPageController.passUser(user);
+	        User user = new User(AccountText,PasswordText,NameText,"","",0,0,0,0,0,0,0);
+	        AuthentificationQuestionPageController.passUser(user);
 	        statement.close();
 	        resultSet.close();
 	        connection.close();
-	        Parent root = FXMLLoader.load(getClass().getResource("/email_verification_page/EmailVerificationPageFXML.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getResource("/authentification_question_page/AuthentificationQuestionPageFXML.fxml"));
 	        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 	        scene = new Scene(root);
 	        stage.setScene(scene);
 	        stage.show();
-	        System.out.println("switch to email verification page");
+	        System.out.println("switch to authentification question page");
 
 	    }
 	    

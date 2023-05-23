@@ -37,7 +37,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label fx:id="LogInStatusLabel" layoutX="148.0" layoutY="314.0" prefHeight="34.0" prefWidth="252.0" style="-fx-alignment: center;;">
+      <Label fx:id="LogInStatusLabel" layoutX="148.0" layoutY="297.0" prefHeight="73.0" prefWidth="252.0" style="-fx-alignment: center;;">
          <font>
             <Font size="18.0" />
          </font>
