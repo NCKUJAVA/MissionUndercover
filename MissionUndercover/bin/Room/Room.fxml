@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="800.0" minWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<AnchorPane minHeight="800.0" minWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Room.RoomUIController">
    <children>
       <Label fx:id="P1Name" layoutX="33.0" layoutY="105.0" text="等待加入...">
          <font>
@@ -45,7 +44,7 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextArea fx:id="chatRoom" editable="false" layoutX="53.0" layoutY="465.0" prefHeight="244.0" prefWidth="331.0" text="&#10;">
+      <TextArea fx:id="chatRoom" editable="false" layoutX="53.0" layoutY="465.0" prefHeight="244.0" prefWidth="331.0">
          <font>
             <Font size="15.0" />
          </font>
@@ -80,18 +79,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="chatRoomInputOK" layoutX="395.0" layoutY="722.0" mnemonicParsing="false" text="輸入">
+      <Button fx:id="chatRoomInputOK" layoutX="395.0" layoutY="722.0" mnemonicParsing="false" onAction="#chatInput" text="輸入">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="BackBtn" layoutX="40.0" layoutY="36.0" mnemonicParsing="false" text="返回" />
-      <TextField fx:id="DesInput" layoutX="472.0" layoutY="506.0" prefHeight="32.0" prefWidth="252.0">
+      <Button fx:id="BackBtn" layoutX="40.0" layoutY="36.0" mnemonicParsing="false" onAction="#goBackScene" text="返回" />
+      <TextField fx:id="desInput" layoutX="472.0" layoutY="506.0" prefHeight="32.0" prefWidth="252.0">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="DesInputOK" layoutX="735.0" layoutY="507.0" mnemonicParsing="false" text="輸入">
+      <Button fx:id="desInputOK" layoutX="735.0" layoutY="507.0" mnemonicParsing="false" onAction="#desInput" text="輸入">
          <font>
             <Font size="15.0" />
          </font>
