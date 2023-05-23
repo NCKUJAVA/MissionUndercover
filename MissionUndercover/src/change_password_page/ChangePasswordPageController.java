@@ -105,7 +105,7 @@ public class ChangePasswordPageController
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/MissionUndercover_DB";
 			String username = "root";
-			String password = "24081333";
+			String password = "F74086250";
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, username, password);
 			System.out.println("Connecting successfully!");

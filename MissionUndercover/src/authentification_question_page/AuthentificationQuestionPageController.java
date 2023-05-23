@@ -79,7 +79,9 @@ public class AuthentificationQuestionPageController implements Initializable
 		StatusLabel.setText("安全性驗證問題設定");
 		QuestionText=QuestionComboBox.getValue();
 		AnswerText=AnswerTextField.getText();
-		if(AnswerText.compareTo("")==0 || QuestionText.compareTo("")==0)
+		System.out.println(QuestionText);
+		System.out.println(AnswerText);
+		if(AnswerText.compareTo("")==0 || QuestionText == null)
 		{
 			StatusLabel.setText("安全驗證問題與答案皆不可為空");
 		}else
@@ -147,7 +149,7 @@ public class AuthentificationQuestionPageController implements Initializable
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/MissionUndercover_DB";
 			String username = "root";
-			String password = "24081333";
+			String password = "F74086250";
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, username, password);
 			System.out.println("Connecting successfully!");
@@ -178,3 +180,7 @@ public class AuthentificationQuestionPageController implements Initializable
 		QuestionComboBox.getItems().add("您的JAVA期中考分數為何?");	
 	}
 }
+
+
+
+

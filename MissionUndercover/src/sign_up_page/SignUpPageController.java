@@ -116,9 +116,15 @@ public class SignUpPageController
 			while(resultSet.next())
 			{
 				String column1Value = resultSet.getString("account");
+				String column2Value = resultSet.getString("name");
 				if(AccountText.compareTo(column1Value)==0)
 				{
-					AccountCheckLabel.setText("Account已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+					AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+					all_info_ok=0;
+				}
+				if(NameText.compareTo(column2Value)==0)
+				{
+					NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
 					all_info_ok=0;
 				}
 			}
@@ -179,7 +185,7 @@ public class SignUpPageController
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/MissionUndercover_DB";
 			String username = "root";
-			String password = "24081333";
+			String password = "F74086250";
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, username, password);
 			System.out.println("Connecting successfully!");
