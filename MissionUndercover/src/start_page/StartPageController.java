@@ -58,11 +58,9 @@ public class StartPageController
     Statement statement;
     ResultSet resultSet;
     
-    int check_user_info=0;
     @FXML
     public void login(ActionEvent e) throws Exception
 	{
-    	check_user_info=0;
 		System.out.println("login");
         String AccountText = AccountTextField.getText();
         System.out.println("Account:"+AccountText);
@@ -70,67 +68,63 @@ public class StartPageController
 
 	    String PasswordText = PasswordTextField.getText();
 	    System.out.println("Password:"+PasswordText);
-	    
-	    connection = getConnection();
-		String sql = "SELECT * FROM user";
-		statement = connection.createStatement();
-		resultSet = statement.executeQuery(sql);
-		while(resultSet.next())
-		{
-			String user_account = resultSet.getString("account");
-
-			if(AccountText.compareTo(user_account)==0)
-			{
-				
-				
-				String user_password = resultSet.getString("password");
-				if(PasswordText.compareTo(user_password)==0)
-				{
-					
-					String user_name = resultSet.getString("name");
-					String user_question = resultSet.getString("question");
-					String user_answer = resultSet.getString("answer");
-					int user_coin=Integer.parseInt(resultSet.getString("coin"));
-					int user_exp=Integer.parseInt(resultSet.getString("exp"));
-					int user_level=Integer.parseInt(resultSet.getString("level"));
-					int user_hunter=Integer.parseInt(resultSet.getString("hunter"));
-					int user_sec_bonus=Integer.parseInt(resultSet.getString("sec_bonus"));
-					int user_exp_bonus=Integer.parseInt(resultSet.getString("exp_bonus"));
-					int user_coin_bonus=Integer.parseInt(resultSet.getString("coin_bonus"));
-					
-					
-					User user = new User(user_account,
-										user_password,
-										user_name,
-										user_question,
-										user_answer,
-										user_coin,
-										user_exp,
-										user_level,
-										user_hunter,
-										user_sec_bonus,
-										user_exp_bonus,
-										user_coin_bonus);
-					LogInStatusLabel.setText("帳號密碼正確\n歡迎"+user.getName());
-					check_user_info=1;
-					
-					Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
-			        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-			        scene = new Scene(root);
-			        stage.setScene(scene);
-			        stage.show();
-			        System.out.println("switch to mainwindow");
-					
+	    if(AccountText.compareTo("")==0 || PasswordText.compareTo("")==0)
+	    {
+	    	LogInStatusLabel.setText("帳號或密碼不可為空");
+	    }else
+	    {
+	    	StartPage.player.sendMessage("LogIn:"+AccountText+"|"+PasswordText);
+	    	while(StartPage.player.getNowString().contains("LogIn")==false)
+	    	{
+	    		System.out.println("StartPage:"+StartPage.player.getNowString());
+	    	}
+	    	String now_string=StartPage.player.getNowString();
+	    	System.out.println("StartPage:"+now_string);
+	    	if(now_string.contains("successful"))
+	    	{
+				String[] parts = now_string.split("[|]");
+				String account = parts[1];
+				String name = parts[2];
+				String level = parts[3];
+				String exp = parts[4];
+				String coin = parts[5];
+				String hunter = parts[6];
+				String sec_bonus = parts[7];
+				String exp_bonus = parts[8];
+				String coin_bonus = parts[9];
+				StartPage.player.setAccount(account);
+				StartPage.player.setName(name);
+				StartPage.player.setlevel(Integer.valueOf(level));
+				StartPage.player.setExp(Integer.valueOf(exp));
+				StartPage.player.setCoin(Integer.valueOf(coin));
+				int[] Items = {Integer.valueOf(hunter),Integer.valueOf(sec_bonus),Integer.valueOf(exp_bonus),Integer.valueOf(coin_bonus)};
+				StartPage.player.setItems(Items);
+				System.out.println("StartPage:"+StartPage.player.getAccount());
+				System.out.println("StartPage:"+StartPage.player.getName());
+				System.out.println("StartPage:"+StartPage.player.getlevel());
+				System.out.println("StartPage:"+StartPage.player.getExp());
+				System.out.println("StartPage:"+StartPage.player.getCoin());
+				Items=StartPage.player.getItems();
+				for(int i = 0; i < Items.length; i ++) {
+					System.out.println("StartPage:"+Items[i]);
 				}
-				
-			}
+				StartPage.player.resetNowString();
+				Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+		        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		        scene = new Scene(root);
+		        stage.setScene(scene);
+		        stage.show();
+		        System.out.println("switch to mainwindow");
+	    	}else
+	    	{
+	    		StartPage.player.resetNowString();
+	    		System.out.println(now_string);
+	    		LogInStatusLabel.setText("帳號或密碼有誤!");
+	    	}
+
 			
-			
-		}
-		if(check_user_info==0)
-		{
-			LogInStatusLabel.setText("帳號或密碼有誤!");
-		}
+	    }
+
 
 
 	}

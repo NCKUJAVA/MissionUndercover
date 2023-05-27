@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 import UserPackage.User;
 public class AuthentificationQuestionPageController implements Initializable
 {
-	private static User user;
+
 	
 	@FXML
 	private Label StatusLabel;
@@ -65,10 +65,6 @@ public class AuthentificationQuestionPageController implements Initializable
 	String AnswerText="";
 
 
-	public static void passUser(User user_object)
-	{
-		user=user_object;
-	}
 
 	
 
@@ -76,6 +72,7 @@ public class AuthentificationQuestionPageController implements Initializable
 	@FXML
 	public void finish_and_insert() throws Exception
 	{
+		StartPage.player.resetNowString();
 		StatusLabel.setText("安全性驗證問題設定");
 		QuestionText=QuestionComboBox.getValue();
 		AnswerText=AnswerTextField.getText();
@@ -84,35 +81,28 @@ public class AuthentificationQuestionPageController implements Initializable
 		if(AnswerText.compareTo("")==0 || QuestionText == null)
 		{
 			StatusLabel.setText("安全驗證問題與答案皆不可為空");
+			StartPage.player.resetNowString();
 		}else
 		{
-			user.setQuestion(QuestionText);
-			user.setAnswer(AnswerText);
-			connection = getConnection();
-			String sql = "INSERT INTO user (account,password,name,question,answer,coin,exp,level,hunter,sec_bonus,exp_bonus,coin_bonus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-			prestatement = connection.prepareStatement(sql);
-			prestatement.setString(1, user.getAccount());
-			prestatement.setString(2, user.getPassword());
-			prestatement.setString(3, user.getName());
-			prestatement.setString(4, user.getQuestion());
-			prestatement.setString(5, user.getAnswer());
-			prestatement.setInt(6, user.getCoin());
-			prestatement.setInt(7, user.getExp());
-			prestatement.setInt(8, user.getLevel());
-			prestatement.setInt(9, user.getHunter());
-			prestatement.setInt(10, user.getSecBonus());
-			prestatement.setInt(11, user.getExpBonus());
-			prestatement.setInt(12, user.getCoinBonus());
-			int rowsAffected = prestatement.executeUpdate();
-			System.out.println("Row affected:"+rowsAffected);
-			StatusLabel.setText("驗證成功，帳戶註冊完成\n歡迎"+user.getName()+"的加入!");
+			StartPage.player.sendMessage("Auth question:"+QuestionText+"|"+AnswerText);
+			while(StartPage.player.getNowString().contains("Auth question:OK:")==false)
+	    	{
+	    		System.out.println("StartPage:"+StartPage.player.getNowString());
+	    	}
+			String s=StartPage.player.getNowString();
+			String[] parts = s.split("[:|]");
+
+			
+			String name = parts[2];
+			StatusLabel.setText("驗證成功，帳戶註冊完成\n歡迎"+name+"的加入!");
 			StatusLabel1.setText("請返回登入頁面登入您的帳號");
 			FinishSignUpButton.setDisable(true);
-			prestatement.close();
-			connection.close();
+//			prestatement.close();
+//			connection.close();
+			StartPage.player.resetNowString();
 
 		}
-
+		StartPage.player.resetNowString();
 
 	}
 	

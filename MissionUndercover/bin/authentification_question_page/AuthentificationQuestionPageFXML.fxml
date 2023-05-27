@@ -21,7 +21,7 @@
          </font></Button>
       <Button fx:id="BackToSignUpPageButton" layoutX="69.0" layoutY="443.0" mnemonicParsing="false" onAction="#BackToSignUpPage" prefHeight="42.0" prefWidth="105.0" text="返回註冊介面" />
       <Button fx:id="BackToLogInPageButton" layoutX="441.0" layoutY="443.0" mnemonicParsing="false" onAction="#BackToLogInPage" prefHeight="42.0" prefWidth="105.0" text="返回登入介面" />
-      <ComboBox fx:id="QuestionComboBox" layoutX="65.0" layoutY="113.0" prefHeight="42.0" prefWidth="496.0" fx:constant="String" />
+      <ComboBox fx:id="QuestionComboBox" layoutX="65.0" layoutY="113.0" prefHeight="42.0" prefWidth="496.0" />
       <Label fx:id="StatusLabel1" layoutX="127.0" layoutY="305.0" prefHeight="42.0" prefWidth="371.0" style="-fx-alignment: center;;">
          <font>
             <Font size="16.0" />

@@ -21,13 +21,13 @@ public class StartPage extends Application {
 	public void start(Stage primaryStage) {
 		// use player.sendMessage to send command to server
 		try {
-			player.setName("Charles");
-			player.setCoin(1);
-			player.setExp(1);
-			player.setlevel(1);
-			System.out.println("finish");
-			//Parent root = FXMLLoader.load(getClass().getResource("StartPageFXML.fxml"));
-			Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
+//			player.setName("Charles");
+//			player.setCoin(1);
+//			player.setExp(1);
+//			player.setlevel(1);
+//			System.out.println("finish");
+			Parent root = FXMLLoader.load(getClass().getResource("StartPageFXML.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
 			Scene scene = new Scene(root,600,600);
 			scene.getStylesheets().add(getClass().getResource("StartPage.css").toExternalForm());
 			primaryStage.setScene(scene);
