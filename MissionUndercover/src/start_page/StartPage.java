@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import Player.Player;
+import Room.Room;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -16,7 +18,8 @@ import javafx.scene.layout.BorderPane;
 
 public class StartPage extends Application {
 	public static Player player = new Player();
-
+	public static ArrayList<Room> rooms = new ArrayList<Room>();
+	public static Room room = new Room();
 	@Override
 	public void start(Stage primaryStage) {
 		// use player.sendMessage to send command to server

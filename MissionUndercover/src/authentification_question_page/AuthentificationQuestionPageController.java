@@ -110,7 +110,7 @@ public class AuthentificationQuestionPageController implements Initializable
 			FinishSignUpButton.setDisable(true);
 			prestatement.close();
 			connection.close();
-
+			
 		}
 
 

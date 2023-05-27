@@ -70,7 +70,8 @@ public class StartPageController
 
 	    String PasswordText = PasswordTextField.getText();
 	    System.out.println("Password:"+PasswordText);
-	    
+//        StartPage.player.sendMessage("Login:ACCOUNT/pwd");
+
 	    connection = getConnection();
 		String sql = "SELECT * FROM user";
 		statement = connection.createStatement();

@@ -23,7 +23,7 @@ public class RoomUIController implements Initializable {
 	@FXML
 	private Label P1Name;
 	@FXML
-	private Label P1Des;
+	public Label P1Des;
 	@FXML
 	private TextField chatRoomInput;
 	@FXML
@@ -39,20 +39,41 @@ public class RoomUIController implements Initializable {
 		// P1Name.setText("Charles");
 		// P1Des.setText("灰色的");
 		try {
-			//Platform.runLater(new Runnable() {   //TODO: check if this can be used  if the   maybe solve the exception of the thread
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					try {
-						while (true) {
+					Runnable updater = new Runnable() {
+						@Override
+						public void run() {
 							chatRoom.setText(StartPage.player.getChatRoom());
+							System.out.print("running");
 						}
-					} catch (Exception e) {
-						System.out.println("RoomUIController error");
-						;
+					};
+					
+					while(true) {
+						try {
+							Thread.sleep(1000);
+						}catch(InterruptedException ex) {
+							System.out.println("RoomUIController err");
+							ex.printStackTrace();
+						}
+						Platform.runLater(updater);
 					}
 				}
-			}).start();
+				
+			}).start();;
+			/*Platform.runLater(new Runnable() {   //TODO: check if this can be used  if the   maybe solve the exception of the thread
+			//new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						System.out.println("Runlater");
+						chatRoom.setText(StartPage.player.getChatRoom());
+					} catch (Exception e) {
+						System.out.println("RoomUIController error");
+					}
+				}
+			});//.start();*/
 		} catch (Exception e) {
 			System.out.println("Error out UI");
 		}
@@ -66,7 +87,8 @@ public class RoomUIController implements Initializable {
 		// print message to socket
 		if (!input.equals("")) {
 			chatRoomInput.setText("");
-			StartPage.player.sendMessage("Chat:" + input);
+			StartPage.player.sendMessage("Chat/"+StartPage.room.getId());
+			StartPage.player.sendMessage(input);
 		} else
 			chatRoomInput.setText("");
 
@@ -75,12 +97,14 @@ public class RoomUIController implements Initializable {
 
 	public void desInput(ActionEvent e) {
 		if (!desInput.getText().equals("")) {
-			P1Des.setText(desInput.getText());
+			StartPage.player.sendMessage("Description/" + StartPage.player.getName() + "/" + desInput.getText());
+			//P1Des.setText(desInput.getText());
 			desInput.setDisable(true);
 			desInputOK.setDisable(true);
 			desInput.setVisible(false);
 			desInputOK.setVisible(false);
 		}
+		
 	}
 
 	public void goBackScene(ActionEvent event) throws IOException {
@@ -95,6 +119,20 @@ public class RoomUIController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 		System.out.println("switch to scene RoomList");
+		StartPage.player.sendMessage("LeaveRoom");
+		//StartPage.player.sendMessage("GetRooms");
+	}
+
+	public void ready(ActionEvent e) {
+		/*boolean r = false;
+		if (StartPage.player.getReady())
+			r = false;
+		else
+			r = true;*/
+		StartPage.player.ready();
+		StartPage.player.sendMessage( "ready/" + StartPage.room.getId() + "/" + StartPage.player.getName());
+		return;
 	}
 
 }
+

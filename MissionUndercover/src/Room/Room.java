@@ -1,8 +1,9 @@
 package Room;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 import Player.Player;
 import javafx.event.ActionEvent;
@@ -12,17 +13,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Room {
+public class Room implements Serializable {
 	private int people = 1;
 	private String id = "12345";
 	private String status = "waiting";
+	private ArrayList<String> description = new ArrayList<String>(6);
 
-	static String a;
+	static String a; // TODO : check where use this property
 
-	private ArrayList<Player> players;
+	private ArrayList<Player> players = new ArrayList<Player>(6);
 	private int readys = 1;
 
+	private int time = 0;
 
+	Thread thread = null;
 
 	public Room() {
 		// check this!
@@ -41,6 +45,14 @@ public class Room {
 		this.status = status;
 		players = new ArrayList<Player>();
 		System.out.println("ROOM cons2");
+		/*
+		 * new Thread(new Runnable(){ public void run() { while(players.size()>0) {
+		 * if(players.size() == 6) { for(Player p : players) { if (p.getReady())
+		 * 
+		 * } StartGame(); } } }
+		 * 
+		 * }).start();
+		 */
 
 	}
 
@@ -79,21 +91,50 @@ public class Room {
 		}
 	}
 
+	public void removePlayer(Player player) {
+		players.remove(player);
+	}
 
-	private void startGame() {
-		System.out.println("StartGame");
+	public void startGame() {
+		randomQuestion(players, "雞蛋", "鴨蛋");
+
 		return;
 	}
 
-	public void ready(ActionEvent e) {
-		/*Player player = new Player(id, people, people, people);
-		if (player.getReady())
-			player.setReady(false);
-		else
-			player.setReady(true);
-		return;*/
+	private void randomQuestion(ArrayList<Player> p, String undercoverWord, String civilianWord) {
+		int undercover = 0;
+		if (p.size() > 4) {
+			undercover = 2;
+		} else
+			undercover = 1;
+		int u1 = (int) (Math.random() * 10) % p.size();
+		int u2 = -1;
+		while (u2 < 0 || u1 == u1) {
+			u2 = (int) (Math.random() * 10) % p.size();
+		}
+		for (int i = 0; i < p.size(); i++) {
+			if (i != u1 && i != u2) {
+				p.get(i).setCard(civilianWord);
+			} else
+				p.get(i).setCard(undercoverWord);
+		}
+
 	}
 
-	
+	public void leaveRoom(Player player) {
+		players.remove(player);
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public void setTime(int t) {
+		time = t;
+	}
+
+	public int getTime() {
+		return time;
+	}
 
 }
