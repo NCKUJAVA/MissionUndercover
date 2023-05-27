@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -71,6 +71,7 @@ public class SignUpPageController
     @FXML
     public void signup(ActionEvent e) throws Exception
 	{
+    	StartPage.player.resetNowString();
 		System.out.println("signup");
 		all_info_ok=1;
 		
@@ -109,55 +110,45 @@ public class SignUpPageController
 
 	    if(all_info_ok==1)
 	    {
-	    	connection = getConnection();
-			String sql = "SELECT * FROM user";
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
-			while(resultSet.next())
-			{
-				String column1Value = resultSet.getString("account");
-				String column2Value = resultSet.getString("name");
-				if(AccountText.compareTo(column1Value)==0)
-				{
-					AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
-					all_info_ok=0;
-				}
-				if(NameText.compareTo(column2Value)==0)
-				{
-					NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
-					all_info_ok=0;
-				}
-			}
-			
+	    	StartPage.player.sendMessage("SignUp:"+AccountText+"|"+PasswordText+"|"+NameText);
+	    	while(StartPage.player.getNowString().contains("SignUp info")==false)
+	    	{
+	    		System.out.println("StartPage:"+StartPage.player.getNowString());
+	    	}
+	    	String now_string=StartPage.player.getNowString();
+	    	System.out.println("StartPage:"+now_string);
+	    	if(now_string.contains("SignUp info ok")==true)
+	    	{
+		    	AccountCheckLabel.setText("OK!");
+		    	PasswordCheckLabel.setText("OK!");
+		    	NameCheckLabel.setText("OK!");
+		        Parent root = FXMLLoader.load(getClass().getResource("/authentification_question_page/AuthentificationQuestionPageFXML.fxml"));
+		        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		        scene = new Scene(root);
+		        stage.setScene(scene);
+		        stage.show();
+		        System.out.println("switch to authentification question page");
+	    	}else if(now_string.contains("SignUp info G:"))
+	    	{
+	    		String[] parts = now_string.split("[:]");
+	    		String result=parts[1];
+	    		if(result.compareTo("1")==0)
+	    		{
+	    			AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+	    		}else if(result.compareTo("2")==0)
+	    		{
+	    			NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
+	    		}else if(result.compareTo("3")==0)
+	    		{
+	    			AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+	    			NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
+	    		}
+	    	}
+
 	    	
 	    }
 	    
-	    if(all_info_ok==1)
-	    {
-	    	AccountCheckLabel.setText("OK!");
-	    	PasswordCheckLabel.setText("OK!");
-	    	NameCheckLabel.setText("OK!");
-
-//	    	long currentSeconds = LocalDateTime.now().getSecond();
-//
-//	        // 使用当前秒数作为种子创建Random对象
-//	    	Random random = new Random();
-//	        int randomNumber = random.nextInt(900000) + 100000;
-//	        String user_id_text=Integer.toString(randomNumber);
-	        User user = new User(AccountText,PasswordText,NameText,"","",0,0,0,0,0,0,0);
-	        AuthentificationQuestionPageController.passUser(user);
-	        statement.close();
-	        resultSet.close();
-	        connection.close();
-	        Parent root = FXMLLoader.load(getClass().getResource("/authentification_question_page/AuthentificationQuestionPageFXML.fxml"));
-	        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-	        scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.show();
-	        System.out.println("switch to authentification question page");
-
-	    }
-	    
+	    StartPage.player.resetNowString();
 	    
 	    
 	    

@@ -7,18 +7,20 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Player {
-	private String account="";
-	private int coin = 0;
-	private String name = "kl";
-	private int level = 1;;
+
+	private String account="";	
+	private String name = "";
+	private int level = 1;
 	private int exp = 0;
-	private int[] items = {0,0,0,0,0,0};
+	private int coin = 0;
+	private int[] items = {0,0,0,0};
 	private Boolean ready = false;
 
 	private Socket socket;
 	private String chatRoom = "";
 	BufferedReader in;
 	PrintWriter out;
+	private String now_string="";
 	public Player() {
 		//System.out.println("player()");
 		try {
@@ -33,7 +35,7 @@ public class Player {
 					try {
 						while (true) {
 							String s = in.readLine();
-							System.out.println(s);
+							System.out.println("player:"+s);
 							if (s.contains("Chat:")) {
 								//TODO: write message to chatRoom
 //								s = s.substring(5);
@@ -44,8 +46,46 @@ public class Player {
 							else if (s.contains("time:")) {
 								
 							}
+							else if (s.contains("LogIn successfully"))
+							{
+								now_string=s;
+								System.out.println("player:"+"K"+" "+s);
+							}else if(s.contains("LogIn failed"))
+							{
+								now_string=s;
+								System.out.println("player:"+"G"+" "+s);
+							}else if(s.contains("SignUp info"))
+							{
+								now_string=s;
+							}else if(s.contains("Auth question:OK:"))
+							{
+								now_string=s;
+								System.out.println("player:"+now_string);
+							}else if(s.contains("Forgot:"))
+							{
+								if(s.contains("OK"))
+								{
+									now_string=s;
+								}else if(s.contains("G"))
+								{
+									now_string=s;
+								}
+							}else if(s.contains("Answer:"))
+							{
+								if(s.contains("OK"))
+								{
+									now_string=s;
+								}else if(s.contains("G"))
+								{
+									now_string=s;
+								}
+							}else if(s.contains("NewPassword:"))
+							{
+								now_string=s;
+							}
 							//else if (s.contains("command:content"))
-							else {
+							else 
+							{
 								System.out.println("ERROR MESSAGE OR Check spelling");
 							}
 						}
@@ -70,9 +110,11 @@ public class Player {
 		this.name = name;
 		this.exp = exp;
 	}
+
 	public String getAccount() {
 		return account;
 	}
+	
 	public int getCoin() {
 		return coin;
 	}
@@ -88,9 +130,12 @@ public class Player {
 	public int[] getItems() {
 		return items;
 	}
-	public void setAccount(String account) {
-		this.account = account;
+	
+	public void setAccount(String account)
+	{
+		this.account=account;
 	}
+	
 	public void setCoin(int coin) {
 		this.coin = coin;
 	}
@@ -115,18 +160,25 @@ public class Player {
 	public void setReady(Boolean b) {
 		ready = b;
 	}
-	
+	public void resetNowString()
+	{
+		this.now_string="";
+	}
 	public Boolean getReady() {
 		return ready;
 	}
 
-	public void sendMessage(String s) {
-		
+	public void sendMessage(String s) 
+	{
 		out.println(s);
 		out.flush();
 	}
 	
 	public String getChatRoom() {
 		return chatRoom;
+	}
+	public String getNowString()
+	{
+		return now_string;
 	}
 }

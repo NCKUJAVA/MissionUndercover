@@ -30,6 +30,14 @@ public class MainwindowController {
 	}
 	
 
+	public void leave(ActionEvent e) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/start_page/StartPageFXML.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+	}
+
 	public void getInfo(ActionEvent e) throws IOException {
 		System.out.println("info");
 		
@@ -57,8 +65,6 @@ public class MainwindowController {
         
 	}
 	
-	public void leave(ActionEvent e) {
-		System.out.println("leave");
-	}
+
 	
 }

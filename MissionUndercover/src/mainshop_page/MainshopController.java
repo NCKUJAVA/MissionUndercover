@@ -215,11 +215,11 @@ public class MainshopController {
         } else {
             System.out.println("金幣不足，無法購買。");
             Alert alert = new Alert(AlertType.INFORMATION);
-            int inadequateCoin = -(StartPage.player.getCoin()-totalCost);
+            int inadequateCoin = totalCost - StartPage.player.getCoin();
             alert.setTitle("Purchase Failed");
             alert.setHeaderText(null);
             alert.setContentText("購買失敗!\n" +
-                    "金幣餘額: " + inadequateCoin);
+                    "金幣不足: " + inadequateCoin);
 
             alert.showAndWait();
         }
