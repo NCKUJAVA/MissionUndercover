@@ -1,17 +1,3 @@
-/PlayerBuy/
-/authentification_question_page/
-/change_password_page/
-/forgot_page/
-/sign_up_page/
-<<<<<<< HEAD
-/maininfo_page/
-/mainshop_page/
 /mainwindow_page/
-=======
-/Player/
->>>>>>> branch 'main' of https://github.com/NCKUJAVA/MissionUndercover.git
-/Room/
-/RoomChoice/
-/UserPackage/
-/application/
+/mainshop_page/
 /start_page/

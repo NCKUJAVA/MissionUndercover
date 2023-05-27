@@ -7,8 +7,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Player {
+	private String account="";
 	private int coin = 0;
-	private String name = "";
+	private String name = "kl";
 	private int level = 1;;
 	private int exp = 0;
 	private int[] items = {0,0,0,0,0,0};
@@ -69,14 +70,16 @@ public class Player {
 		this.name = name;
 		this.exp = exp;
 	}
-
+	public String getAccount() {
+		return account;
+	}
 	public int getCoin() {
 		return coin;
 	}
 	public String getName() {
 		return name;
 	}
-	public int getlevel() {
+	public int getLevel() {
 		return level;
 	}
 	public int getExp() {
@@ -85,7 +88,9 @@ public class Player {
 	public int[] getItems() {
 		return items;
 	}
-	
+	public void setAccount(String account) {
+		this.account = account;
+	}
 	public void setCoin(int coin) {
 		this.coin = coin;
 	}

@@ -16,23 +16,26 @@ public class MainwindowController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-	public void room(ActionEvent e) {
+    
+	public void getRoom(ActionEvent e) throws IOException {
 		System.out.println("room");
-	}
-
-	public void shop(ActionEvent e) {
-		System.out.println("shop");
+		
+		Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("switch to room");
+        
 	}
 	
-	public void leave(ActionEvent e) {
-		System.out.println("leave");
-	}
+
 	public void getInfo(ActionEvent e) throws IOException {
 		System.out.println("info");
 		
-		Player player1 = new Player();
-		player1.setCoin(1000); 
-		MaininfoController.PassPlayer(player1);
+		//Player player1 = new Player();
+		//player1.setCoin(1000); 
+		//MaininfoController.PassPlayer(player1);
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/maininfo_page/maininfo.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -52,6 +55,10 @@ public class MainwindowController {
         stage.show();
         System.out.println("switch to itemshop");
         
+	}
+	
+	public void leave(ActionEvent e) {
+		System.out.println("leave");
 	}
 	
 }

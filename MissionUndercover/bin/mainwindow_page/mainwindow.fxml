@@ -81,6 +81,6 @@
         </items>
       </MenuButton>
       <Button layoutX="104.0" layoutY="315.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="玩家資訊" />
-      <Button layoutX="103.0" layoutY="238.0" mnemonicParsing="false" onAction="#room" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="進入等待房間" />
+      <Button layoutX="103.0" layoutY="238.0" mnemonicParsing="false" onAction="#getRoom" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="進入等待房間" />
    </children>
 </AnchorPane>

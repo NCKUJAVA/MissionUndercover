@@ -115,7 +115,6 @@
          </textFill>
       </Label>
       <Slider layoutX="127.0" layoutY="119.0" prefHeight="16.0" prefWidth="100.0" value="20.0" />
-      <Pane layoutX="132.0" layoutY="89.0" prefHeight="29.0" prefWidth="26.0" style="-fx-background-color: black;" />
       <Pane layoutX="16.0" layoutY="176.0" prefHeight="47.0" prefWidth="294.0" style="-fx-background-color: green;">
          <children>
             <Label layoutX="17.0" layoutY="1.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="109.0" style="-fx-border-style: crazy;" text="遊戲暱稱：" textAlignment="CENTER" textFill="WHITE">
@@ -123,7 +122,11 @@
                   <Font name="Apple Braille Outline 8 Dot" size="20.0" />
                </font>
             </Label>
-            <Pane layoutX="131.0" layoutY="8.0" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: black;" />
+            <Label fx:id="NameLabel" layoutX="115.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Apple Braille Outline 8 Dot" size="20.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane layoutX="14.0" layoutY="236.0" prefHeight="47.0" prefWidth="294.0" style="-fx-background-color: green;">
@@ -138,26 +141,10 @@
                   <Image url="@../../images/coin.jpeg" />
                </image>
             </ImageView>
-            <Label fx:id="AccountLabel" layoutX="106.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: black;" textAlignment="CENTER">
+            <Label fx:id="CoinLabel" layoutX="106.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Apple Braille Outline 8 Dot" size="20.0" />
                </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
             </Label>
          </children>
       </Pane>
@@ -189,6 +176,15 @@
          </children>
       </Pane>
       <Button fx:id="displaybutton" layoutX="249.0" layoutY="75.0" mnemonicParsing="false" onAction="#display" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="展示" />
-      <Pane layoutX="132.0" layoutY="49.0" prefHeight="28.0" prefWidth="26.0" style="-fx-background-color: black;" />
+      <Label fx:id="LevelLabel" layoutX="127.0" layoutY="86.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" textAlignment="CENTER">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="AccountLabel" layoutX="123.0" layoutY="48.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" textAlignment="CENTER">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
