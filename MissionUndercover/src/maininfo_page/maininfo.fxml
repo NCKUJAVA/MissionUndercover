@@ -122,9 +122,9 @@
                   <Font name="Apple Braille Outline 8 Dot" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="NameLabel" layoutX="115.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="NameLabel" layoutX="115.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="166.0" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Apple Braille Outline 8 Dot" size="20.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
          </children>
@@ -181,9 +181,9 @@
             <Font name="Apple Braille Outline 8 Dot" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="AccountLabel" layoutX="123.0" layoutY="48.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="100.0" textAlignment="CENTER">
+      <Label fx:id="AccountLabel" layoutX="116.0" layoutY="48.0" lineSpacing="1.0" prefHeight="34.0" prefWidth="133.0" textAlignment="CENTER">
          <font>
-            <Font name="Apple Braille Outline 8 Dot" size="20.0" />
+            <Font size="16.0" />
          </font>
       </Label>
    </children>
