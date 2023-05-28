@@ -88,11 +88,12 @@ public class StartPageController
 				String name = parts[2];
 				String level = parts[3];
 				String exp = parts[4];
-				String coin = parts[5];
+				//String coin = parts[5];
+				String coin = "100";
 				String hunter = parts[6];
 				String sec_bonus = parts[7];
 				String exp_bonus = parts[8];
-				String coin_bonus = parts[9];
+				String coin_bonus = parts[9]; //"1000"
 				StartPage.player.setAccount(account);
 				StartPage.player.setName(name);
 				StartPage.player.setlevel(Integer.valueOf(level));
@@ -102,7 +103,7 @@ public class StartPageController
 				StartPage.player.setItems(Items);
 				System.out.println("StartPage:"+StartPage.player.getAccount());
 				System.out.println("StartPage:"+StartPage.player.getName());
-				System.out.println("StartPage:"+StartPage.player.getlevel());
+				System.out.println("StartPage:"+StartPage.player.getLevel());
 				System.out.println("StartPage:"+StartPage.player.getExp());
 				System.out.println("StartPage:"+StartPage.player.getCoin());
 				Items=StartPage.player.getItems();
@@ -165,7 +166,7 @@ public class StartPageController
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/MissionUndercover_DB";
 			String username = "root";
-			String password = "F74086250";
+			String password = "24081333";
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, username, password);
 			System.out.println("Connecting successfully!");

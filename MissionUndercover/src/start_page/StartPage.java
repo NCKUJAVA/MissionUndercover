@@ -32,6 +32,9 @@ public class StartPage extends Application {
 			System.out.println("start");
 			Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
 			//Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
+
+			//Parent root = FXMLLoader.load(getClass().getResource("StartPageFXML.fxml"));
+
 			Scene scene = new Scene(root,600,600);
 			scene.getStylesheets().add(getClass().getResource("StartPage.css").toExternalForm());
 			primaryStage.setScene(scene);

@@ -170,6 +170,7 @@ public class Player implements Serializable{
 		this.exp = exp;
 	}
 
+
 	private void getRooms() {
 //		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 //		StartPage.rooms = (ArrayList<Room>) objectInputStream.readObject();
@@ -187,8 +188,10 @@ public class Player implements Serializable{
 		}
 		System.out.println("NEWSgetRooms Finish  " + StartPage.rooms.size());
 	}
-	public String getAccount()
-	{
+
+
+	public String getAccount() {
+
 		return account;
 	}
 	
@@ -199,7 +202,7 @@ public class Player implements Serializable{
 		return name;
 		
 	}
-	public int getlevel() {
+	public int getLevel() {
 		return level;
 	}
 	public int getExp() {
