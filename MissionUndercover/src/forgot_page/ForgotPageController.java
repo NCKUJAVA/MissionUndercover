@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -57,55 +57,77 @@ public class ForgotPageController
     @FXML
     public void ShowQuestion(ActionEvent e) throws Exception
     {
+    	StartPage.player.resetNowString();
     	AccountText=AccountTextField.getText();
-    	connection = getConnection();
-		String sql = "SELECT * FROM user";
-		statement = connection.createStatement();
-		resultSet = statement.executeQuery(sql);
-		while(resultSet.next())
+    	if(AccountText.compareTo("")==0)
 		{
-			String column1Value = resultSet.getString("account");
-			if(AccountText.compareTo(column1Value)==0)
+			AccountLabel.setText("帳號不可為空");
+		}else
+		{
+			StartPage.player.sendMessage("Forgot:"+AccountText);
+			while(StartPage.player.getNowString().contains("Forgot:")==false)
+	    	{
+	    		System.out.println("StartPage:"+StartPage.player.getNowString());
+	    	}
+			String s = StartPage.player.getNowString();
+			if(s.contains("Forgot:"))
 			{
-				AccountCheck=1;
-				AccountLabel.setText("帳號正確，請回答安全驗證問題");
-				String question=resultSet.getString("question");
-				QuestionLabel.setText(question);
-				RealAnswer=resultSet.getString("answer");
-				old_pwd=resultSet.getString("password");
-				ShowQuestionButton.setDisable(true);
-				break;
-				
+				if(s.contains("OK"))
+				{
+					String[] parts = s.split("[:]");
+					String question = parts[2];
+					AccountLabel.setText("帳號正確，請回答安全驗證問題");
+					QuestionLabel.setText(question);
+					ShowQuestionButton.setDisable(true);
+				}else if(s.contains("G"))
+				{
+					AccountLabel.setText("帳號錯誤，請重新輸入");
+				}
 			}
 		}
-		if(AccountCheck==0)
-		{
-			AccountLabel.setText("帳號錯誤，請重新輸入");
-		}
-		statement.close();
-		resultSet.close();
-		connection.close();
+    	StartPage.player.resetNowString();
+    	
+    	
+
+		
     }
     
     public void CheckANswer(ActionEvent e) throws Exception
     {
-    	AnswerText=AnswerTextField.getText();
-    	if(AnswerText.compareTo(RealAnswer)!=0)
-    	{
-    		AnswerLabel.setText("答案錯誤，請重新輸入");
-    	}else
-    	{
-    		AnswerLabel.setText("答案正確");
-    		System.out.println("change password");
-    		ChangePasswordPageController.passUserAccount(AccountText,old_pwd);
-            Parent root = FXMLLoader.load(getClass().getResource("/change_password_page/ChangePasswordPageFXML.fxml"));
-            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            System.out.println("switch to change password page");
-    	}
-    	
+    	StartPage.player.resetNowString();
+    	AnswerText=AnswerTextField.getText();	
+    	if(AnswerText.compareTo("")==0)
+		{
+			AnswerLabel.setText("答案不可為空");
+		}else
+		{
+			StartPage.player.sendMessage("Answer:"+AnswerText);
+			while(StartPage.player.getNowString().contains("Answer:")==false)
+	    	{
+	    		System.out.println("StartPage:"+StartPage.player.getNowString());
+	    	}
+			String s = StartPage.player.getNowString();
+			if(s.contains("Answer:"))
+			{
+				if(s.contains("OK"))
+				{
+					AnswerLabel.setText("答案正確");
+		    		System.out.println("change password");
+		            Parent root = FXMLLoader.load(getClass().getResource("/change_password_page/ChangePasswordPageFXML.fxml"));
+		            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		            scene = new Scene(root);
+		            stage.setScene(scene);
+		            stage.show();
+		            System.out.println("switch to change password page");
+				}else if(s.contains("G"))
+				{
+					AnswerLabel.setText("答案錯誤，請重新輸入");
+				}
+			}
+			
+		}
+    	StartPage.player.resetNowString();
+
     }
     
 	public static Connection getConnection() throws Exception

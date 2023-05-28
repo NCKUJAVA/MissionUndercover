@@ -32,7 +32,9 @@ public class RoomUIController implements Initializable {
 	private TextField desInput;
 	@FXML
 	private Button desInputOK;
-
+	@FXML 
+	private Label timer; 
+	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		System.out.println("initialize");
@@ -46,6 +48,7 @@ public class RoomUIController implements Initializable {
 						@Override
 						public void run() {
 							chatRoom.setText(StartPage.player.getChatRoom());
+							timer.setText(String.valueOf(StartPage.room.getTime()));
 							System.out.print("running");
 						}
 					};
@@ -97,7 +100,8 @@ public class RoomUIController implements Initializable {
 
 	public void desInput(ActionEvent e) {
 		if (!desInput.getText().equals("")) {
-			StartPage.player.sendMessage("Description/" + StartPage.player.getName() + "/" + desInput.getText());
+			StartPage.player.sendMessage("Description/" + StartPage.room.getId());// StartPage.player.getName() + "/" + desInput.getText());
+			StartPage.player.sendMessage(StartPage.player.getName() + desInput.getText());
 			//P1Des.setText(desInput.getText());
 			desInput.setDisable(true);
 			desInputOK.setDisable(true);
@@ -133,6 +137,20 @@ public class RoomUIController implements Initializable {
 		StartPage.player.sendMessage( "ready/" + StartPage.room.getId() + "/" + StartPage.player.getName());
 		return;
 	}
+	
+	public void useItemHunter(ActionEvent e) {
+		int[] items = StartPage.player.getItems();
+		StartPage.player.useItem("hunter");
+		StartPage.player.sendMessage("UseItem:hunter" + String.valueOf(items[0]) + StartPage.player.getAccount());
+	}
+	
+	public void useItemTime(ActionEvent e) {
+		int[] items = StartPage.player.getItems();
+		StartPage.player.useItem("hunter");
+		StartPage.player.sendMessage("UseItem:hunter" + String.valueOf(items[1]) + StartPage.player.getAccount());
+	}
+	
+	
 
 }
 

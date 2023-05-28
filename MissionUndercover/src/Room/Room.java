@@ -25,6 +25,7 @@ public class Room implements Serializable {
 	private int readys = 1;
 
 	private int time = 0;
+	
 
 	Thread thread = null;
 

@@ -16,10 +16,11 @@ import start_page.StartPage;
 
 public class Player implements Serializable{
 	private int coin = 0;
+	private String account="";	
 	private String name = "";
-	private int level = 1;;
+	private int level = 1;
 	private int exp = 0;
-	private int[] items = {0,0,0,0,0,0};
+	private int[] items = {0,0,0,0};
 	private Boolean ready = false;
 
 	private transient Socket socket ;
@@ -32,7 +33,9 @@ public class Player implements Serializable{
 	
 //	PrintWriter out;
 	transient ObjectOutputStream out;
-	public Player(){
+	private String now_string="";
+	
+	public Player() {
 		//System.out.println("player()");
 		try {
 			System.out.println("Player constructor");
@@ -53,6 +56,8 @@ public class Player implements Serializable{
 //							String s = in.readLine();
 							String s = (String) in.readObject();
 							System.out.println("get command-======== :" + s);
+							//String s = in.readLine();
+							System.out.println("player:"+s);
 							if (s.contains("Chat:")) {
 								//TODO: write message to chatRoom
 //								s = s.substring(5);
@@ -71,14 +76,8 @@ public class Player implements Serializable{
 								
 							}
 							else if (s.contains("GetRooms")){
-		
-//								ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-//								StartPage.rooms = (ArrayList<Room>) objectInputStream.readObject();
-								StartPage.rooms = new ArrayList<Room>();
-								synchronized(StartPage.rooms){
-									StartPage.rooms = (ArrayList<Room>) in.readObject();
-								}
-								System.out.println("NEWSgetRooms Finish  " + StartPage.rooms.size());
+								getRooms();
+
 								
 							}
 							else if (s.contains("question:")) {
@@ -95,8 +94,46 @@ public class Player implements Serializable{
 									}
 								}
 							}
-							
-							else {
+							else if (s.contains("LogIn successfully"))
+							{
+								now_string=s;
+								System.out.println("player:"+"K"+" "+s);
+							}else if(s.contains("LogIn failed"))
+							{
+								now_string=s;
+								System.out.println("player:"+"G"+" "+s);
+							}else if(s.contains("SignUp info"))
+							{
+								now_string=s;
+							}else if(s.contains("Auth question:OK:"))
+							{
+								now_string=s;
+								System.out.println("player:"+now_string);
+							}else if(s.contains("Forgot:"))
+							{
+								if(s.contains("OK"))
+								{
+									now_string=s;
+								}else if(s.contains("G"))
+								{
+									now_string=s;
+								}
+							}else if(s.contains("Answer:"))
+							{
+								if(s.contains("OK"))
+								{
+									now_string=s;
+								}else if(s.contains("G"))
+								{
+									now_string=s;
+								}
+							}else if(s.contains("NewPassword:"))
+							{
+								now_string=s;
+							}
+							//else if (s.contains("command:content"))
+							else 
+							{
 								System.out.println("ERROR MESSAGE OR Check spelling");
 							}
 						}
@@ -133,6 +170,28 @@ public class Player implements Serializable{
 		this.exp = exp;
 	}
 
+	private void getRooms() {
+//		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+//		StartPage.rooms = (ArrayList<Room>) objectInputStream.readObject();
+		StartPage.rooms = new ArrayList<Room>();
+		synchronized(StartPage.rooms){
+			try {
+				StartPage.rooms = (ArrayList<Room>) in.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("NEWSgetRooms Finish  " + StartPage.rooms.size());
+	}
+	public String getAccount()
+	{
+		return account;
+	}
+	
 	public int getCoin() {
 		return coin;
 	}
@@ -148,6 +207,11 @@ public class Player implements Serializable{
 	}
 	public int[] getItems() {
 		return items;
+	}
+	
+	public void setAccount(String account)
+	{
+		this.account=account;
 	}
 	
 	public void setCoin(int coin) {
@@ -167,6 +231,26 @@ public class Player implements Serializable{
 			this.items[i] = items[i];
 		}
 	}
+	public void addItem(String s, int k) {
+		if(s.equals("hunter"))
+			items[0]--;
+		else if(s.equals("time"))
+			items[1]--;
+		else if(s.equals("exp"))
+			items[2]--;
+		else if(s.equals("coin"))
+			items[3]--;
+	}
+	public void useItem(String s) {
+		if(s.equals("hunter"))
+			items[0]--;
+		else if(s.equals("time"))
+			items[1]--;
+		else if(s.equals("exp"))
+			items[2]--;
+		else if(s.equals("coin"))
+			items[3]--;
+	}
     public void addCoins(int amount) {
         coin += amount;
     }
@@ -174,11 +258,13 @@ public class Player implements Serializable{
 	public void ready() {
 		ready = !ready;
 	}
-	
+	public void resetNowString()
+	{
+		this.now_string="";
+	}
 	public Boolean getReady() {
 		return ready;
 	}
-
 	public void sendMessage(String s) {
 		
 		try {
@@ -200,7 +286,6 @@ public class Player implements Serializable{
 	}
 	
 public void sendMessage(Player p) {
-		
 		try {
 			out.writeObject(p);
 			out.flush();
@@ -212,12 +297,12 @@ public void sendMessage(Player p) {
 		}
 //		out.println(s);
 //		out.flush();
-	}
-	
+}
 	
 	public String getChatRoom() {
 		return chatRoom;
 	}
+
 	public Socket getSocket() {
 		return socket;
 	}
@@ -244,4 +329,9 @@ public void sendMessage(Player p) {
 		return description;
 	}
 	
+
+	public String getNowString()
+	{
+		return now_string;
+	}
 }
