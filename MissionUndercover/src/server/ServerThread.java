@@ -187,6 +187,14 @@ public class ServerThread extends Servers implements Runnable {
 				}
 				else if(line.contains("Buy:")) {
 					//TODO : do SQL add items and use coin  shangyuan  chiatung
+					String[] parts = line.split("[:|]");
+					String hunter = parts[1];
+					String sec_bonus = parts[2];
+					String exp_bonus = parts[3];
+					String coin_bonus = parts[4];
+					String now_coin = parts[5];
+					String account = parts[6];
+					Buy_update_DB(hunter,sec_bonus,exp_bonus,coin_bonus,now_coin,account);
 				}
 				else if (line.contains("UseItem:")) {
 					//TODO : do SQL minus the items and correct function the item;
@@ -208,7 +216,14 @@ public class ServerThread extends Servers implements Runnable {
 				else if (line.contains("ready")) {
 					// TODO Room.ready
 				}
-				
+				else if(line.contains("UseItem:"))
+				{
+					String[] parts = line.split("[:|]");
+					String item = parts[1];
+					String before_num=parts[2];
+					String account=parts[3];
+					UseItem(item,before_num,account);
+				}
 			}
 
 			closeConnect();
@@ -456,5 +471,47 @@ public class ServerThread extends Servers implements Runnable {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	private void UseItem(String item,String before_num,String account)
+	{
+		int after_num=(Integer.parseInt(before_num))-1;
+		try {
+			connection = getConnection();
+			String sql = "UPDATE user SET "+item+" = ? WHERE account = ?";
+			prestatement = connection.prepareStatement(sql);
+			prestatement.setInt(1, after_num);
+			prestatement.setString(2, account);
+			int rowsAffected = prestatement.executeUpdate();
+			System.out.println("Row affected:"+rowsAffected);
+			prestatement.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	private void Buy_update_DB(String hunter,String sec_bonus,String exp_bonus,String coin_bonus,String now_coin,String account)
+	{
+		try {
+			connection = getConnection();
+			String sql = "UPDATE user SET hunter = ?, sec_bonus = ?, exp_bonus = ?, coin_bonus = ?, coin = ? WHERE account = ?";
+			prestatement = connection.prepareStatement(sql);
+			prestatement.setInt(1, Integer.parseInt(hunter));
+			prestatement.setInt(2, Integer.parseInt(sec_bonus));
+			prestatement.setInt(3, Integer.parseInt(exp_bonus));
+			prestatement.setInt(4, Integer.parseInt(coin_bonus));
+			prestatement.setInt(5, Integer.parseInt(now_coin));
+			prestatement.setString(6, account);
+			int rowsAffected = prestatement.executeUpdate();
+			System.out.println("Row affected:"+rowsAffected);
+			prestatement.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
