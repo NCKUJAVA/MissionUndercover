@@ -1,11 +1,14 @@
 package mainshop_page;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +20,7 @@ import javafx.stage.Stage;
 import start_page.StartPage;
 
 
-public class MainshopController {
+public class MainshopController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -25,12 +28,7 @@ public class MainshopController {
     int[] itemCost = {30,20,10, 5};
     int[] quantity = {0, 0, 0, 0};
     
-    //private int quantity = 0;  
-    //private int itemHunterCost = 30;
-    //private int itemTimeCost = 20;
-    //private int itemExpCost = 10;
-    //private int itemCoinCost = 5;
-    
+
     @FXML
     private Label payTotal;
     
@@ -89,7 +87,7 @@ public class MainshopController {
     
   
     
-    public void initialize() {
+    public void initialize(URL arg0, ResourceBundle arg1) {
     	updateHunterQuantityLabel();
     	updateTimeQuantityLabel();
     	updateExpQuantityLabel();
@@ -198,9 +196,21 @@ public class MainshopController {
         
     public void purchase() {
     	int totalCost = updatePayTotal();
-
         if (StartPage.player.getCoin() >= totalCost) {
         	StartPage.player.addCoins(-totalCost); // 扣除金幣
+        	String msg="Buy:";
+        	int[] new_quantity= {0,0,0,0}; 
+        	for(int i=0;i<quantity.length;i++)
+        	{
+        		int tmp_num=(StartPage.player.getItems()[i]+quantity[i]);
+        		msg+=(String.valueOf(tmp_num)+"|");
+        		new_quantity[i]=tmp_num;
+        	}
+        	StartPage.player.setItems(new_quantity);
+        	msg+=String.valueOf(StartPage.player.getCoin());
+        	msg+="|";
+        	msg+=StartPage.player.getAccount();
+        	StartPage.player.sendMessage(msg);
             System.out.println("購買成功！");
             // Show a pop-up message with the purchase information
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -218,12 +228,22 @@ public class MainshopController {
             int inadequateCoin = totalCost - StartPage.player.getCoin();
             alert.setTitle("Purchase Failed");
             alert.setHeaderText(null);
-            alert.setContentText("購買失敗!\n" +
-                    "金幣不足: " + inadequateCoin);
+            alert.setContentText("購買失敗!\n" + 
+            		"金幣餘額: " + StartPage.player.getCoin() + "\n" +
+                    "不足 " + inadequateCoin + " 請充值!");
 
             alert.showAndWait();
         }
-    	
+        
+        for (int i = 0; i < quantity.length; i++) {
+            quantity[i] = 0;
+        }
+        
+        // Update the quantity labels to display 0
+        updateHunterQuantityLabel();
+        updateTimeQuantityLabel();
+        updateExpQuantityLabel();
+        updateCoinQuantityLabel();
     }  
     
 	public void leaveMainwindow(ActionEvent e) throws IOException {

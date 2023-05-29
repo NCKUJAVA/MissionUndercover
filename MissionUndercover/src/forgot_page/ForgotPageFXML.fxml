@@ -6,19 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forgot_page.ForgotPageController">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #90EE90;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forgot_page.ForgotPageController">
    <children>
       <Label fx:id="StatusLabel" layoutX="30.0" layoutY="14.0" prefHeight="42.0" prefWidth="228.0" style="-fx-alignment: center;;" text="忘記密碼之修改步驟如下:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="AccountTextField" layoutX="376.0" layoutY="83.0" prefHeight="41.0" prefWidth="354.0" />
-      <Button fx:id="ShowQuestionButton" layoutX="469.0" layoutY="136.0" mnemonicParsing="false" onAction="#ShowQuestion" prefHeight="62.0" prefWidth="166.0" text="顯示安全驗證問題" />
-      <Button fx:id="CheckAnswerButton" layoutX="477.0" layoutY="403.0" mnemonicParsing="false" onAction="#CheckANswer" prefHeight="62.0" prefWidth="151.0" text="驗證並開始修改密碼" />
-      <Button fx:id="BackToLogInPageButton" layoutX="38.0" layoutY="426.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0" prefWidth="105.0" text="返回登入介面" />
-      <TextField fx:id="AnswerTextField" layoutX="376.0" layoutY="353.0" prefHeight="41.0" prefWidth="354.0" />
-      <Label fx:id="AccountLabel" layoutX="379.0" layoutY="47.0" prefHeight="30.0" prefWidth="354.0" style="-fx-alignment: center;;" text="請輸入您的帳號">
+      <TextField fx:id="AccountTextField" layoutX="377.0" layoutY="85.0" prefHeight="41.0" prefWidth="354.0" />
+      <Button fx:id="ShowQuestionButton" layoutX="470.0" layoutY="138.0" mnemonicParsing="false" onAction="#ShowQuestion" prefHeight="62.0" prefWidth="166.0" text="顯示安全驗證問題" />
+      <Button fx:id="CheckAnswerButton" layoutX="476.0" layoutY="599.0" mnemonicParsing="false" onAction="#CheckANswer" prefHeight="62.0" prefWidth="151.0" text="驗證並開始修改密碼" />
+      <Button fx:id="BackToLogInPageButton" layoutX="30.0" layoutY="620.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0" prefWidth="105.0" text="返回登入介面" />
+      <TextField fx:id="AnswerTextField" layoutX="379.0" layoutY="533.0" prefHeight="41.0" prefWidth="354.0" />
+      <Label fx:id="AccountLabel" layoutX="380.0" layoutY="49.0" prefHeight="30.0" prefWidth="354.0" style="-fx-alignment: center;;" text="請輸入您的帳號">
          <font>
             <Font size="16.0" />
          </font>
@@ -43,12 +43,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="QuestionLabel" layoutX="376.0" layoutY="237.0" prefHeight="42.0" prefWidth="354.0" style="-fx-alignment: center; -fx-background-color: yellow;" text="安全驗證問題將顯示在此處">
+      <Label fx:id="QuestionLabel" layoutX="380.0" layoutY="297.0" prefHeight="83.0" prefWidth="354.0" style="-fx-alignment: center; -fx-background-color: #2b961f;" text="安全驗證問題將顯示在此處">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="AnswerLabel" layoutX="377.0" layoutY="312.0" prefHeight="42.0" prefWidth="354.0" style="-fx-alignment: center;" text="請輸入您註冊時設定之答案">
+      <Label fx:id="AnswerLabel" layoutX="379.0" layoutY="481.0" prefHeight="42.0" prefWidth="354.0" style="-fx-alignment: center;" text="請輸入您註冊時設定之答案">
          <font>
             <Font size="16.0" />
          </font>
