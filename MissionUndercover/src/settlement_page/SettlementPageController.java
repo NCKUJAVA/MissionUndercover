@@ -89,7 +89,10 @@ public class SettlementPageController implements Initializable
 
 		System.out.println(StartPage.player.getExp());
 		String msg="GameOver:"+StartPage.player.getAccount()+"|";
-		StartPage.player.sendMessage("");
+		msg+=(StartPage.player.getLevel()+"|");
+		msg+=(StartPage.player.getExp()+"|");
+		msg+=(StartPage.player.getCoin());
+		StartPage.player.sendMessage(msg);
 		
 		
 	}
