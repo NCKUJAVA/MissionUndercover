@@ -34,72 +34,32 @@ public class MaininfoController implements Initializable {
     @FXML
     private Label CoinLabel;
     
-	/*public static void passPlayer(Player player_object)
-	{
-		player=player_object;
-	}*/
-	public void showAccount() {
-        AccountLabel.setText(StartPage.player.getAccount());
-        System.out.println(StartPage.player.getAccount());
-
-	}
-    
-	public void showLevel() {
-        LevelLabel.setText(String.valueOf(StartPage.player.getLevel()));
-        System.out.println(StartPage.player.getLevel());
-	}
-	
-	public void showName() {
-        NameLabel.setText(StartPage.player.getName());
-        System.out.println(StartPage.player.getName());
-        //StartPage.player.getName();
-	}
-	
-	public void showCoin() {
-        CoinLabel.setText(String.valueOf(StartPage.player.getCoin()));
-        System.out.println(StartPage.player.getCoin());
-	}
+    @FXML
+    private Label PackHunterLabel;
+    @FXML
+    private Label PackTimeLabel;
+    @FXML
+    private Label PackExpLabel;
+    @FXML
+    private Label PackCoinLabel;
+    @FXML
+    public void display() {
+    	AccountLabel.setText(StartPage.player.getAccount());
+    	LevelLabel.setText(String.valueOf(StartPage.player.getLevel()));
+    	NameLabel.setText(StartPage.player.getName());
+    	CoinLabel.setText(String.valueOf(StartPage.player.getCoin()));
+    	
+    	PackHunterLabel.setText(String.valueOf(StartPage.player.getItems()[0]));
+    	PackTimeLabel.setText(String.valueOf(StartPage.player.getItems()[1]));
+    	PackExpLabel.setText(String.valueOf(StartPage.player.getItems()[2]));
+    	PackCoinLabel.setText(String.valueOf(StartPage.player.getItems()[3]));
+    	//System.out.println("display");
+    }
     
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		showAccount();
-		showLevel();
-		showName();
-		showCoin();
+		display();
+		//System.out.println("display");
 	}
-	
-    /*public MaininfoController() {
-    	
-    }
-    
-    public MaininfoController(Player player1) {
-        this.player1 = player1;
-    }*/
-
-    
-     
-    
-    
-	public void display() {
-        System.out.println("玩家資訊");
-        //System.out.println(player1);
-        //System.out.println("金幣數量：" + player1.getCoin());
-        // 顯示其他玩家資訊的程式碼
-        //AccountLabel.setText(String.valueOf(player1.getCoin()));
-    }
-    /*
-	public void level(ActionEvent e) {
-		System.out.println("level");
-	}
-	
-	public void coin(ActionEvent e) {
-		System.out.println("coin");
-	}
-	
-	public void props(ActionEvent e) {
-		System.out.println("props");
-	}
-	*/
 	
 	public void leave(ActionEvent e) throws IOException {
 		System.out.println("leave");

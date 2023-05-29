@@ -9,93 +9,93 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="321.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainshop_page.MainshopController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainshop_page.MainshopController">
    <children>
-      <Button layoutX="260.0" layoutY="2.0" mnemonicParsing="false" onAction="#leaveMainwindow" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="主畫面" />
-      <ImageView fitHeight="75.0" fitWidth="68.0" layoutX="14.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="502.0" layoutY="112.0" mnemonicParsing="false" onAction="#leaveMainwindow" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="主畫面" />
+      <ImageView fitHeight="75.0" fitWidth="68.0" layoutX="256.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/timer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="82.0" fitWidth="62.0" layoutX="15.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="82.0" fitWidth="62.0" layoutX="257.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/hunter.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="78.0" layoutX="9.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="78.0" layoutX="251.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/exp.png" />
          </image>
       </ImageView>
-      <Label layoutX="153.0" layoutY="59.0" text="獵人卡">
+      <Label layoutX="395.0" layoutY="169.0" text="獵人卡">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="156.0" layoutY="170.0" text="加時器">
+      <Label layoutX="398.0" layoutY="280.0" text="加時器">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="143.0" layoutY="268.0" text="經驗加成">
+      <Label layoutX="385.0" layoutY="378.0" text="經驗加成">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="82.0" layoutY="86.0" text="- 玩家被票選出局可帶走場上一人" />
-      <Label layoutX="91.0" layoutY="197.0" text="- 增加討論時間" />
-      <Label layoutX="103.0" layoutY="289.0" text="- 經驗值加倍獎勵" />
-      <TextField prefHeight="33.0" prefWidth="73.0" text="道具商店" />
-      <Label layoutX="97.0" layoutY="180.0" />
-      <Button fx:id="PurchaseButton" layoutX="214.0" layoutY="440.0" mnemonicParsing="false" onAction="#purchase" prefHeight="41.0" prefWidth="78.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="確認購買" />
-      <ImageView fitHeight="67.0" fitWidth="78.0" layoutX="11.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="324.0" layoutY="196.0" text="- 玩家被票選出局可帶走場上一人" />
+      <Label layoutX="333.0" layoutY="307.0" text="- 增加討論時間" />
+      <Label layoutX="345.0" layoutY="399.0" text="- 經驗值加倍獎勵" />
+      <TextField layoutX="242.0" layoutY="110.0" prefHeight="33.0" prefWidth="73.0" text="道具商店" />
+      <Label layoutX="339.0" layoutY="290.0" />
+      <Button fx:id="PurchaseButton" layoutX="456.0" layoutY="550.0" mnemonicParsing="false" onAction="#purchase" prefHeight="41.0" prefWidth="78.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="確認購買" />
+      <ImageView fitHeight="67.0" fitWidth="78.0" layoutX="253.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/coindouble.png" />
          </image>
       </ImageView>
-      <Label layoutX="142.0" layoutY="354.0" text="金幣加成">
+      <Label layoutX="384.0" layoutY="464.0" text="金幣加成">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="105.0" layoutY="381.0" text="- 金幣加倍獎勵" />
-      <Button fx:id="increaseHunterButton" layoutX="86.0" layoutY="115.0" mnemonicParsing="false" onAction="#increaseHunterQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Button fx:id="decreaseHunterButton" layoutX="153.0" layoutY="114.0" mnemonicParsing="false" onAction="#decreaseHunterQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
-      <Label fx:id="quantityHunter" layoutX="121.0" layoutY="113.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Label fx:id="payHunter" layoutX="224.0" layoutY="113.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="190.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="347.0" layoutY="491.0" text="- 金幣加倍獎勵" />
+      <Button fx:id="increaseHunterButton" layoutX="328.0" layoutY="225.0" mnemonicParsing="false" onAction="#increaseHunterQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
+      <Button fx:id="decreaseHunterButton" layoutX="395.0" layoutY="224.0" mnemonicParsing="false" onAction="#decreaseHunterQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
+      <Label fx:id="quantityHunter" layoutX="363.0" layoutY="223.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="payHunter" layoutX="466.0" layoutY="223.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="432.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/coin.jpeg" />
          </image>
       </ImageView>
-      <Button fx:id="increaseTimeButton" layoutX="90.0" layoutY="216.0" mnemonicParsing="false" onAction="#increaseTimeQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Label fx:id="quantityTime" layoutX="127.0" layoutY="213.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Button fx:id="decreaseTimeButton" layoutX="153.0" layoutY="216.0" mnemonicParsing="false" onAction="#decreaseTimeQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
-      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="190.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="increaseTimeButton" layoutX="332.0" layoutY="326.0" mnemonicParsing="false" onAction="#increaseTimeQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
+      <Label fx:id="quantityTime" layoutX="369.0" layoutY="323.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Button fx:id="decreaseTimeButton" layoutX="395.0" layoutY="326.0" mnemonicParsing="false" onAction="#decreaseTimeQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
+      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="432.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/coin.jpeg" />
          </image>
       </ImageView>
-      <Label fx:id="payTime" layoutX="226.0" layoutY="214.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Button fx:id="increaseExpButton" layoutX="88.0" layoutY="309.0" mnemonicParsing="false" onAction="#increaseExpQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Label fx:id="quantityExp" layoutX="121.0" layoutY="310.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Button fx:id="decreaseExpButton" layoutX="153.0" layoutY="310.0" mnemonicParsing="false" onAction="#decreaseExpQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
-      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="189.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="payTime" layoutX="468.0" layoutY="324.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Button fx:id="increaseExpButton" layoutX="330.0" layoutY="419.0" mnemonicParsing="false" onAction="#increaseExpQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
+      <Label fx:id="quantityExp" layoutX="363.0" layoutY="420.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Button fx:id="decreaseExpButton" layoutX="395.0" layoutY="420.0" mnemonicParsing="false" onAction="#decreaseExpQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
+      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="431.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/coin.jpeg" />
          </image>
       </ImageView>
-      <Label fx:id="payExp" layoutX="224.0" layoutY="310.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Button fx:id="increaseCoinButton" layoutX="88.0" layoutY="400.0" mnemonicParsing="false" onAction="#increaseCoinQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Label fx:id="quantityCoin" layoutX="121.0" layoutY="398.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Button fx:id="decreaseCoinButton" layoutX="152.0" layoutY="401.0" mnemonicParsing="false" onAction="#decreaseCoinQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
-      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="188.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="payExp" layoutX="466.0" layoutY="420.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Button fx:id="increaseCoinButton" layoutX="330.0" layoutY="510.0" mnemonicParsing="false" onAction="#increaseCoinQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
+      <Label fx:id="quantityCoin" layoutX="363.0" layoutY="508.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Button fx:id="decreaseCoinButton" layoutX="394.0" layoutY="511.0" mnemonicParsing="false" onAction="#decreaseCoinQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
+      <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="430.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/coin.jpeg" />
          </image>
       </ImageView>
-      <Label fx:id="payCoin" layoutX="223.0" layoutY="398.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Separator layoutX="-32.0" layoutY="434.0" prefHeight="1.0" prefWidth="348.0" />
-      <Label fx:id="payTotal" layoutX="54.0" layoutY="446.0" prefHeight="31.0" prefWidth="128.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="payCoin" layoutX="465.0" layoutY="508.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Separator layoutX="210.0" layoutY="544.0" prefHeight="1.0" prefWidth="348.0" />
+      <Label fx:id="payTotal" layoutX="296.0" layoutY="556.0" prefHeight="31.0" prefWidth="128.0" style="-fx-alignment: center;" textAlignment="CENTER" />
    </children>
 </AnchorPane>

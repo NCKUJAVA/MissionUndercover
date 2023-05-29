@@ -123,7 +123,9 @@ public class Player implements Serializable{
 							}else if(s.contains("SignUp info"))
 							{
 								now_string=s;
-							}else if(s.contains("Auth:OK"))
+								System.out.println("Player: " +now_string);
+							}
+							else if(s.contains("Auth:OK"))
 							{
 								now_string=s;
 								System.out.println("player:"+now_string);

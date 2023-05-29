@@ -30,6 +30,7 @@ public class StartPage extends Application {
 //			player.setlevel(1);
 //			System.out.println("finish");
 			System.out.println("start");
+			//Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
 			//Parent root = FXMLLoader.load(getClass().getResource("/settlement_page/SettlementPageFXML.fxml"));
 			//Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
 
