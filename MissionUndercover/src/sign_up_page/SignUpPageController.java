@@ -113,7 +113,7 @@ public class SignUpPageController
 	    	StartPage.player.sendMessage("SignUp:"+AccountText+"|"+PasswordText+"|"+NameText);
 	    	while(StartPage.player.getNowString().contains("SignUp info")==false)
 	    	{
-	    		System.out.println("StartPage:"+StartPage.player.getNowString());
+	    		//System.out.println("StartPage:"+StartPage.player.getNowString());
 	    	}
 	    	String now_string=StartPage.player.getNowString();
 	    	System.out.println("StartPage:"+now_string);

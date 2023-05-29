@@ -3,48 +3,96 @@ package Player;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
 
-public class Player {
+import Room.Room;
+import Room.RoomUIController;
+import start_page.StartPage;
 
+public class Player implements Serializable{
+	private int coin = 0;
 	private String account="";	
 	private String name = "";
 	private int level = 1;
 	private int exp = 0;
-	private int coin = 0;
 	private int[] items = {0,0,0,0};
 	private Boolean ready = false;
 
-	private Socket socket;
+	private transient Socket socket ;
 	private String chatRoom = "";
-	BufferedReader in;
-	PrintWriter out;
+	private String roomId  = "";
+	private String card = "";
+//	BufferedReader in;
+	private String description = "";
+	transient ObjectInputStream in;
+	
+//	PrintWriter out;
+	transient ObjectOutputStream out;
 	private String now_string="";
+	
 	public Player() {
 		//System.out.println("player()");
 		try {
+			System.out.println("Player constructor");
 			socket = new Socket("127.0.0.1", 8000);//TODO: check server ip     connect to server
 			// out is used to send message to server;
-			out = new PrintWriter(socket.getOutputStream());
+//			out = new PrintWriter(socket.getOutputStream());
+			out = new ObjectOutputStream(socket.getOutputStream());
 			// in is used to get message from server
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			in = new ObjectInputStream(socket.getInputStream());
+
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
 					try {
+						System.out.println("new THREAD---- ----------------;");
 						while (true) {
-							String s = in.readLine();
+//							String s = in.readLine();
+							String s = (String) in.readObject();
+							System.out.println("get command-======== :" + s);
+							//String s = in.readLine();
 							System.out.println("player:"+s);
 							if (s.contains("Chat:")) {
 								//TODO: write message to chatRoom
 //								s = s.substring(5);
 								chatRoom = chatRoom + s + "\n";
 								System.out.println("CHAT: " + chatRoom);
-								
+							}
+							else if (s.contains("AddRoom:")) {
+								StartPage.room.addPlayer(StartPage.player);
+							}
+							else if (s.contains("roominfo")){
+								StartPage.room.setId(s.split("/")[1]);
 							}
 							else if (s.contains("time:")) {
+								String[] tempS = s.split(":");
+								StartPage.room.setTime(Integer.parseInt(tempS[1]));
 								
+							}
+							else if (s.contains("GetRooms")){
+								getRooms();
+
+								
+							}
+							else if (s.contains("question:")) {
+								String[] tempS = s.split(":");
+								StartPage.player.setCard(tempS[1]);
+								
+							}
+							else if(s.contains("Description")) {
+								// Description/Name/Des
+								String[] msg = s.split("/");
+								for(Player p: StartPage.room.getPlayers()) {
+									if(p.getName().equals(msg[1])) {
+										p.setDescription(msg[2]);
+									}
+								}
 							}
 							else if (s.contains("LogIn successfully"))
 							{
@@ -57,6 +105,7 @@ public class Player {
 							}else if(s.contains("SignUp info"))
 							{
 								now_string=s;
+								System.out.println("Player: " +now_string);
 							}else if(s.contains("Auth question:OK:"))
 							{
 								now_string=s;
@@ -95,11 +144,22 @@ public class Player {
 					}
 					catch(Exception ee) {
 						System.out.println("errror rrrr");
+						ee.printStackTrace();
 					}
 				}
 			}).start();
 		} catch (IOException e1) {
+			
 			// TODO Auto-generated catch block
+			try {
+				out.close();
+				in.close();
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 			e1.printStackTrace();
 		}
 
@@ -111,7 +171,28 @@ public class Player {
 		this.exp = exp;
 	}
 
+
+	private void getRooms() {
+//		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+//		StartPage.rooms = (ArrayList<Room>) objectInputStream.readObject();
+		StartPage.rooms = new ArrayList<Room>();
+		synchronized(StartPage.rooms){
+			try {
+				StartPage.rooms = (ArrayList<Room>) in.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("NEWSgetRooms Finish  " + StartPage.rooms.size());
+	}
+
+
 	public String getAccount() {
+
 		return account;
 	}
 	
@@ -120,6 +201,7 @@ public class Player {
 	}
 	public String getName() {
 		return name;
+		
 	}
 	public int getLevel() {
 		return level;
@@ -153,12 +235,32 @@ public class Player {
 			this.items[i] = items[i];
 		}
 	}
+	public void addItem(String s, int k) {
+		if(s.equals("hunter"))
+			items[0]--;
+		else if(s.equals("time"))
+			items[1]--;
+		else if(s.equals("exp"))
+			items[2]--;
+		else if(s.equals("coin"))
+			items[3]--;
+	}
+	public void useItem(String s) {
+		if(s.equals("hunter"))
+			items[0]--;
+		else if(s.equals("time"))
+			items[1]--;
+		else if(s.equals("exp"))
+			items[2]--;
+		else if(s.equals("coin"))
+			items[3]--;
+	}
     public void addCoins(int amount) {
         coin += amount;
     }
 	
-	public void setReady(Boolean b) {
-		ready = b;
+	public void ready() {
+		ready = !ready;
 	}
 	public void resetNowString()
 	{
@@ -167,16 +269,71 @@ public class Player {
 	public Boolean getReady() {
 		return ready;
 	}
+	public void sendMessage(String s) {
+		
+		try {
+			out.writeObject(s);
+			out.flush();
+			out.reset();
+			if (s.contains("LeaveRoom")) {
+				out.writeObject(StartPage.player);
+				out.flush();
+				out.reset();
+			}
 
-	public void sendMessage(String s) 
-	{
-		out.println(s);
-		out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		out.println(s);
+//		out.flush();
 	}
+	
+public void sendMessage(Player p) {
+		try {
+			out.writeObject(p);
+			out.flush();
+			out.reset();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		out.println(s);
+//		out.flush();
+}
 	
 	public String getChatRoom() {
 		return chatRoom;
 	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+	
+	public String getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(String id) {
+
+		roomId = id;
+	}
+	public void setCard(String s) {
+		card = s;
+	}
+	public String getCard() {
+		return card;
+	}
+	
+	public void setDescription(String s) {
+		description = s;
+	}
+	
+	public String getDescription () {
+		return description;
+	}
+	
+
 	public String getNowString()
 	{
 		return now_string;

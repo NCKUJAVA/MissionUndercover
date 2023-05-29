@@ -1,11 +1,14 @@
 package mainshop_page;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +20,7 @@ import javafx.stage.Stage;
 import start_page.StartPage;
 
 
-public class MainshopController {
+public class MainshopController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -84,7 +87,7 @@ public class MainshopController {
     
   
     
-    public void initialize() {
+    public void initialize(URL arg0, ResourceBundle arg1) {
     	updateHunterQuantityLabel();
     	updateTimeQuantityLabel();
     	updateExpQuantityLabel();

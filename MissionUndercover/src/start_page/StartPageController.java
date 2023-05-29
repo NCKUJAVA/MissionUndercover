@@ -68,6 +68,7 @@ public class StartPageController
 
 	    String PasswordText = PasswordTextField.getText();
 	    System.out.println("Password:"+PasswordText);
+
 	    if(AccountText.compareTo("")==0 || PasswordText.compareTo("")==0)
 	    {
 	    	LogInStatusLabel.setText("帳號或密碼不可為空");

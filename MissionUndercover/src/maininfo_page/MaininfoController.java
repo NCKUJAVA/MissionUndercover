@@ -42,7 +42,7 @@ public class MaininfoController implements Initializable {
     private Label PackExpLabel;
     @FXML
     private Label PackCoinLabel;
-    
+    @FXML
     public void display() {
     	AccountLabel.setText(StartPage.player.getAccount());
     	LevelLabel.setText(String.valueOf(StartPage.player.getLevel()));
@@ -53,11 +53,12 @@ public class MaininfoController implements Initializable {
     	PackTimeLabel.setText(String.valueOf(StartPage.player.getItems()[1]));
     	PackExpLabel.setText(String.valueOf(StartPage.player.getItems()[2]));
     	PackCoinLabel.setText(String.valueOf(StartPage.player.getItems()[3]));
-    	
+    	//System.out.println("display");
     }
     
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		display();
+		//System.out.println("display");
 	}
 	
 	public void leave(ActionEvent e) throws IOException {

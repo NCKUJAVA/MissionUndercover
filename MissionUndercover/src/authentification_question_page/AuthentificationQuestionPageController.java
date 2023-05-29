@@ -100,7 +100,6 @@ public class AuthentificationQuestionPageController implements Initializable
 //			prestatement.close();
 //			connection.close();
 			StartPage.player.resetNowString();
-
 		}
 		StartPage.player.resetNowString();
 
