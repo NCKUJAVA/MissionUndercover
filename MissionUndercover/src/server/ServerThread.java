@@ -232,6 +232,14 @@ public class ServerThread extends Servers implements Runnable {
 					String before_num=parts[2];
 					String account=parts[3];
 					UseItem(item,before_num,account);
+				}else if(line.contains("GameOver"))
+				{
+					String[] parts = line.split("[:|]");
+					String account = parts[1];
+					String level = parts[2];
+					String exp = parts[3];
+					String coin = parts[4];
+					GameOverUpdate(account,level,exp,coin);
 				}
 			}
 			closeConnect();
@@ -684,6 +692,25 @@ public class ServerThread extends Servers implements Runnable {
 			e.printStackTrace();
 		}
 		
+	}
+	private void GameOverUpdate(String account,String level,String exp,String coin)
+	{
+		try {
+			connection = getConnection();
+			String sql = "UPDATE user SET level = ?, exp = ?, coin = ? WHERE account = ?";
+			prestatement = connection.prepareStatement(sql);
+			prestatement.setInt(1, Integer.parseInt(level));
+			prestatement.setInt(2, Integer.parseInt(exp));
+			prestatement.setInt(3, Integer.parseInt(coin));
+			prestatement.setString(4, account);
+			int rowsAffected = prestatement.executeUpdate();
+			System.out.println("Row affected:"+rowsAffected);
+			prestatement.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
