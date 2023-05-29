@@ -89,6 +89,7 @@ public class ServerThread extends Servers implements Runnable {
 				if (line.contains("LogIn")) {
 					// do sql to check if account and pwd correct
 					// TODO : shangyuan read log in
+					
 					String[] parts = line.split("[:|]");
 
 					String account = parts[1];
@@ -101,7 +102,7 @@ public class ServerThread extends Servers implements Runnable {
 							msg += "|";
 						}
 						print_single("Server thread:" + msg);
-
+						player = new Player(player_value);
 					} else {
 						String msg = "LogIn failed";
 						print_single("Server thread:" + msg);
@@ -128,14 +129,14 @@ public class ServerThread extends Servers implements Runnable {
 						print_single(msg);
 					}
 
-				} else if (line.contains("Auth question")) {
+				} else if (line.contains("Auth")) {
 					String[] parts = line.split("[:|]");
 
 					String question = parts[1];
 					String answer = parts[2];
-					SignUpWriteDB(account, password, name, question, answer, 0, 0, 0, 0, 0, 0, 0);
+					SignUpWriteDB(account, password, name, question, answer, 1, 0, 100, 0, 0, 0, 0);
 					System.out.println("Server:" + line);
-					print_single("Auth question:OK:" + name);
+					print_single("Auth:OK:" + name);
 
 				} else if (line.contains("Forgot:")) {
 					String[] parts = line.split("[:]");
@@ -178,9 +179,8 @@ public class ServerThread extends Servers implements Runnable {
 					createRoom();
 				} else if (line.contains("AddRoom:")) {
 					addRoom(line);
-				} else if (line.contains("Buy:")) {
-					// TODO : do SQL add items and use coin shangyuan chiatung
-				} else if (line.contains("UseItem:")) {
+				}
+				else if (line.contains("UseItem:")) {
 					// TODO : do SQL minus the items and correct function the item;
 				} else if (line.contains("GetRooms")) {
 					// TODO : return RoomList
@@ -194,7 +194,45 @@ public class ServerThread extends Servers implements Runnable {
 					ready(line);
 
 				}
-
+				else if(line.contains("Buy:")) {
+					//TODO : do SQL add items and use coin  shangyuan  chiatung
+					String[] parts = line.split("[:|]");
+					String hunter = parts[1];
+					String sec_bonus = parts[2];
+					String exp_bonus = parts[3];
+					String coin_bonus = parts[4];
+					String now_coin = parts[5];
+					String account = parts[6];
+					Buy_update_DB(hunter,sec_bonus,exp_bonus,coin_bonus,now_coin,account);
+				}
+				else if (line.contains("UseItem:")) {
+					//TODO : do SQL minus the items and correct function the item;
+				}
+				else if (line.contains("GetRooms")) {
+					//TODO : return RoomList
+					
+				}
+				else if (line.contains("Chat:")) {
+					//TODO 
+					String msg = "Client@" + socketName + ":" + line;
+					System.out.println(msg);
+					// 向在线客户端输出信息
+					print(msg);
+				}
+				else if (line.contains("Description:")) {
+					
+				}
+				else if (line.contains("ready")) {
+					// TODO Room.ready
+				}
+				else if(line.contains("UseItem:"))
+				{
+					String[] parts = line.split("[:|]");
+					String item = parts[1];
+					String before_num=parts[2];
+					String account=parts[3];
+					UseItem(item,before_num,account);
+				}
 			}
 			closeConnect();
 		} catch (IOException e) {
@@ -377,10 +415,9 @@ public class ServerThread extends Servers implements Runnable {
 	}
 
 	private void print_single(String msg) throws IOException {
-		PrintWriter out = null;
-		out = new PrintWriter(socket.getOutputStream());
-		out.println(msg);
-		out.flush();
+		objectOutputStream.writeObject(msg);
+        objectOutputStream.flush();
+        objectOutputStream.reset();
 	}
 
 	/**
@@ -605,6 +642,48 @@ public class ServerThread extends Servers implements Runnable {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	private void UseItem(String item,String before_num,String account)
+	{
+		int after_num=(Integer.parseInt(before_num))-1;
+		try {
+			connection = getConnection();
+			String sql = "UPDATE user SET "+item+" = ? WHERE account = ?";
+			prestatement = connection.prepareStatement(sql);
+			prestatement.setInt(1, after_num);
+			prestatement.setString(2, account);
+			int rowsAffected = prestatement.executeUpdate();
+			System.out.println("Row affected:"+rowsAffected);
+			prestatement.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	private void Buy_update_DB(String hunter,String sec_bonus,String exp_bonus,String coin_bonus,String now_coin,String account)
+	{
+		try {
+			connection = getConnection();
+			String sql = "UPDATE user SET hunter = ?, sec_bonus = ?, exp_bonus = ?, coin_bonus = ?, coin = ? WHERE account = ?";
+			prestatement = connection.prepareStatement(sql);
+			prestatement.setInt(1, Integer.parseInt(hunter));
+			prestatement.setInt(2, Integer.parseInt(sec_bonus));
+			prestatement.setInt(3, Integer.parseInt(exp_bonus));
+			prestatement.setInt(4, Integer.parseInt(coin_bonus));
+			prestatement.setInt(5, Integer.parseInt(now_coin));
+			prestatement.setString(6, account);
+			int rowsAffected = prestatement.executeUpdate();
+			System.out.println("Row affected:"+rowsAffected);
+			prestatement.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

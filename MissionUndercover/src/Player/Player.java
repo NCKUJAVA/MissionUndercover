@@ -34,7 +34,24 @@ public class Player implements Serializable{
 //	PrintWriter out;
 	transient ObjectOutputStream out;
 	private String now_string="";
-	
+	public Player(Object[] player_value)
+	{
+		this.account=(String) player_value[0];
+		this.name=(String) player_value[1];
+		this.level= (int) player_value[2];
+		this.exp= (int) player_value[3];
+		this.coin= (int) player_value[4];
+		for(int i=0;i<items.length;i++)
+		{
+			items[i] = (int) player_value[i+5];
+		}
+//		items[0] = (int) player_value[5];
+//		items[1] = (int) player_value[6];
+//		items[2] = (int) player_value[7];
+//		items[3] = (int) player_value[8];
+		
+				
+	}
 	public Player() {
 		//System.out.println("player()");
 		try {
@@ -53,11 +70,12 @@ public class Player implements Serializable{
 					try {
 						System.out.println("new THREAD---- ----------------;");
 						while (true) {
+							
 //							String s = in.readLine();
 							String s = (String) in.readObject();
 							System.out.println("get command-======== :" + s);
 							//String s = in.readLine();
-							System.out.println("player:"+s);
+							//System.out.println("player:"+s);
 							if (s.contains("Chat:")) {
 								//TODO: write message to chatRoom
 //								s = s.substring(5);
@@ -106,7 +124,8 @@ public class Player implements Serializable{
 							{
 								now_string=s;
 								System.out.println("Player: " +now_string);
-							}else if(s.contains("Auth question:OK:"))
+							}
+							else if(s.contains("Auth:OK"))
 							{
 								now_string=s;
 								System.out.println("player:"+now_string);
@@ -237,13 +256,13 @@ public class Player implements Serializable{
 	}
 	public void addItem(String s, int k) {
 		if(s.equals("hunter"))
-			items[0]--;
+			items[0]+=k;
 		else if(s.equals("time"))
-			items[1]--;
+			items[1]+=k;
 		else if(s.equals("exp"))
-			items[2]--;
+			items[2]+=k;
 		else if(s.equals("coin"))
-			items[3]--;
+			items[3]+=k;
 	}
 	public void useItem(String s) {
 		if(s.equals("hunter"))
@@ -336,6 +355,6 @@ public void sendMessage(Player p) {
 
 	public String getNowString()
 	{
-		return now_string;
+		return this.now_string;
 	}
 }
