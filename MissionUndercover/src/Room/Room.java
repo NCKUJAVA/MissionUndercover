@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import Player.Player;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,17 +15,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Room implements Serializable {
+	///private static final long serialVersionUID = 6529685098267757690L;
 	private int people = 1;
 	private String id = "12345";
 	private String status = "waiting";
+	private String gameStatus= "waiting";
 	private ArrayList<String> description = new ArrayList<String>(6);
 
 	static String a; // TODO : check where use this property
 
 	private ArrayList<Player> players = new ArrayList<Player>(6);
 	private int readys = 1;
-
+	
 	private int time = 0;
+	
 	
 
 	Thread thread = null;
@@ -37,6 +41,21 @@ public class Room implements Serializable {
 		players = new ArrayList<Player>();
 		// read message from socket
 		System.out.println("ROOM cons");
+		new Thread(new Runnable() {
+			public void run()
+			{
+				try {
+					Thread.sleep(1000);
+					if(time > 0)
+						time --;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}).start();
+
 
 	}
 
@@ -136,6 +155,18 @@ public class Room implements Serializable {
 
 	public int getTime() {
 		return time;
+	}
+	
+	public void addTime(int t) {
+		time += t;
+	}
+	
+	public void setGameStatus(String s) {
+		gameStatus = s;
+	}
+	
+	public String getGameStatus() {
+		return gameStatus;
 	}
 
 }

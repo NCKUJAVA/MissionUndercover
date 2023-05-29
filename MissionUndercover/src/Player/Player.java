@@ -46,7 +46,6 @@ public class Player implements Serializable{
 			// in is used to get message from server
 //			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			in = new ObjectInputStream(socket.getInputStream());
-
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -65,7 +64,8 @@ public class Player implements Serializable{
 								System.out.println("CHAT: " + chatRoom);
 							}
 							else if (s.contains("AddRoom:")) {
-								StartPage.room.addPlayer(StartPage.player);
+								addRoom();
+								//StartPage.room.addPlayer(StartPage.player);
 							}
 							else if (s.contains("roominfo")){
 								StartPage.room.setId(s.split("/")[1]);
@@ -77,15 +77,16 @@ public class Player implements Serializable{
 							}
 							else if (s.contains("GetRooms")){
 								getRooms();
-
-								
+							}
+							else if (s.contains("playerAddroom/")) {
+								playerAddRoom(s);
 							}
 							else if (s.contains("question:")) {
 								String[] tempS = s.split(":");
 								StartPage.player.setCard(tempS[1]);
 								
 							}
-							else if(s.contains("Description")) {
+							else if(s.contains("Description/")) {
 								// Description/Name/Des
 								String[] msg = s.split("/");
 								for(Player p: StartPage.room.getPlayers()) {
@@ -169,7 +170,33 @@ public class Player implements Serializable{
 		this.name = name;
 		this.exp = exp;
 	}
+	private void addRoom() {
+		try {
+			Player newPlayer = (Player)in.readObject();
+			StartPage.room.addPlayer(newPlayer);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	private void playerAddRoom(String s) {
+		try {
+			Player p = (Player) in.readObject();
+			StartPage.room.addPlayer(p);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	private void getRooms() {
 //		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
@@ -288,20 +315,18 @@ public class Player implements Serializable{
 //		out.flush();
 	}
 	
-public void sendMessage(Player p) {
+	public void sendMessage(Player p) {
 		try {
 			out.writeObject(p);
 			out.flush();
 			out.reset();
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 //		out.println(s);
 //		out.flush();
-}
-	
+	}
 	public String getChatRoom() {
 		return chatRoom;
 	}

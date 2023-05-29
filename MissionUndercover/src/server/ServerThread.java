@@ -53,7 +53,9 @@ public class ServerThread extends Servers implements Runnable {
 
 	public ServerThread(Socket socket) {
 		this.socket = socket;
-		player = new Player("default", 0, 0, 0);
+		player = new Player("Charles", 1, 1, 1);
+		playerToSocket.put("Charles", socket);
+		System.out.println(sockets);
 	}
 
 	@Override
@@ -69,6 +71,10 @@ public class ServerThread extends Servers implements Runnable {
 			System.out.println("Client@" + socketName + "has join chatRoom");
 //			print("Client@" + socketName + "has Join ChatRoom");
 			boolean flag = true;
+//			player = (Player) in.readObject();
+			//System.out.println("player name = " + player.getName());
+			//playerToSocket.put(player, socket);
+			System.out.println(playerToSocket);
 			while (flag) {
 				// 阻塞，等待该客户端的输出流
 //				String line = reader.readLine();
@@ -172,7 +178,7 @@ public class ServerThread extends Servers implements Runnable {
 
 					}
 				} else if (line.contains("LeaveRoom")) {
-					leaveRoom();
+					leaveRoom(line);
 
 				} else if (line.contains("CreateRoom")) {
 					createRoom();
@@ -181,19 +187,20 @@ public class ServerThread extends Servers implements Runnable {
 				} else if (line.contains("Buy:")) {
 					// TODO : do SQL add items and use coin shangyuan chiatung
 				} else if (line.contains("UseItem:")) {
+					useItem();
 					// TODO : do SQL minus the items and correct function the item;
 				} else if (line.contains("GetRooms")) {
-					// TODO : return RoomList
 					getRooms();
-
 				} else if (line.contains("Chat/")) {
 					chat(line);
-				} else if (line.contains("Description:")) {
+				} else if (line.contains("Description/")) {
 					description(line);
 				} else if (line.contains("ready/")) {
 					ready(line);
-
 				}
+				/*else if (line.contains("timer:")) {
+					timer(line);
+				}*/
 
 			}
 			closeConnect();
@@ -203,7 +210,14 @@ public class ServerThread extends Servers implements Runnable {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		}
+		} 
+	}
+	private void timer(String s) {
+		
+	}
+	
+	private void useItem(){
+		
 	}
 	private void description(String line) {
 		// description/roomid
@@ -290,11 +304,17 @@ public class ServerThread extends Servers implements Runnable {
 		}
 	}
 	private void addRoom(String line) {
+		System.out.println("AddRoom func");
 		try {
 			String s[] = line.split(":");
 			Player newPlayer = (Player) in.readObject();
-			rooms.get(Integer.parseInt(s[1])).addPlayer(newPlayer);
-
+			//rooms.get(Integer.parseInt(s[1])).addPlayer(newPlayer);
+			for(Room r : rooms) {
+				if (r.getId().equals(s[1])) {
+					roomSendPlayer(r, newPlayer);
+					r.addPlayer(newPlayer);
+				}
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -302,19 +322,13 @@ public class ServerThread extends Servers implements Runnable {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		for (Room r : rooms) {
-			if (r.getId().equals("1")) {
-				r.addPlayer(null); // TODO: Add player
-				break;
-			}
-		}
 	}
-	private void leaveRoom() {
+	private void leaveRoom(String s) {
 		System.out.println("LeaveRoom");
+		String rid = s.split("/")[1];
 		try {
 			Player p = (Player) in.readObject();
-			String rid = p.getRoomId();
+			//String rid = p.getRoomId();
 			synchronized (rooms) {
 				for (Room r : rooms) {
 					if (p.getRoomId().equals(rid)) {
@@ -346,6 +360,8 @@ public class ServerThread extends Servers implements Runnable {
 				System.out.print(r.getId());
 			}
 			objectOutputStream.writeObject("roominfo/" + newRoom.getId());
+			objectOutputStream.flush();
+			objectOutputStream.reset();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -377,10 +393,13 @@ public class ServerThread extends Servers implements Runnable {
 	}
 
 	private void print_single(String msg) throws IOException {
-		PrintWriter out = null;
-		out = new PrintWriter(socket.getOutputStream());
-		out.println(msg);
-		out.flush();
+		objectOutputStream.writeObject(msg);
+		objectOutputStream.flush();
+		objectOutputStream.reset();
+		//PrintWriter out = null;
+		//out = new PrintWriter(socket.getOutputStream());
+		//out.println(msg);
+		//out.flush();
 	}
 
 	/**
@@ -389,8 +408,8 @@ public class ServerThread extends Servers implements Runnable {
 	 * @throws IOException
 	 */
 	public void closeConnect() throws IOException {
-		System.out.println("Client@" + socketName + "已退出聊天");
-		print("Client@" + socketName + "已退出聊天");
+		System.out.println("Client@" + socketName + "disconnected");
+		//print("Client@" + socketName + "已退出聊天");
 		// 移除没连接上的客户端
 		synchronized (sockets) {
 			sockets.remove(socket);
@@ -403,11 +422,33 @@ public class ServerThread extends Servers implements Runnable {
 		ObjectOutputStream out = null;
 		for (Player p : r.getPlayers()) {
 			System.out.println(p.getName());
-			out = new ObjectOutputStream(p.getSocket().getOutputStream());
+			Socket s = playerToSocket.get(p.getName());
+			out = new ObjectOutputStream(s.getOutputStream());
 			out.writeObject(msg);
 			out.flush();
 			out.reset();
 		}
+	}
+	public void roomSendPlayer(Room r,Player p) {
+		System.out.println("roomSendPlayer");
+		
+		ObjectOutputStream out = null;
+		for (Player pl:r.getPlayers()) {
+			Socket s = playerToSocket.get(pl.getName());
+			try {
+				out = new ObjectOutputStream(s.getOutputStream());
+				out.writeObject("AddRoom:");
+				out.flush();
+				out.reset();
+				out.writeObject(p);
+				out.flush();
+				out.reset();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	public void sendMessageToPlayer(Player p, String msg) {

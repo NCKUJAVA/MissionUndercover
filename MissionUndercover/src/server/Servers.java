@@ -2,9 +2,12 @@ package server;
 
 import java.net.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import Player.Player;
 import Room.Room;
 
 import java.io.*;
@@ -14,6 +17,7 @@ public class Servers {
 	protected static List<Socket> sockets = new Vector<>();
 	public static ArrayList<Room> rooms = new ArrayList<Room>();
 	public static int roomID = 1;
+	public static Map<String, Socket> playerToSocket = new HashMap<>();
 	
 	
 	public static void main(String[] args) throws IOException {

@@ -38,6 +38,7 @@ public class RoomUIController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		System.out.println("initialize");
+		StartPage.page = "Room";
 		// P1Name.setText("Charles");
 		// P1Des.setText("灰色的");
 		try {
@@ -49,13 +50,14 @@ public class RoomUIController implements Initializable {
 						public void run() {
 							chatRoom.setText(StartPage.player.getChatRoom());
 							timer.setText(String.valueOf(StartPage.room.getTime()));
-							System.out.print("running");
+							
+							//System.out.print("running");
 						}
 					};
 					
-					while(true) {
+					while(StartPage.page.equals("Room")) {
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(500);
 						}catch(InterruptedException ex) {
 							System.out.println("RoomUIController err");
 							ex.printStackTrace();
@@ -123,7 +125,7 @@ public class RoomUIController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 		System.out.println("switch to scene RoomList");
-		StartPage.player.sendMessage("LeaveRoom");
+		StartPage.player.sendMessage("LeaveRoom/" + StartPage.room.getId());
 		//StartPage.player.sendMessage("GetRooms");
 	}
 
@@ -146,7 +148,7 @@ public class RoomUIController implements Initializable {
 	
 	public void useItemTime(ActionEvent e) {
 		int[] items = StartPage.player.getItems();
-		StartPage.player.useItem("hunter");
+		StartPage.player.useItem("timer");
 		StartPage.player.sendMessage("UseItem:hunter" + String.valueOf(items[1]) + StartPage.player.getAccount());
 	}
 	
