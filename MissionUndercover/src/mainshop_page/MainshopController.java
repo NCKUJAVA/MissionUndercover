@@ -25,12 +25,7 @@ public class MainshopController {
     int[] itemCost = {30,20,10, 5};
     int[] quantity = {0, 0, 0, 0};
     
-    //private int quantity = 0;  
-    //private int itemHunterCost = 30;
-    //private int itemTimeCost = 20;
-    //private int itemExpCost = 10;
-    //private int itemCoinCost = 5;
-    
+
     @FXML
     private Label payTotal;
     
@@ -218,12 +213,22 @@ public class MainshopController {
             int inadequateCoin = totalCost - StartPage.player.getCoin();
             alert.setTitle("Purchase Failed");
             alert.setHeaderText(null);
-            alert.setContentText("購買失敗!\n" +
-                    "金幣不足: " + inadequateCoin);
+            alert.setContentText("購買失敗!\n" + 
+            		"金幣餘額: " + StartPage.player.getCoin() + "\n" +
+                    "不足 " + inadequateCoin + " 請充值!");
 
             alert.showAndWait();
         }
-    	
+        
+        for (int i = 0; i < quantity.length; i++) {
+            quantity[i] = 0;
+        }
+        
+        // Update the quantity labels to display 0
+        updateHunterQuantityLabel();
+        updateTimeQuantityLabel();
+        updateExpQuantityLabel();
+        updateCoinQuantityLabel();
     }  
     
 	public void leaveMainwindow(ActionEvent e) throws IOException {
