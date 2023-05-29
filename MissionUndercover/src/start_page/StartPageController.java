@@ -68,6 +68,7 @@ public class StartPageController
 
 	    String PasswordText = PasswordTextField.getText();
 	    System.out.println("Password:"+PasswordText);
+
 	    if(AccountText.compareTo("")==0 || PasswordText.compareTo("")==0)
 	    {
 	    	LogInStatusLabel.setText("帳號或密碼不可為空");
@@ -87,8 +88,8 @@ public class StartPageController
 				String name = parts[2];
 				String level = parts[3];
 				String exp = parts[4];
-				//String coin = parts[5];
-				String coin = "100";
+				String coin = parts[5];
+				//String coin = "100";
 				String hunter = parts[6];
 				String sec_bonus = parts[7];
 				String exp_bonus = parts[8];
@@ -110,7 +111,8 @@ public class StartPageController
 					System.out.println("StartPage:"+Items[i]);
 				}
 				StartPage.player.resetNowString();
-				Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+				//Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/settlement_page/SettlementPageFXML.fxml"));
 		        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		        scene = new Scene(root);
 		        stage.setScene(scene);

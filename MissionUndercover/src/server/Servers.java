@@ -12,7 +12,8 @@ import java.io.*;
 public class Servers {
 
 	protected static List<Socket> sockets = new Vector<>();
-	protected static ArrayList<Room> rooms = new ArrayList<Room>();
+	public static ArrayList<Room> rooms = new ArrayList<Room>();
+	public static int roomID = 1;
 	
 	
 	public static void main(String[] args) throws IOException {

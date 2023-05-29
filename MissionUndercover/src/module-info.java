@@ -7,7 +7,7 @@ module MissionUndercover {
 	
 	opens RoomChoice to javafx.graphics, javafx.fxml, javafx.base;
 	opens Room to javafx.graphics, javafx.fxml, javafx.base;
-
+	opens settlement_page to javafx.graphics, javafx.fxml, javafx.base;
     
     opens application to javafx.graphics, javafx.fxml;
     opens mainwindow_page to javafx.graphics, javafx.fxml;

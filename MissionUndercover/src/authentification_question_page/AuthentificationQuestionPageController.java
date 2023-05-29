@@ -81,16 +81,17 @@ public class AuthentificationQuestionPageController implements Initializable
 		if(AnswerText.compareTo("")==0 || QuestionText == null)
 		{
 			StatusLabel.setText("安全驗證問題與答案皆不可為空");
-			StartPage.player.resetNowString();
+			//StartPage.player.resetNowString();
 		}else
 		{
-			StartPage.player.sendMessage("Auth question:"+QuestionText+"|"+AnswerText);
-			while(StartPage.player.getNowString().contains("Auth question:OK:")==false)
+			
+			StartPage.player.sendMessage("Auth:"+QuestionText+"|"+AnswerText);
+			while(StartPage.player.getNowString().contains("Auth:OK")==false)
 	    	{
 	    		System.out.println("StartPage:"+StartPage.player.getNowString());
 	    	}
 			String s=StartPage.player.getNowString();
-			String[] parts = s.split("[:|]");
+			String[] parts = s.split("[:]");
 
 			
 			String name = parts[2];
@@ -99,8 +100,7 @@ public class AuthentificationQuestionPageController implements Initializable
 			FinishSignUpButton.setDisable(true);
 //			prestatement.close();
 //			connection.close();
-			StartPage.player.resetNowString();
-
+			//StartPage.player.resetNowString();
 		}
 		StartPage.player.resetNowString();
 

@@ -201,11 +201,14 @@ public class MainshopController {
         if (StartPage.player.getCoin() >= totalCost) {
         	StartPage.player.addCoins(-totalCost); // 扣除金幣
         	String msg="Buy:";
+        	int[] new_quantity= {0,0,0,0}; 
         	for(int i=0;i<quantity.length;i++)
         	{
-        		int tmp_num=StartPage.player.getItems()[i];
-        		msg+=(String.valueOf(quantity[i]+tmp_num)+"|");
+        		int tmp_num=(StartPage.player.getItems()[i]+quantity[i]);
+        		msg+=(String.valueOf(tmp_num)+"|");
+        		new_quantity[i]=tmp_num;
         	}
+        	StartPage.player.setItems(new_quantity);
         	msg+=String.valueOf(StartPage.player.getCoin());
         	msg+="|";
         	msg+=StartPage.player.getAccount();
