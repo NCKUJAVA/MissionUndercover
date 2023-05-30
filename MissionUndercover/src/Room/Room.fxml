@@ -121,6 +121,7 @@
          </font>
       </Label>
 
+
       <Button fx:id="finishBtn" layoutX="555.0" layoutY="633.0" mnemonicParsing="false" onAction="#finish" prefHeight="45.0" prefWidth="121.0" style="-fx-background-radius: 30;" text="進入結算畫面" />
       <ImageView fx:id="hunterImg" fitHeight="74.0" fitWidth="50.0" layoutX="40.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
 
