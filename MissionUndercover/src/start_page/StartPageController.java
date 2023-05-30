@@ -115,7 +115,9 @@ public class StartPageController{
 				}
 				StartPage.player.resetNowString();
 				//Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+
 				Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
+
 		        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		        scene = new Scene(root);
 		        stage.setScene(scene);

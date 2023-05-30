@@ -50,7 +50,7 @@
       <Button layoutX="505.0" layoutY="119.0" mnemonicParsing="false" onAction="#leave" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="主畫面" />
       <Separator layoutX="202.0" layoutY="240.0" prefHeight="33.0" prefWidth="364.0" />
       <TextField layoutX="245.0" layoutY="117.0" prefHeight="33.0" prefWidth="73.0" text="玩家資訊" />
-      <Label layoutX="265.0" layoutY="161.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="53.0" style="-fx-border-style: crazy;" text="帳號" textAlignment="CENTER">
+      <Label layoutX="265.0" layoutY="161.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="53.0" text="帳號" textAlignment="CENTER">
          <font>
             <Font name="Apple Braille Outline 8 Dot" size="25.0" />
          </font>
@@ -71,7 +71,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Label layoutX="265.0" layoutY="199.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="53.0" style="-fx-border-style: crazy;" text="等級" textAlignment="CENTER">
+      <Label layoutX="265.0" layoutY="199.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="53.0" text="等級" textAlignment="CENTER">
          <font>
             <Font name="Apple Braille Outline 8 Dot" size="24.0" />
          </font>
@@ -94,13 +94,13 @@
       </Label>
       <Pane layoutX="259.0" layoutY="273.0" prefHeight="47.0" prefWidth="294.0" style="-fx-background-color: green;">
          <children>
-            <Label layoutX="44.0" layoutY="3.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="109.0" style="-fx-border-style: crazy;" text="遊戲暱稱：" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="44.0" layoutY="3.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="109.0" text="遊戲暱稱：" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Apple Braille Outline 8 Dot" size="20.0" />
                </font>
             </Label>
 
-            <Label fx:id="NameLabel" layoutX="115.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="166.0" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="NameLabel" layoutX="139.0" layoutY="7.0" lineSpacing="1.0" prefHeight="33.0" prefWidth="150.0" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -114,7 +114,7 @@
       </Pane>
       <Pane layoutX="259.0" layoutY="338.0" prefHeight="47.0" prefWidth="294.0" style="-fx-background-color: green;">
          <children>
-            <Label layoutX="47.0" layoutY="3.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="109.0" style="-fx-border-style: crazy;" text="金幣：" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="47.0" layoutY="3.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="109.0" text="金幣：" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Apple Braille Outline 8 Dot" size="20.0" />
                </font>
@@ -170,7 +170,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="384.0" layoutY="572.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="58.0" style="-fx-border-style: crazy;" text="背包" textAlignment="CENTER">
+      <Label layoutX="384.0" layoutY="572.0" lineSpacing="1.0" prefHeight="41.0" prefWidth="58.0" text="背包" textAlignment="CENTER">
          <font>
             <Font name="Apple Braille Outline 8 Dot" size="25.0" />
          </font>
