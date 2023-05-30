@@ -33,7 +33,7 @@ public class ServerThread extends Servers implements Runnable {
 	// one user has one this thread
 	Socket socket;
 	String socketName;
-	ObjectOutputStream objectOutputStream;
+	public ObjectOutputStream objectOutputStream;
 	ObjectInputStream in;
 	Player player;
 	Connection connection;
@@ -54,7 +54,8 @@ public class ServerThread extends Servers implements Runnable {
 	public ServerThread(Socket socket) {
 		this.socket = socket;
 		player = new Player("Charles", 1, 1, 1);
-		playerToSocket.put("Charles", socket);
+		// playerToSocket.put("Charles", socket);
+		// playerToThread.put("Charles", this);
 		System.out.println(sockets);
 	}
 
@@ -72,9 +73,10 @@ public class ServerThread extends Servers implements Runnable {
 //			print("Client@" + socketName + "has Join ChatRoom");
 			boolean flag = true;
 //			player = (Player) in.readObject();
-			//System.out.println("player name = " + player.getName());
-			//playerToSocket.put(player, socket);
-			System.out.println(playerToSocket);
+			// System.out.println("player name = " + player.getName());
+			// playerToSocket.put(player, socket);
+			// System.out.println(playerToSocket);
+			System.out.println(playerToThread);
 			while (flag) {
 				// 阻塞，等待该客户端的输出流
 //				String line = reader.readLine();
@@ -95,7 +97,7 @@ public class ServerThread extends Servers implements Runnable {
 				if (line.contains("LogIn")) {
 					// do sql to check if account and pwd correct
 					// TODO : shangyuan read log in
-					
+
 					String[] parts = line.split("[:|]");
 
 					String account = parts[1];
@@ -109,6 +111,7 @@ public class ServerThread extends Servers implements Runnable {
 						}
 						print_single("Server thread:" + msg);
 						player = new Player(player_value);
+						playerToThread.put((String) player_value[1], this);
 					} else {
 						String msg = "LogIn failed";
 						print_single("Server thread:" + msg);
@@ -185,16 +188,19 @@ public class ServerThread extends Servers implements Runnable {
 					createRoom();
 				} else if (line.contains("AddRoom:")) {
 					addRoom(line);
-				} /*else if (line.contains("Buy:")) {
-					// TODO : do SQL add items and use coin shangyuan chiatung
-				} */
+				} /*
+					 * else if (line.contains("Buy:")) { // TODO : do SQL add items and use coin
+					 * shangyuan chiatung }
+					 */
 				else if (line.contains("UseItem:")) {
 					useItem();
+				} else if (line.contains("vote")) {
+					vote(line);
 				}
 				// cancel by charles 20230529 23:51
-				//else if (line.contains("UseItem:")) {
-					// TODO : do SQL minus the items and correct function the item;
-				//} 
+				// else if (line.contains("UseItem:")) {
+				// TODO : do SQL minus the items and correct function the item;
+				// }
 				else if (line.contains("GetRooms")) {
 					getRooms();
 				} else if (line.contains("Chat/")) {
@@ -204,13 +210,12 @@ public class ServerThread extends Servers implements Runnable {
 				} else if (line.contains("ready/")) {
 					ready(line);
 				}
-				/*else if (line.contains("timer:")) {
-					timer(line);
-				}*/
+				/*
+				 * else if (line.contains("timer:")) { timer(line); }
+				 */
 
-
-				else if(line.contains("Buy:")) {
-					//TODO : do SQL add items and use coin  shangyuan  chiatung
+				else if (line.contains("Buy:")) {
+					// TODO : do SQL add items and use coin shangyuan chiatung
 					String[] parts = line.split("[:|]");
 					String hunter = parts[1];
 					String sec_bonus = parts[2];
@@ -218,43 +223,22 @@ public class ServerThread extends Servers implements Runnable {
 					String coin_bonus = parts[4];
 					String now_coin = parts[5];
 					String account = parts[6];
-					Buy_update_DB(hunter,sec_bonus,exp_bonus,coin_bonus,now_coin,account);
+					Buy_update_DB(hunter, sec_bonus, exp_bonus, coin_bonus, now_coin, account);
 				}
+
 				else if (line.contains("UseItem:")) {
-					//TODO : do SQL minus the items and correct function the item;
-				}
-				else if (line.contains("GetRooms")) {
-					//TODO : return RoomList
-					
-				}
-				else if (line.contains("Chat:")) {
-					//TODO 
-					String msg = "Client@" + socketName + ":" + line;
-					System.out.println(msg);
-					// 向在线客户端输出信息
-					print(msg);
-				}
-				else if (line.contains("Description:")) {
-					
-				}
-				else if (line.contains("ready")) {
-					// TODO Room.ready
-				}
-				else if(line.contains("UseItem:"))
-				{
 					String[] parts = line.split("[:|]");
 					String item = parts[1];
-					String before_num=parts[2];
-					String account=parts[3];
-					UseItem(item,before_num,account);
-				}else if(line.contains("GameOver"))
-				{
+					String before_num = parts[2];
+					String account = parts[3];
+					UseItem(item, before_num, account);
+				} else if (line.contains("GameOver")) {
 					String[] parts = line.split("[:|]");
 					String account = parts[1];
 					String level = parts[2];
 					String exp = parts[3];
 					String coin = parts[4];
-					GameOverUpdate(account,level,exp,coin);
+					GameOverUpdate(account, level, exp, coin);
 				}
 			}
 			closeConnect();
@@ -264,34 +248,120 @@ public class ServerThread extends Servers implements Runnable {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} 
+		}
 	}
+
 	private void timer(String s) {
-		
+
 	}
-	
-	private void useItem(){
-		
+
+	private void vote(String s) {
+		System.out.println("VOte");
+		for (Room r : rooms) {
+			if (r.getId().equals(s.split(":")[2])) {
+				r.addVote(Integer.parseInt(s.split(":")[1]));
+				if (r.voteSum() == r.getAlivesNum()) {
+					int highestVote = r.getHighestVote();
+					r.setAlive(highestVote, false);
+					// TODO : use hunter
+
+
+					String msg = "Chat/玩家" + r.getPlayers().get(highestVote).getName() + "已經出局";
+					ObjectOutputStream o = playerToThread
+							.get(r.getPlayers().get(highestVote).getName()).objectOutputStream;
+					try {
+						o.writeObject("You OUT");
+						o.flush();
+						o.reset();
+						roomChat(r, msg);
+						roomChat(r, "getout:" + r.getPlayers().get(highestVote).getName());
+					/*	objectOutputStream.writeObject(msg);
+						objectOutputStream.flush();
+						objectOutputStream.reset();*/
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String isFinish = checkFinish(r);
+					if (isFinish.equals("Civilian WIN")) {
+						try {
+							roomChat(r,"Chat/[系統通知]遊戲結束 平民獲勝");
+							roomChat(r, "Civilian WIN");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (isFinish.equals("Undercover WIN")) {
+						try {
+							roomChat(r,"Chat/[系統通知]遊戲結束 臥底獲勝");
+							roomChat(r, "Undercover WIN");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else {
+						try {
+							roomChat(r,"next Round");
+							roomChat(r,"Chat/[系統通知]繼續下一回合，計時60秒，請輸入您的描述");
+							roomChat(r,"setTime:60");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
 	}
+
+	private String checkFinish(Room r) {
+		if (!r.checkUnderCoverIsAlive())
+			return "Civilian WIN";
+		if (r.getAlivesNum() == 2 && r.checkUnderCoverIsAlive()) {
+			return "Undercover WIN";
+		} else
+			return "continue";
+	}
+
+	private void useItem() {
+
+	}
+
 	private void description(String line) {
 		// description/roomid
 		String chat[] = line.split("/");
+		int desCount = 0;
 		try {
 			line = (String) in.readObject();
-			String msg = "Desctiption:" + line;
-			for(Room r : rooms) {
+			String msg = "Description:" + line;
+			for (Room r : rooms) {
 				if (r.getId().equals(chat[1])) {
 					roomChat(r, msg);
+					for (Player p : r.getPlayers()) {
+						if (p.getName().equals(line.split(":")[0])) {
+							p.setDescription(line.split(":")[1]);
+						}
+						if (!p.getDescription().equals(""))
+							desCount++;
+
+					}
+					System.out.println("desCount:" + String.valueOf(desCount) + "  getAliveNUM:"+ String.valueOf(r.getAlivesNum()));
+					if (desCount == r.getAlivesNum()) {
+						roomChat(r, "Chat/系統通知:計時60秒，請將您認為是臥底的對象投出");
+						roomChat(r, "setTime:60");
+						roomChat(r, "gamestatus:vote");
+					}
+					// TODO how to check time
 				}
 			}
-		}catch(ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void chat(String line) {
 		// TODO
 		String chat[] = line.split("/");
@@ -300,10 +370,8 @@ public class ServerThread extends Servers implements Runnable {
 		try {
 			line = (String) in.readObject();
 			String msg = "Chat:Client@" + socketName + ":" + line;
-
+			msg = "Chat/" + line;
 			System.out.println(msg);
-			// 向在线客户端输出信息
-			// print(msg);
 			for (Room r : rooms) {
 				System.out.println("rinfo : " + r.getId());
 				if (r.getId().equals(chat[1])) {
@@ -313,29 +381,61 @@ public class ServerThread extends Servers implements Runnable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+
 	private void ready(String line) {
 		// TODO Room.ready
+
 		String s[] = line.split("/");
-		ArrayList<Player> ps = rooms.get(Integer.parseInt(s[1])).getPlayers();
+		System.out.println(s[2] + "ready");
+		ArrayList<Player> ps = null;
+		Room room = null;
+		for (Room r : rooms) {
+			if (r.getId().equals(s[1])) {
+				ps = r.getPlayers();
+				room = r;
+			}
+
+		}
+		// rooms.get(Integer.parseInt(s[1])).getPlayers();
 		int readys = 0;
 		for (Player p : ps) {
 			if (p.getName().equals(s[2])) {
-				p.ready();
+				if (s[1].contains("cancel"))
+					p.setReady(false);
+				else
+					p.setReady(true);
 			}
 			if (p.getReady())
 				readys++;
 		}
-		if (readys == ps.size() && readys >= 4) {
-			rooms.get(Integer.parseInt(s[1])).startGame();
+		System.out.println("ready : " + String.valueOf(readys));
+		if (readys == 4) {
+			room.startGame();
+			System.out.print("Game Start");
 			for (Player p : ps) {
-				sendMessageToPlayer(p, "question:" + p.getCard());
+				try {
+					playerToThread.get(p.getName()).objectOutputStream.writeObject("question:" + p.getCard());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// sendMessageToPlayer(p, "question:" + p.getCard());
 			}
+			try {
+				System.out.print("Game Start");
+				roomChat(room, "setTime:60");
+				roomChat(room, "gamestatus:description");
+				roomChat(room, "Chat/[系統] 計時60秒，請輸入您的描述");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -357,14 +457,21 @@ public class ServerThread extends Servers implements Runnable {
 			e.printStackTrace();
 		}
 	}
+
 	private void addRoom(String line) {
 		System.out.println("AddRoom func");
 		try {
 			String s[] = line.split(":");
 			Player newPlayer = (Player) in.readObject();
-			//rooms.get(Integer.parseInt(s[1])).addPlayer(newPlayer);
-			for(Room r : rooms) {
+			// rooms.get(Integer.parseInt(s[1])).addPlayer(newPlayer);
+			for (Room r : rooms) {
 				if (r.getId().equals(s[1])) {
+					objectOutputStream.writeObject("returnRoom:");
+					objectOutputStream.flush();
+					objectOutputStream.reset();
+					objectOutputStream.writeObject(r);
+					objectOutputStream.flush();
+					objectOutputStream.reset();
 					roomSendPlayer(r, newPlayer);
 					r.addPlayer(newPlayer);
 				}
@@ -372,17 +479,17 @@ public class ServerThread extends Servers implements Runnable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	private void leaveRoom(String s) {
 		System.out.println("LeaveRoom");
 		String rid = s.split("/")[1];
 		try {
 			Player p = (Player) in.readObject();
-			//String rid = p.getRoomId();
+			// String rid = p.getRoomId();
 			synchronized (rooms) {
 				for (Room r : rooms) {
 					if (p.getRoomId().equals(rid)) {
@@ -397,8 +504,7 @@ public class ServerThread extends Servers implements Runnable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -448,8 +554,8 @@ public class ServerThread extends Servers implements Runnable {
 
 	private void print_single(String msg) throws IOException {
 		objectOutputStream.writeObject(msg);
-        objectOutputStream.flush();
-        objectOutputStream.reset();
+		objectOutputStream.flush();
+		objectOutputStream.reset();
 	}
 
 	/**
@@ -459,7 +565,7 @@ public class ServerThread extends Servers implements Runnable {
 	 */
 	public void closeConnect() throws IOException {
 		System.out.println("Client@" + socketName + "disconnected");
-		//print("Client@" + socketName + "已退出聊天");
+		// print("Client@" + socketName + "已退出聊天");
 		// 移除没连接上的客户端
 		synchronized (sockets) {
 			sockets.remove(socket);
@@ -472,21 +578,25 @@ public class ServerThread extends Servers implements Runnable {
 		ObjectOutputStream out = null;
 		for (Player p : r.getPlayers()) {
 			System.out.println(p.getName());
-			Socket s = playerToSocket.get(p.getName());
-			out = new ObjectOutputStream(s.getOutputStream());
+			// Socket s = playerToSocket.get(p.getName());
+			out = playerToThread.get(p.getName()).objectOutputStream;
+			// out = new ObjectOutputStream(s.getOutputStream());
 			out.writeObject(msg);
 			out.flush();
 			out.reset();
 		}
 	}
-	public void roomSendPlayer(Room r,Player p) {
+
+	public void roomSendPlayer(Room r, Player p) {
 		System.out.println("roomSendPlayer");
-		
+
 		ObjectOutputStream out = null;
-		for (Player pl:r.getPlayers()) {
-			Socket s = playerToSocket.get(pl.getName());
+		for (Player pl : r.getPlayers()) {
+			// Socket s = playerToSocket.get(pl.getName());
+			out = playerToThread.get(pl.getName()).objectOutputStream;
+
 			try {
-				out = new ObjectOutputStream(s.getOutputStream());
+				// out = new ObjectOutputStream(s.getOutputStream());
 				out.writeObject("AddRoom:");
 				out.flush();
 				out.reset();
@@ -498,7 +608,7 @@ public class ServerThread extends Servers implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	public void sendMessageToPlayer(Player p, String msg) {
@@ -518,7 +628,7 @@ public class ServerThread extends Servers implements Runnable {
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/MissionUndercover_DB";
 			String username = "root";
-			String password = "24081333";
+			String password = "ddcharles";
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, username, password);
 			System.out.println("Connecting successfully!");
@@ -698,27 +808,27 @@ public class ServerThread extends Servers implements Runnable {
 		return false;
 	}
 
-	private void UseItem(String item,String before_num,String account)
-	{
-		int after_num=(Integer.parseInt(before_num))-1;
+	private void UseItem(String item, String before_num, String account) {
+		int after_num = (Integer.parseInt(before_num)) - 1;
 		try {
 			connection = getConnection();
-			String sql = "UPDATE user SET "+item+" = ? WHERE account = ?";
+			String sql = "UPDATE user SET " + item + " = ? WHERE account = ?";
 			prestatement = connection.prepareStatement(sql);
 			prestatement.setInt(1, after_num);
 			prestatement.setString(2, account);
 			int rowsAffected = prestatement.executeUpdate();
-			System.out.println("Row affected:"+rowsAffected);
+			System.out.println("Row affected:" + rowsAffected);
 			prestatement.close();
 			connection.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	private void Buy_update_DB(String hunter,String sec_bonus,String exp_bonus,String coin_bonus,String now_coin,String account)
-	{
+
+	private void Buy_update_DB(String hunter, String sec_bonus, String exp_bonus, String coin_bonus, String now_coin,
+			String account) {
 		try {
 			connection = getConnection();
 			String sql = "UPDATE user SET hunter = ?, sec_bonus = ?, exp_bonus = ?, coin_bonus = ?, coin = ? WHERE account = ?";
@@ -730,17 +840,17 @@ public class ServerThread extends Servers implements Runnable {
 			prestatement.setInt(5, Integer.parseInt(now_coin));
 			prestatement.setString(6, account);
 			int rowsAffected = prestatement.executeUpdate();
-			System.out.println("Row affected:"+rowsAffected);
+			System.out.println("Row affected:" + rowsAffected);
 			prestatement.close();
 			connection.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	private void GameOverUpdate(String account,String level,String exp,String coin)
-	{
+
+	private void GameOverUpdate(String account, String level, String exp, String coin) {
 		try {
 			connection = getConnection();
 			String sql = "UPDATE user SET level = ?, exp = ?, coin = ? WHERE account = ?";
@@ -750,7 +860,7 @@ public class ServerThread extends Servers implements Runnable {
 			prestatement.setInt(3, Integer.parseInt(coin));
 			prestatement.setString(4, account);
 			int rowsAffected = prestatement.executeUpdate();
-			System.out.println("Row affected:"+rowsAffected);
+			System.out.println("Row affected:" + rowsAffected);
 			prestatement.close();
 			connection.close();
 		} catch (Exception e) {

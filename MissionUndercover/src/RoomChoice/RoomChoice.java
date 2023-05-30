@@ -100,15 +100,19 @@ public class RoomChoice implements Initializable {
 		// rooms.add(room);
 
 		// tableView.setItems(rooms);
+		StartPage.player.setReady(false);
 		StartPage.player.sendMessage("CreateRoom");
 		StartPage.player.sendMessage(StartPage.player);
+		StartPage.player.resetChatRoom();
+		StartPage.room = new Room();
+		StartPage.room.addPlayer(StartPage.player);
 		Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
 		Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		System.out.println("switch to scene 2");
-		System.out.println("HIHIHI");
+		//System.out.println("switch to scene 2");
+		//System.out.println("HIHIHI");
 	}
 
 	@FXML
@@ -119,14 +123,16 @@ public class RoomChoice implements Initializable {
 
 		// tableView.refresh();
 		if (rid != "") {
+			StartPage.player.setReady(false);
 			StartPage.player.sendMessage("AddRoom:" + rid);
 			StartPage.player.sendMessage(StartPage.player);
+			StartPage.player.resetChatRoom();
 			Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
 			Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
-			System.out.println("switch to scene 2");
+			//System.out.println("switch to scene 2");
 		}
 	}
 
@@ -136,13 +142,14 @@ public class RoomChoice implements Initializable {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		System.out.println("switch to scene main");
+		//System.out.println("switch to scene main");
 
 	}
 
 	 public void rowClicked(MouseEvent event) {
 		Room r = tableView.getSelectionModel().getSelectedItem();
-		rid = r.getId();
-		System.out.println("rid = " + rid);
+		if(r!=null)
+			rid = r.getId();
+		//System.out.println("rid = " + rid);
 	}
 }
