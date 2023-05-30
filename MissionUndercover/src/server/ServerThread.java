@@ -192,9 +192,9 @@ public class ServerThread extends Servers implements Runnable {
 					 * else if (line.contains("Buy:")) { // TODO : do SQL add items and use coin
 					 * shangyuan chiatung }
 					 */
-				else if (line.contains("UseItem:")) {
+				/*else if (line.contains("UseItem:")) {
 					useItem();
-				} else if (line.contains("vote")) {
+				}*/ else if (line.contains("vote")) {
 					vote(line);
 				}
 				// cancel by charles 20230529 23:51
@@ -229,8 +229,20 @@ public class ServerThread extends Servers implements Runnable {
 				else if (line.contains("UseItem:")) {
 					String[] parts = line.split("[:|]");
 					String item = parts[1];
+					if (item.equals("AddTime"))
+						item = "sec_bonus";
 					String before_num = parts[2];
 					String account = parts[3];
+					String rid = parts[4];
+					if(item.equals("sec_bonus")) {
+						System.out.println("addtime");
+						for(Room r : rooms) {
+							if(r.getId().equals(rid)) {
+								System.out.println("addtime rid");
+								roomChat(r,"AddTime:5");
+							}
+						}
+					}
 					UseItem(item, before_num, account);
 				} else if (line.contains("GameOver")) {
 					String[] parts = line.split("[:|]");
@@ -305,6 +317,7 @@ public class ServerThread extends Servers implements Runnable {
 					} else {
 						try {
 							roomChat(r,"next Round");
+							roomChat(r,"gamestatus:description");
 							roomChat(r,"Chat/[系統通知]繼續下一回合，計時60秒，請輸入您的描述");
 							roomChat(r,"setTime:60");
 							for(Player p : r.getPlayers()) {
@@ -333,9 +346,6 @@ public class ServerThread extends Servers implements Runnable {
 			return "continue";
 	}
 
-	private void useItem() {
-
-	}
 
 	private void description(String line) {
 		// description/roomid

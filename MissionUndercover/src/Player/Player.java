@@ -107,6 +107,9 @@ public class Player implements Serializable{
 							else if (s.contains("roominfo")){
 								StartPage.room.setId(s.split("/")[1]);
 							}
+							else if (s.contains("AddTime:5")) {
+								StartPage.room.addTime(5);
+							}
 							else if (s.contains("setTime:")) {
 								String[] tempS = s.split(":");
 								StartPage.room.setTime(Integer.parseInt(tempS[1]));
@@ -115,6 +118,7 @@ public class Player implements Serializable{
 								for(Player p : StartPage.room.getPlayers()) {
 									p.setDescription("");
 								}
+								StartPage.player.setIsVote(false);
 								StartPage.player.setDescription("");
 								StartPage.room.setGameStatus("Description");
 							}

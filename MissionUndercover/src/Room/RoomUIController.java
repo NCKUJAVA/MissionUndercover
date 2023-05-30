@@ -73,6 +73,10 @@ public class RoomUIController implements Initializable {
 	private ImageView hunterImg;
 	@FXML
 	private Button hunterBtn;
+	@FXML
+	private ImageView timeImg;
+	@FXML
+	private Button AddTimeBtn;
 
 	ArrayList<Label> nameLabels = new ArrayList<Label>();
 	ArrayList<Label> desLabels = new ArrayList<Label>();
@@ -120,7 +124,7 @@ public class RoomUIController implements Initializable {
 							playerSetting();
 							btnSetting();
 							descriptionSetting();
-							desInputSetting();
+							//desInputSetting();
 							question_label.setText("題目:" + StartPage.player.getCard());
 							if (StartPage.player.getAlive()) {
 								if (StartPage.room.getGameStatus().equals("description")) {
@@ -137,8 +141,8 @@ public class RoomUIController implements Initializable {
 								}
 								if (StartPage.room.getGameStatus().equals("vote") && !StartPage.player.getIsVote()) {
 									btnShow = true;
-								} /*else
-									btnShow = false;*/
+								} else
+									btnShow = false;
 								if (StartPage.room.getGameStatus().equals("finish")) {
 									/*
 									 * Parent root =
@@ -323,7 +327,7 @@ public class RoomUIController implements Initializable {
 	public void useItemTime(ActionEvent e) {
 		int[] items = StartPage.player.getItems();
 		StartPage.player.useItem("timer");
-		StartPage.player.sendMessage("UseItem:hunter" + String.valueOf(items[1]) + StartPage.player.getAccount());
+		StartPage.player.sendMessage("UseItem:AddTime:" + String.valueOf(items[1]) +":"+ StartPage.player.getAccount() + ":" + StartPage.room.getId());
 	}
 
 	public void vote1(ActionEvent e) {
