@@ -65,8 +65,18 @@ public class SettlementPageController implements Initializable
 
 		
 		// TODO Auto-generated method stub
-		int exp_reward=1700;
-		int coin_reward=100;
+		int exp_reward=50;
+		int coin_reward=50;
+		if(StartPage.player.getItems()[2]>0)
+		{
+			exp_reward*=2;
+			StartPage.player.useItem("exp");
+		}
+		if(StartPage.player.getItems()[3]>0)
+		{
+			coin_reward*=2;
+			StartPage.player.useItem("coin");
+		}
 		NameLabel.setText("玩家暱稱:"+StartPage.player.getName());
 		String BeforeLevel = String.valueOf(StartPage.player.getLevel());
 		String BeforeCoin = String.valueOf(StartPage.player.getCoin());

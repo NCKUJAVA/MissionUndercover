@@ -32,7 +32,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="27.0" prefHeight="79.0" prefWidth="548.0" style="-fx-alignment: center;" text="Welcome: Mission Undercover" textAlignment="CENTER">
+      <Label layoutX="121.0" layoutY="27.0" prefHeight="79.0" prefWidth="606.0" style="-fx-alignment: center;" text="Welcome: Mission Undercover" textAlignment="CENTER">
          <font>
             <Font size="40.0" />
          </font>
@@ -42,10 +42,12 @@
             <Font size="18.0" />
          </font>
       </Label>
+
       <Label layoutX="311.0" layoutY="114.0" prefHeight="33.0" prefWidth="176.0" style="-fx-alignment: center;" text="誰是臥底" textAlignment="CENTER">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
+
    </children>
 </AnchorPane>

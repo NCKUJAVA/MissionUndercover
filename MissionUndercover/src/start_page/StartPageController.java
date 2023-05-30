@@ -1,16 +1,23 @@
 package start_page;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+
 import javafx.stage.Stage;
 
 import javafx.scene.Node;
@@ -29,8 +36,10 @@ import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
 
+
 public class StartPageController implements Initializable
 {
+
     @FXML
     private TextField AccountTextField;
     
@@ -127,7 +136,7 @@ public class StartPageController implements Initializable
 				}
 				StartPage.player.resetNowString();
 				//Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
-				//Parent root = FXMLLoader.load(getClass().getResource("/settlement_page/SettlementPageFXML.fxml"));
+
 				Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
 
 		        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -214,5 +223,9 @@ public class StartPageController implements Initializable
         System.out.println("switch to mainwindow");
         
 	}
+
+
+
+
 
 }
