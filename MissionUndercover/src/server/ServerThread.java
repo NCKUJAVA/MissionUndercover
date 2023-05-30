@@ -259,10 +259,11 @@ public class ServerThread extends Servers implements Runnable {
 		System.out.println("VOte");
 		for (Room r : rooms) {
 			if (r.getId().equals(s.split(":")[2])) {
-				r.addVote(Integer.parseInt(s.split(":")[1]));
+				r.addVote(Integer.parseInt(s.split(":")[1]) - 1);
 				if (r.voteSum() == r.getAlivesNum()) {
 					int highestVote = r.getHighestVote();
 					r.setAlive(highestVote, false);
+					System.out.println("remaining alive:" + String.valueOf(r.getAlivesNum()));
 					// TODO : use hunter
 
 
@@ -287,6 +288,7 @@ public class ServerThread extends Servers implements Runnable {
 						try {
 							roomChat(r,"Chat/[系統通知]遊戲結束 平民獲勝");
 							roomChat(r, "Civilian WIN");
+							rooms.remove(r);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -295,6 +297,7 @@ public class ServerThread extends Servers implements Runnable {
 						try {
 							roomChat(r,"Chat/[系統通知]遊戲結束 臥底獲勝");
 							roomChat(r, "Undercover WIN");
+							rooms.remove(r);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -304,12 +307,18 @@ public class ServerThread extends Servers implements Runnable {
 							roomChat(r,"next Round");
 							roomChat(r,"Chat/[系統通知]繼續下一回合，計時60秒，請輸入您的描述");
 							roomChat(r,"setTime:60");
+							for(Player p : r.getPlayers()) {
+								p.setDescription("");
+							}
+							r.voteReset();
+							
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
 				}
+				break;
 			}
 		}
 
@@ -493,7 +502,12 @@ public class ServerThread extends Servers implements Runnable {
 			synchronized (rooms) {
 				for (Room r : rooms) {
 					if (p.getRoomId().equals(rid)) {
-						r.removePlayer(p);
+						for(Player pl : r.getPlayers()) {
+							if(pl.getName().equals(p.getName())) {
+								r.removePlayer(pl);
+							}
+						}
+						//r.removePlayer(p);
 						if (r.getPlayers().size() == 0)
 							rooms.remove(r);
 						break;

@@ -157,7 +157,11 @@ public class Room implements Serializable {
 	}
 
 	public void removePlayer(Player player) {
-		players.remove(player);
+		for(Player p: players) {
+			if(player.getName().equals(p.getName())) {
+				players.remove(p);
+			}
+		}
 	}
 
 	public void startGame() {

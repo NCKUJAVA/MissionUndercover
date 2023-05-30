@@ -22,7 +22,7 @@ public class Player implements Serializable{
 	private int exp = 0;
 	private int[] items = {0,0,0,0};
 	private Boolean ready = false;
-
+	private Boolean isVote = false;
 	private transient Socket socket ;
 	private String chatRoom = "";
 	private String roomId  = "";
@@ -115,6 +115,7 @@ public class Player implements Serializable{
 								for(Player p : StartPage.room.getPlayers()) {
 									p.setDescription("");
 								}
+								StartPage.player.setDescription("");
 								StartPage.room.setGameStatus("Description");
 							}
 							
@@ -470,5 +471,11 @@ public class Player implements Serializable{
 	
 	public Boolean getAlive() {
 		return alive;
+	}
+	public Boolean getIsVote() {
+		return isVote;
+	}
+	public void setIsVote(Boolean b) {
+		isVote = b;
 	}
 }

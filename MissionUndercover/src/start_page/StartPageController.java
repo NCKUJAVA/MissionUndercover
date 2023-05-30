@@ -119,6 +119,7 @@ public class StartPageController
 		        scene = new Scene(root);
 		        stage.setScene(scene);
 		        stage.show();
+		        stage.setTitle("user :" + StartPage.player.getName());
 		        System.out.println("switch to mainwindow");
 	    	}else
 	    	{

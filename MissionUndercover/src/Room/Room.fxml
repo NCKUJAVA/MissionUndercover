@@ -48,7 +48,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="733.0" layoutY="446.0" mnemonicParsing="false" onAction="#useItemHunter" text="獵人" />
+      <Button fx:id="hunterBtn" layoutX="733.0" layoutY="446.0" mnemonicParsing="false" onAction="#useItemHunter" text="獵人" />
       <Button layoutX="716.0" layoutY="502.0" mnemonicParsing="false" onAction="#useItemTime" text="增加時間" />
       <Label fx:id="timer" layoutX="384.0" layoutY="34.0" text="時間">
          <font>
@@ -121,8 +121,7 @@
          </font>
       </Label>
       <Button fx:id="finishBtn" layoutX="652.0" layoutY="633.0" mnemonicParsing="false" onAction="#finish" prefHeight="45.0" prefWidth="121.0" text="結算畫面" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="74.0" fitWidth="50.0" layoutX="728.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="hunterImg" fitHeight="74.0" fitWidth="50.0" layoutX="728.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/hunter.png" />
          </image>

@@ -47,7 +47,7 @@ public class SettlementPageController implements Initializable
 	public void back(ActionEvent event) throws IOException
 	{
 		System.out.println("back");
-        Parent root = FXMLLoader.load(getClass().getResource("/start_page/StartPageFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/mainwindow_page/mainwindow.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
