@@ -4,6 +4,7 @@ module MissionUndercover {
 	requires javafx.graphics;
 	requires java.sql;
 	requires javafx.base;
+	requires javafx.media;
 	
 	opens RoomChoice to javafx.graphics, javafx.fxml, javafx.base;
 	opens Room to javafx.graphics, javafx.fxml, javafx.base;

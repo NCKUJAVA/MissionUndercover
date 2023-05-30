@@ -1,6 +1,7 @@
 package start_page;
 	
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -14,7 +15,22 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 public class StartPage extends Application {
 	public static Player player = new Player();
@@ -24,6 +40,7 @@ public class StartPage extends Application {
 	public void start(Stage primaryStage) {
 		// use player.sendMessage to send command to server
 		try {
+
 //			player.setName("Charles");
 //			player.setCoin(1);
 //			player.setExp(1);
@@ -34,8 +51,14 @@ public class StartPage extends Application {
 			//Parent root = FXMLLoader.load(getClass().getResource("/settlement_page/SettlementPageFXML.fxml"));
 			//Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
 
+//			String path="counterclockwise.mp3";
+//			Media media = new Media(new File(path).toURI().toString()); 
+//	        mediaPlayer = new MediaPlayer(media);
+//	        mediaPlayer.setAutoPlay(true);
+//	        primaryStage.setTitle("Playing Audio");  
+//	        primaryStage.show();  
+	        //MediaView mediaView = new MediaView(mediaPlayer);
 			Parent root = FXMLLoader.load(getClass().getResource("StartPageFXML.fxml"));
-
 			Scene scene = new Scene(root,800,700);
 			scene.getStylesheets().add(getClass().getResource("StartPage.css").toExternalForm());
 			primaryStage.setScene(scene);
