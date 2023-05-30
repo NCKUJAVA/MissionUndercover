@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 
@@ -43,6 +44,14 @@ public class MaininfoController implements Initializable {
     @FXML
     private Label PackCoinLabel;
     @FXML
+    private AnchorPane maininfoPage;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 maininfoPage.getStylesheets().add(getClass().getResource("maininfo.css").toExternalForm());
+    	 display();
+    }
+    @FXML
     public void display() {
     	AccountLabel.setText(StartPage.player.getAccount());
     	LevelLabel.setText(String.valueOf(StartPage.player.getLevel()));
@@ -56,11 +65,7 @@ public class MaininfoController implements Initializable {
     	//System.out.println("display");
     }
     
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		display();
-		//System.out.println("display");
-	}
-	
+
 	public void leave(ActionEvent e) throws IOException {
 		System.out.println("leave");
 		

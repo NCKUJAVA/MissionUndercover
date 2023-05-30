@@ -9,11 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
@@ -64,9 +67,9 @@ public class AuthentificationQuestionPageController implements Initializable
 	String QuestionText="";
 	String AnswerText="";
 
-
-
-	
+    @FXML
+    private AnchorPane questionPage;
+ 	
 
 	
 	@FXML
@@ -80,7 +83,13 @@ public class AuthentificationQuestionPageController implements Initializable
 		System.out.println(AnswerText);
 		if(AnswerText.compareTo("")==0 || QuestionText == null)
 		{
-			StatusLabel.setText("安全驗證問題與答案皆不可為空");
+			//StatusLabel.setText("安全驗證問題與答案皆不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("安全驗證問題與答案皆不可為空");
+
+            alert.showAndWait();
 			//StartPage.player.resetNowString();
 		}else
 		{
@@ -95,8 +104,14 @@ public class AuthentificationQuestionPageController implements Initializable
 
 			
 			String name = parts[2];
-			StatusLabel.setText("驗證成功，帳戶註冊完成\n歡迎"+name+"的加入!");
-			StatusLabel1.setText("請返回登入頁面登入您的帳號");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("驗證成功");
+            alert.setHeaderText(null);
+            alert.setContentText("帳戶註冊完成，歡迎"+name+"的加入!\n請返回登入頁面登入您的帳號");
+
+            alert.showAndWait();
+			//StatusLabel.setText("驗證成功，帳戶註冊完成\n歡迎"+name+"的加入!");
+			//StatusLabel1.setText("請返回登入頁面登入您的帳號");
 			FinishSignUpButton.setDisable(true);
 //			prestatement.close();
 //			connection.close();
@@ -153,8 +168,10 @@ public class AuthentificationQuestionPageController implements Initializable
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+   	 	questionPage.getStylesheets().add(getClass().getResource("AuthentificationQuestionPage.css").toExternalForm());
+
 		// TODO Auto-generated method stub
-		StatusLabel1.setText("");
+		//StatusLabel1.setText("");
 		QuestionComboBox.setStyle("-fx-font-size: 16px;");
 		QuestionComboBox.getItems().add("您的指導教授的名字是什麼?");
 		QuestionComboBox.getItems().add("您的高中班導的名字是什麼?");

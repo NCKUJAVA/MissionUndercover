@@ -9,11 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +29,7 @@ import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
 
-public class StartPageController
+public class StartPageController implements Initializable
 {
     @FXML
     private TextField AccountTextField;
@@ -57,7 +60,13 @@ public class StartPageController
     //PreparedStatement prestatement;
     Statement statement;
     ResultSet resultSet;
+    @FXML
+    private AnchorPane startPage;
     
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 startPage.getStylesheets().add(getClass().getResource("StartPage.css").toExternalForm());
+    }
     @FXML
     public void login(ActionEvent e) throws Exception
 	{
@@ -124,7 +133,13 @@ public class StartPageController
 	    	{
 	    		StartPage.player.resetNowString();
 	    		System.out.println(now_string);
-	    		LogInStatusLabel.setText("帳號或密碼有誤!");
+	    		//LogInStatusLabel.setText("帳號或密碼有誤!");
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("提示");
+	            alert.setHeaderText(null);
+	            alert.setContentText("帳號或密碼有誤!");
+
+	            alert.showAndWait();
 	    	}
 
 			

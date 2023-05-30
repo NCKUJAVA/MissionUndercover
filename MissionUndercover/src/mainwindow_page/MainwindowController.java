@@ -1,21 +1,35 @@
 package mainwindow_page;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import Player.Player;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import maininfo_page.MaininfoController;
 
 
-public class MainwindowController {
+public class MainwindowController implements Initializable{
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private AnchorPane mainWindow;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 mainWindow.getStylesheets().add(getClass().getResource("mainwindow.css").toExternalForm());
+    }
+    
+    
     
 	public void getRoom(ActionEvent e) throws IOException {
 		System.out.println("room");
@@ -64,6 +78,9 @@ public class MainwindowController {
         System.out.println("switch to itemshop");
         
 	}
+
+
+
 	
 
 	

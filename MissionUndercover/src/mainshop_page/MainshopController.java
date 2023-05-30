@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -85,13 +86,18 @@ public class MainshopController implements Initializable {
     @FXML
     private Button decreaseCoinButton;
     
-  
+    @FXML
+    private AnchorPane mainshopPage;
+    
+    @Override
     
     public void initialize(URL arg0, ResourceBundle arg1) {
     	updateHunterQuantityLabel();
     	updateTimeQuantityLabel();
     	updateExpQuantityLabel();
-    	updateCoinQuantityLabel();    	
+    	updateCoinQuantityLabel();
+   	 	mainshopPage.getStylesheets().add(getClass().getResource("mainshop.css").toExternalForm());
+
     }
     
    
