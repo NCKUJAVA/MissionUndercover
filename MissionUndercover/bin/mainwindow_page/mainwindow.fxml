@@ -34,53 +34,43 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainwindow_page.MainwindowController">
+<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainwindow_page.MainwindowController">
    <children>
-      <Label layoutX="273.0" layoutY="290.0" lineSpacing="1.0" prefHeight="49.0" prefWidth="270.0" style="-fx-background-color: gray;" text=" Misson Undercover" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold Italic" size="32.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.2090643346309662" green="0.43421053886413574" blue="0.23908382654190063" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <ImageView fitHeight="123.0" fitWidth="130.0" layoutX="343.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="123.0" fitWidth="130.0" layoutX="23.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/undercover.png" />
          </image>
       </ImageView>
-      <Button layoutX="350.0" layoutY="519.0" mnemonicParsing="false" onAction="#getShop" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="道具商店" />
-      <Button layoutX="502.0" layoutY="129.0" mnemonicParsing="false" onAction="#leave" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="離開" />
-      <MenuButton layoutX="246.0" layoutY="127.0" mnemonicParsing="false" style="-fx-background-radius: 30;" text="設定">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
-      <Button layoutX="346.0" layoutY="438.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="玩家資訊" />
-      <Button layoutX="345.0" layoutY="361.0" mnemonicParsing="false" onAction="#getRoom" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="進入等待房間" />
+      <Button layoutX="284.0" layoutY="460.0" mnemonicParsing="false" onAction="#getShop" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="道具商店">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="288.0" layoutY="556.0" mnemonicParsing="false" onAction="#leave" prefHeight="50.0" prefWidth="197.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="離開">
+         <font>
+            <Font size="21.0" />
+         </font></Button>
+      <Button layoutX="284.0" layoutY="359.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="玩家資訊">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="274.0" layoutY="269.0" mnemonicParsing="false" onAction="#getRoom" prefHeight="50.0" prefWidth="217.0" style="-fx-background-color: white; -fx-background-radius: 30;" text="進入等待房間">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Label layoutX="131.0" layoutY="37.0" prefHeight="79.0" prefWidth="591.0" style="-fx-alignment: center;" text="Welcome: Mission Undercover" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="257.0" layoutY="124.0" prefHeight="50.0" prefWidth="240.0" style="-fx-alignment: center;" text="登入主畫面" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

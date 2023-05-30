@@ -15,10 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 
@@ -33,9 +37,19 @@ public class RoomChoice implements Initializable {
 	@FXML
 	private TableColumn<Room, String> status;
 	private String rid = "";
+    @FXML
+    private AnchorPane roomchoiceImg;
+    @FXML
+    private Label NameLabel;
+    @FXML
+    private Label LevelLabel;
+    @FXML
+    private Label CoinLabel;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		display();
+		roomchoiceImg.getStylesheets().add(getClass().getResource("RoomChoice.css").toExternalForm());
 		RoomId.setCellValueFactory(new PropertyValueFactory<Room, String>("id"));
 		people.setCellValueFactory(new PropertyValueFactory<Room, Integer>("people"));
 		status.setCellValueFactory(new PropertyValueFactory<Room, String>("status"));
@@ -100,6 +114,12 @@ public class RoomChoice implements Initializable {
 		// rooms.add(room);
 
 		// tableView.setItems(rooms);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("提示");
+        alert.setHeaderText(null);
+        alert.setContentText("成功創立房間");
+
+        alert.showAndWait();
 		StartPage.player.setReady(false);
 		StartPage.player.sendMessage("CreateRoom");
 		StartPage.player.sendMessage(StartPage.player);
@@ -123,6 +143,12 @@ public class RoomChoice implements Initializable {
 
 		// tableView.refresh();
 		if (rid != "") {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("成功加入房間");
+
+            alert.showAndWait();
 			StartPage.player.setReady(false);
 			StartPage.player.sendMessage("AddRoom:" + rid);
 			StartPage.player.sendMessage(StartPage.player);
@@ -151,5 +177,12 @@ public class RoomChoice implements Initializable {
 		if(r!=null)
 			rid = r.getId();
 		//System.out.println("rid = " + rid);
+	}
+	 
+	public void display() {
+		NameLabel.setText(StartPage.player.getName());
+    	LevelLabel.setText(String.valueOf(StartPage.player.getLevel()));
+    	CoinLabel.setText(String.valueOf(StartPage.player.getCoin()));
+
 	}
 }

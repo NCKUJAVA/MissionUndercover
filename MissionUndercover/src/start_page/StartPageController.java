@@ -11,13 +11,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+
 import javafx.stage.Stage;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,7 +36,10 @@ import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
 
-public class StartPageController{
+
+public class StartPageController implements Initializable
+{
+
     @FXML
     private TextField AccountTextField;
     
@@ -60,7 +69,13 @@ public class StartPageController{
     //PreparedStatement prestatement;
     Statement statement;
     ResultSet resultSet;
+    @FXML
+    private AnchorPane startPage;
     
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 startPage.getStylesheets().add(getClass().getResource("StartPage.css").toExternalForm());
+    }
     @FXML
     public void login(ActionEvent e) throws Exception
 	{
@@ -73,8 +88,14 @@ public class StartPageController{
 	    System.out.println("Password:"+PasswordText);
 
 	    if(AccountText.compareTo("")==0 || PasswordText.compareTo("")==0)
-	    {
-	    	LogInStatusLabel.setText("帳號或密碼不可為空");
+	    {	
+	    	//LogInStatusLabel.setText("帳號或密碼不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("帳號或密碼不可為空");
+
+            alert.showAndWait();
 	    }else
 	    {
 	    	StartPage.player.sendMessage("LogIn:"+AccountText+"|"+PasswordText);
@@ -122,12 +143,19 @@ public class StartPageController{
 		        scene = new Scene(root);
 		        stage.setScene(scene);
 		        stage.show();
+		        stage.setTitle("user :" + StartPage.player.getName());
 		        System.out.println("switch to mainwindow");
 	    	}else
 	    	{
 	    		StartPage.player.resetNowString();
 	    		System.out.println(now_string);
-	    		LogInStatusLabel.setText("帳號或密碼有誤!");
+	    		//LogInStatusLabel.setText("帳號或密碼有誤!");
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("提示");
+	            alert.setHeaderText(null);
+	            alert.setContentText("帳號或密碼有誤!");
+
+	            alert.showAndWait();
 	    	}
 
 			

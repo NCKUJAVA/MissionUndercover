@@ -18,6 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import javafx.scene.image.ImageView;
+
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 
@@ -65,14 +69,22 @@ public class RoomUIController implements Initializable {
 	private Button finishBtn;
 	@FXML
 	private Label descriptionLabel;
+	@FXML
+	private ImageView hunterImg;
+	@FXML
+	private Button hunterBtn;
+
 	ArrayList<Label> nameLabels = new ArrayList<Label>();
 	ArrayList<Label> desLabels = new ArrayList<Label>();
 	ArrayList<Button> choiceBtns = new ArrayList<Button>();
 
 	private boolean btnShow = false;
-
+    @FXML
+    private AnchorPane roomImg;
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+   	 	roomImg.getStylesheets().add(getClass().getResource("Room.css").toExternalForm());
+
 		System.out.println("initialize");
 		StartPage.page = "Room";
 		nameLabels.add(P1Name);
@@ -91,6 +103,8 @@ public class RoomUIController implements Initializable {
 		choiceBtns.add(choiceBtn4);
 		finishBtn.setVisible(false);
 		finishBtn.setDisable(true);
+		hunterBtn.setVisible(false);
+		hunterImg.setVisible(false);
 
 		// P1Name.setText("Charles");
 		// P1Des.setText("灰色的");
@@ -107,12 +121,12 @@ public class RoomUIController implements Initializable {
 							btnSetting();
 							descriptionSetting();
 							desInputSetting();
-							question_label.setText(StartPage.player.getCard());
+							question_label.setText("題目:" + StartPage.player.getCard());
 							if (StartPage.player.getAlive()) {
 								if (StartPage.room.getGameStatus().equals("description")) {
 									readyBtn.setVisible(false);
 									readyBtn.setDisable(true);
-									if (!StartPage.player.getDescription().equals("")) {
+									if (StartPage.player.getDescription().equals("")) {
 										descriptionLabel.setVisible(true);
 										desInputOK.setVisible(true);
 										desInput.setVisible(true);
@@ -120,15 +134,11 @@ public class RoomUIController implements Initializable {
 										desInputOK.setDisable(false);
 										desInput.setDisable(false);
 									}
-								} else if (StartPage.room.getGameStatus().contains("WIN")) {
-									finishBtn.setVisible(true);
-									finishBtn.setDisable(false);
-									closeAllActiveObject();
 								}
-								if (StartPage.room.getGameStatus().equals("vote")) {
+								if (StartPage.room.getGameStatus().equals("vote") && !StartPage.player.getIsVote()) {
 									btnShow = true;
-								} else
-									btnShow = false;
+								} /*else
+									btnShow = false;*/
 								if (StartPage.room.getGameStatus().equals("finish")) {
 									/*
 									 * Parent root =
@@ -138,7 +148,16 @@ public class RoomUIController implements Initializable {
 									 */
 								}
 							} else {
-
+								// hunter time exp coin
+								if (StartPage.player.getItems()[0] > 0) {
+									hunterBtn.setVisible(true);
+									hunterImg.setVisible(true);
+								}
+							}
+							if (StartPage.room.getGameStatus().contains("WIN")) {
+								finishBtn.setVisible(true);
+								finishBtn.setDisable(false);
+								closeAllActiveObject();
 							}
 
 							// System.out.print("running");
@@ -202,6 +221,7 @@ public class RoomUIController implements Initializable {
 		ArrayList<Boolean> a = StartPage.room.getAlive();
 		for (int i = 0; i < choiceBtns.size(); i++) {
 			choiceBtns.get(i).setVisible(btnShow && a.get(i));
+			choiceBtns.get(i).setDisable(!(btnShow&&a.get(i)));
 		}
 	}
 
@@ -312,6 +332,7 @@ public class RoomUIController implements Initializable {
 			b.setVisible(false);
 			b.setDisable(true);
 		}
+		StartPage.player.setIsVote(true);
 	}
 
 	public void vote2(ActionEvent e) {
@@ -320,6 +341,7 @@ public class RoomUIController implements Initializable {
 			b.setVisible(false);
 			b.setDisable(true);
 		}
+		StartPage.player.setIsVote(true);
 	}
 
 	public void vote3(ActionEvent e) {
@@ -328,6 +350,7 @@ public class RoomUIController implements Initializable {
 			b.setVisible(false);
 			b.setDisable(true);
 		}
+		StartPage.player.setIsVote(true);
 	}
 
 	public void vote4(ActionEvent e) {
@@ -336,12 +359,13 @@ public class RoomUIController implements Initializable {
 			b.setVisible(false);
 			b.setDisable(true);
 		}
+		StartPage.player.setIsVote(true);
 	}
 
 	public void finish(ActionEvent e) {
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("/settlement_page/SettlementPage.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/settlement_page/SettlementPageFXML.fxml"));
 			Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);

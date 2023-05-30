@@ -1,1 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#maininfoPage {
+    /* 背景圖片設定 */
+    -fx-background-image: url("../../images/main.jpg");
+    -fx-background-size: cover;
+}

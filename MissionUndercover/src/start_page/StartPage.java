@@ -41,6 +41,7 @@ public class StartPage extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// use player.sendMessage to send command to server
+		
 		try {
 
 //			System.out.println("finish");

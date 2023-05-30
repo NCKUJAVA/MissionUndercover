@@ -6,31 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #90EE90;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sign_up_page.SignUpPageController">
+<AnchorPane fx:id="signupPage" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #90EE90;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sign_up_page.SignUpPageController">
    <children>
-      <Label layoutX="218.0" layoutY="42.0" prefHeight="46.0" prefWidth="387.0" style="-fx-alignment: center; -fx-background-color: #2b961f;" text="註冊介面" textAlignment="CENTER">
+      <Label layoutX="125.0" layoutY="222.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center; -fx-background-color: white;" text="帳號" textAlignment="CENTER">
          <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Label layoutX="357.0" layoutY="184.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center;" text="帳號" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
+            <Font size="25.0" />
          </font>
       </Label>
       <TextField fx:id="AccountTextField" layoutX="242.0" layoutY="215.0" prefHeight="46.0" prefWidth="330.0" />
-      <Label layoutX="362.0" layoutY="375.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center;" text="遊戲暱稱" textAlignment="CENTER">
+      <Label layoutX="120.0" layoutY="410.0" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: white;" text="遊戲暱稱" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font size="26.0" />
          </font>
       </Label>
-      <Label layoutX="362.0" layoutY="271.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center;" text="密碼" textAlignment="CENTER">
+      <Label layoutX="124.0" layoutY="311.0" prefHeight="22.0" prefWidth="99.0" style="-fx-alignment: center; -fx-background-color: white;" text="密碼" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font size="26.0" />
          </font>
       </Label>
       <TextField fx:id="PasswordTextField" layoutX="243.0" layoutY="304.0" prefHeight="46.0" prefWidth="330.0" />
-      <TextField fx:id="NameTextField" layoutX="243.0" layoutY="403.0" prefHeight="46.0" prefWidth="330.0" />
+      <TextField fx:id="NameTextField" layoutX="243.0" layoutY="403.0" prefHeight="46.0" prefWidth="330.0" style="-fx-background-color: white;" />
       <Button fx:id="SignUpButton" layoutX="357.0" layoutY="511.0" mnemonicParsing="false" onAction="#signup" prefHeight="79.0" prefWidth="109.0" style="-fx-border-radius: 30px;" text="註冊">
          <font>
             <Font size="20.0" />
@@ -41,8 +36,27 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Label fx:id="AccountCheckLabel" layoutX="583.0" layoutY="216.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Label fx:id="PasswordCheckLabel" layoutX="583.0" layoutY="304.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
-      <Label fx:id="NameCheckLabel" layoutX="583.0" layoutY="403.0" prefHeight="46.0" prefWidth="138.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="AccountCheckLabel" layoutX="583.0" layoutY="216.0" prefHeight="46.0" prefWidth="210.0" style="-fx-alignment: center;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="PasswordCheckLabel" layoutX="583.0" layoutY="304.0" prefHeight="46.0" prefWidth="210.0" style="-fx-alignment: center;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="NameCheckLabel" layoutX="583.0" layoutY="403.0" prefHeight="46.0" prefWidth="210.0" style="-fx-alignment: center;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label layoutX="131.0" layoutY="37.0" prefHeight="79.0" prefWidth="582.0" style="-fx-alignment: center;" text="Welcome: Mission Undercover" textAlignment="CENTER">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="321.0" layoutY="124.0" prefHeight="33.0" prefWidth="176.0" style="-fx-alignment: center;" text="誰是臥底" textAlignment="CENTER">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -9,11 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +28,7 @@ import java.time.LocalDateTime;
 import UserPackage.User;
 import authentification_question_page.AuthentificationQuestionPageController;
 
-public class SignUpPageController
+public class SignUpPageController implements Initializable
 {
     @FXML
     private TextField AccountTextField;
@@ -60,6 +63,13 @@ public class SignUpPageController
     
     private Scene scene;
     
+    @FXML
+    private AnchorPane signupPage;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 signupPage.getStylesheets().add(getClass().getResource("SignUpPage.css").toExternalForm());
+    }
     //private Parent root;
 
     int all_info_ok=1;
@@ -95,17 +105,35 @@ public class SignUpPageController
 	    if(AccountText.length()==0)
 	    {
 	    	all_info_ok=0;
-	    	AccountCheckLabel.setText("Account不可為空");
+	    	//AccountCheckLabel.setText("Account不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("帳號不可為空");
+
+            alert.showAndWait();
 	    }
 	    if(PasswordText.length()==0)
 	    {
 	    	all_info_ok=0;
-	    	PasswordCheckLabel.setText("Password不可為空");
+	    	//PasswordCheckLabel.setText("Password不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("密碼不可為空");
+
+            alert.showAndWait();
 	    }
 	    if(NameText.length()==0)
 	    {
 	    	all_info_ok=0;
-	    	NameCheckLabel.setText("Name不可為空");
+	    	//NameCheckLabel.setText("Name不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("遊戲暱稱不可為空");
+
+            alert.showAndWait();
 	    }
 
 	    if(all_info_ok==1)
@@ -119,9 +147,15 @@ public class SignUpPageController
 	    	System.out.println("StartPage:"+now_string);
 	    	if(now_string.contains("SignUp info ok")==true)
 	    	{
-		    	AccountCheckLabel.setText("OK!");
-		    	PasswordCheckLabel.setText("OK!");
-		    	NameCheckLabel.setText("OK!");
+		    	//AccountCheckLabel.setText("OK!");
+		    	//PasswordCheckLabel.setText("OK!");
+		    	//NameCheckLabel.setText("OK!");
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("註冊成功");
+                alert.setHeaderText(null);
+                alert.setContentText("請繼續進入安全性頁面");
+
+                alert.showAndWait();
 		        Parent root = FXMLLoader.load(getClass().getResource("/authentification_question_page/AuthentificationQuestionPageFXML.fxml"));
 		        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		        scene = new Scene(root);
@@ -134,14 +168,32 @@ public class SignUpPageController
 	    		String result=parts[1];
 	    		if(result.compareTo("1")==0)
 	    		{
-	    			AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+	    			//AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
+	                Alert alert = new Alert(AlertType.INFORMATION);
+	                alert.setTitle("提示");
+	                alert.setHeaderText(null);
+	                alert.setContentText("該帳號已存在，請註冊新帳戶或使用原有帳戶登入");
+
+	                alert.showAndWait();
 	    		}else if(result.compareTo("2")==0)
 	    		{
-	    			NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
+	    			//NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
+	                Alert alert = new Alert(AlertType.INFORMATION);
+	                alert.setTitle("提示");
+	                alert.setHeaderText(null);
+	                alert.setContentText("該暱稱已存在，請換一個新的暱稱");
+
+	                alert.showAndWait();
 	    		}else if(result.compareTo("3")==0)
 	    		{
-	    			AccountCheckLabel.setText("該帳號已存在，\n請註冊新帳戶\n或使用原有帳戶登入");
-	    			NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
+	    			//AccountCheckLabel.setText("該帳號已存在，請註冊新帳戶\n或使用原有帳戶登入");
+	    			//NameCheckLabel.setText("該暱稱已存在，\n請換一個新的暱稱");
+	                Alert alert = new Alert(AlertType.INFORMATION);
+	                alert.setTitle("提示");
+	                alert.setHeaderText(null);
+	                alert.setContentText("該帳號已存在，請註冊新帳戶或使用原有帳戶登入\n該暱稱已存在，請換一個新的暱稱");
+
+	                alert.showAndWait();
 	    		}
 	    	}
 
