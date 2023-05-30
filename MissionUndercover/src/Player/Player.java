@@ -58,7 +58,7 @@ public class Player implements Serializable{
 		//System.out.println("player()");
 		try {
 			System.out.println("Player constructor");
-			socket = new Socket("127.0.0.1", 8000);//TODO: check server ip     connect to server
+			socket = new Socket("172.28.245.165", 8000);//TODO: check server ip     connect to server
 			// out is used to send message to server;
 //			out = new PrintWriter(socket.getOutputStream());
 			out = new ObjectOutputStream(socket.getOutputStream());
