@@ -27,9 +27,11 @@ public class Player implements Serializable{
 	private String chatRoom = "";
 	private String roomId  = "";
 	private String card = "";
+	private Boolean isUnderCover = false;
 //	BufferedReader in;
 	private String description = "";
 	transient ObjectInputStream in;
+	private Boolean alive = true;
 	
 //	PrintWriter out;
 	transient ObjectOutputStream out;
@@ -63,54 +65,81 @@ public class Player implements Serializable{
 			// in is used to get message from server
 //			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			in = new ObjectInputStream(socket.getInputStream());
-
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
 					try {
 						System.out.println("new THREAD---- ----------------;");
 						while (true) {
-							
+							System.out.println("thread waiting message");
 //							String s = in.readLine();
 							String s = (String) in.readObject();
 							System.out.println("get command-======== :" + s);
 							//String s = in.readLine();
 							//System.out.println("player:"+s);
-							if (s.contains("Chat:")) {
+							if (s.contains("Chat/")) {
 								//TODO: write message to chatRoom
 //								s = s.substring(5);
-								chatRoom = chatRoom + s + "\n";
+								chatRoom = chatRoom + s.split("/")[1] + "\n";
 								System.out.println("CHAT: " + chatRoom);
 							}
+							else if (s.contains("gamestatus:")){
+								StartPage.room.setGameStatus(s.split(":")[1]);
+							}
+							else if (s.contains("Undercover WIN")) {
+								undercoverWIN();
+							}
+							else if (s.contains("Civilian WIN")) {
+								civilianWIN();
+							}
+							else if (s.contains("returnRoom:")) {
+								//TODO : setitems to theroom instead of room = in.readobject()
+								returnRoom();
+								
+							}
+							else if (s.contains("getout:")) {
+								getout(s);
+							}
 							else if (s.contains("AddRoom:")) {
-								StartPage.room.addPlayer(StartPage.player);
+								addRoom();
+								//StartPage.room.addPlayer(StartPage.player);
 							}
 							else if (s.contains("roominfo")){
 								StartPage.room.setId(s.split("/")[1]);
 							}
-							else if (s.contains("time:")) {
+							else if (s.contains("setTime:")) {
 								String[] tempS = s.split(":");
 								StartPage.room.setTime(Integer.parseInt(tempS[1]));
-								
 							}
+							else if (s.contains("next Round")) {
+								for(Player p : StartPage.room.getPlayers()) {
+									p.setDescription("");
+								}
+								StartPage.room.setGameStatus("Description");
+							}
+							
 							else if (s.contains("GetRooms")){
 								getRooms();
-
-								
 							}
+							/*else if (s.contains("playerAddroom/")) {
+								playerAddRoom(s);
+							}*/
 							else if (s.contains("question:")) {
 								String[] tempS = s.split(":");
 								StartPage.player.setCard(tempS[1]);
 								
 							}
-							else if(s.contains("Description")) {
+							else if(s.contains("Description:")) {
 								// Description/Name/Des
-								String[] msg = s.split("/");
+								String[] msg = s.split(":");
 								for(Player p: StartPage.room.getPlayers()) {
 									if(p.getName().equals(msg[1])) {
 										p.setDescription(msg[2]);
 									}
 								}
+							}
+							else if (s.contains("You OUT")) {
+								out();
 							}
 							else if (s.contains("LogIn successfully"))
 							{
@@ -189,7 +218,75 @@ public class Player implements Serializable{
 		this.name = name;
 		this.exp = exp;
 	}
+	
+	private void getout(String s) {
+		ArrayList<Player> players = StartPage.room.getPlayers();
+		for(int i = 0 ; i < players.size();i++) {
+			if(players.get(i).getName().equals(s.split(":")[1])) {
+				StartPage.room.setAlive(i, false);
+				break;
+			}
+		}
+	}
+	private void undercoverWIN() {
+		StartPage.room.setGameStatus("Undercover WIN");
+	}
+	private void civilianWIN() {
+		StartPage.room.setGameStatus("Civilian WIN");
+	}
+	private void out() {
+		StartPage.player.setAlive(false);
+	}
+	private void returnRoom() {
+		try {
+			Room r = (Room) in.readObject();
+			StartPage.room.setId(r.getId());
+			StartPage.room.setStatus(r.getStatus());
+			StartPage.room.setGameStatus(r.getGameStatus());
+			for(Player p : r.getPlayers()) {
+				StartPage.room.addPlayer(p);
+			}
+			StartPage.room.addPlayer(StartPage.player);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	private void addRoom() {
+		try {
+			System.out.println("someone addRoom");
+			Player newPlayer = (Player)in.readObject();
+			StartPage.room.addPlayer(newPlayer);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	private void playerAddRoom(String s) {
+		try {
+			Player p = (Player) in.readObject();
+			StartPage.room.addPlayer(p);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	private void getRooms() {
 //		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
@@ -308,22 +405,23 @@ public class Player implements Serializable{
 //		out.flush();
 	}
 	
-public void sendMessage(Player p) {
+	public void sendMessage(Player p) {
 		try {
 			out.writeObject(p);
 			out.flush();
 			out.reset();
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 //		out.println(s);
 //		out.flush();
-}
-	
+	}
 	public String getChatRoom() {
 		return chatRoom;
+	}
+	public void resetChatRoom() {
+		chatRoom = "";
 	}
 
 	public Socket getSocket() {
@@ -356,5 +454,21 @@ public void sendMessage(Player p) {
 	public String getNowString()
 	{
 		return this.now_string;
+	}
+	public void setReady(Boolean b) {
+		ready = b;
+	}
+	public void setIsUnderCover(Boolean b) {
+		isUnderCover = b;
+	}
+	public Boolean getIsUnderCover() {
+		return isUnderCover;
+	}
+	public void setAlive(Boolean b) {
+		alive = b;
+	}
+	
+	public Boolean getAlive() {
+		return alive;
 	}
 }

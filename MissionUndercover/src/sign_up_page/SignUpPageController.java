@@ -109,7 +109,7 @@ public class SignUpPageController implements Initializable
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
-            alert.setContentText("Account不可為空");
+            alert.setContentText("帳號不可為空");
 
             alert.showAndWait();
 	    }
@@ -120,7 +120,7 @@ public class SignUpPageController implements Initializable
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
-            alert.setContentText("Password不可為空");
+            alert.setContentText("密碼不可為空");
 
             alert.showAndWait();
 	    }
@@ -131,7 +131,7 @@ public class SignUpPageController implements Initializable
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
-            alert.setContentText("Name不可為空");
+            alert.setContentText("遊戲暱稱不可為空");
 
             alert.showAndWait();
 	    }

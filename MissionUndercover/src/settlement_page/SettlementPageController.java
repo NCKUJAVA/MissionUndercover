@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 import javafx.scene.Node;
@@ -44,6 +45,9 @@ public class SettlementPageController implements Initializable
     private Scene scene;
     
     @FXML
+    private AnchorPane settlementPage;
+    
+    @FXML
 	public void back(ActionEvent event) throws IOException
 	{
 		System.out.println("back");
@@ -57,6 +61,9 @@ public class SettlementPageController implements Initializable
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+   	 	settlementPage.getStylesheets().add(getClass().getResource("SettlementPage.css").toExternalForm());
+
+		
 		// TODO Auto-generated method stub
 		int exp_reward=1700;
 		int coin_reward=100;

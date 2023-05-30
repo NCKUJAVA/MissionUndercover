@@ -8,5 +8,5 @@
 
     /* 背景模糊效果設定
     -fx-background-color: transparent;*/
-    -fx-effect: blur(10px);
+    /* -fx-effect: blur(10px);*/
 }

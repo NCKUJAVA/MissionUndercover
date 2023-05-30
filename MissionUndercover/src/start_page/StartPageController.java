@@ -79,8 +79,14 @@ public class StartPageController implements Initializable
 	    System.out.println("Password:"+PasswordText);
 
 	    if(AccountText.compareTo("")==0 || PasswordText.compareTo("")==0)
-	    {
-	    	LogInStatusLabel.setText("帳號或密碼不可為空");
+	    {	
+	    	//LogInStatusLabel.setText("帳號或密碼不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("帳號或密碼不可為空");
+
+            alert.showAndWait();
 	    }else
 	    {
 	    	StartPage.player.sendMessage("LogIn:"+AccountText+"|"+PasswordText);

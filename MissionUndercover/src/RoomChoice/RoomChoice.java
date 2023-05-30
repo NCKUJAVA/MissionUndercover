@@ -15,9 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 
@@ -31,23 +36,36 @@ public class RoomChoice implements Initializable {
 	private TableColumn<Room, String> RoomId;
 	@FXML
 	private TableColumn<Room, String> status;
+	private String rid = "";
+    @FXML
+    private AnchorPane roomchoiceImg;
+    @FXML
+    private Label NameLabel;
+    @FXML
+    private Label LevelLabel;
+    @FXML
+    private Label CoinLabel;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		display();
+		roomchoiceImg.getStylesheets().add(getClass().getResource("RoomChoice.css").toExternalForm());
 		RoomId.setCellValueFactory(new PropertyValueFactory<Room, String>("id"));
 		people.setCellValueFactory(new PropertyValueFactory<Room, Integer>("people"));
 		status.setCellValueFactory(new PropertyValueFactory<Room, String>("status"));
+		StartPage.page = "RoomChoice";
+		rid = "";
 		// TODO:Get Rooms from server
 		StartPage.player.sendMessage("GetRooms");
 		try {
-		 
+
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
 					Runnable updater = new Runnable() {
 						@Override
 						public void run() {
-							System.out.println("start refresh table");
+							//System.out.println("start refresh table");
 							ObservableList<Room> rooms = tableView.getItems();
 							rooms.removeAll(rooms);
 							for (Room r : StartPage.rooms) {
@@ -57,44 +75,31 @@ public class RoomChoice implements Initializable {
 							tableView.refresh();
 						}
 					};
-					while(true) {
+					while (StartPage.page.equals("RoomChoice")) {
 						try {
 							Thread.sleep(1000);
-						}catch(InterruptedException ex) {
+						} catch (InterruptedException ex) {
 							System.out.println("roomchoice thread err");
 							ex.printStackTrace();
 						}
 						Platform.runLater(updater);
 					}
 				}
-			});
-			/*Platform.runLater(new Runnable() { // TODO: check if this can be used if the maybe solve the exception of
-												// the thread
-				// new Thread(new Runnable() {
-				@Override
-				public void run() {
-					int i = 0;
-					
-					try {
-						//while(i<3) {
-						Thread.sleep(3000);
-						System.out.println("start refresh table");
-						ObservableList<Room> rooms = tableView.getItems();
-						rooms.removeAll(rooms);
-						for (Room r : StartPage.rooms) {
-							rooms.add(r);
-						}
-						tableView.setItems(rooms);
-						tableView.refresh();
-						i++;
-						//}
-
-					} catch (Exception e) {
-						System.out.println("RoomUIControlle1231r error");
-						e.printStackTrace();
-					}
-				}
-			});*/
+			}).start();
+			/*
+			 * Platform.runLater(new Runnable() { // TODO: check if this can be used if the
+			 * maybe solve the exception of // the thread // new Thread(new Runnable() {
+			 * 
+			 * @Override public void run() { int i = 0;
+			 * 
+			 * try { //while(i<3) { Thread.sleep(3000);
+			 * System.out.println("start refresh table"); ObservableList<Room> rooms =
+			 * tableView.getItems(); rooms.removeAll(rooms); for (Room r : StartPage.rooms)
+			 * { rooms.add(r); } tableView.setItems(rooms); tableView.refresh(); i++; //}
+			 * 
+			 * } catch (Exception e) { System.out.println("RoomUIControlle1231r error");
+			 * e.printStackTrace(); } } });
+			 */
 		} catch (Exception e) {
 			System.out.println("Error out UI");
 		}
@@ -109,30 +114,52 @@ public class RoomChoice implements Initializable {
 		// rooms.add(room);
 
 		// tableView.setItems(rooms);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("提示");
+        alert.setHeaderText(null);
+        alert.setContentText("成功創立房間");
+
+        alert.showAndWait();
+		StartPage.player.setReady(false);
 		StartPage.player.sendMessage("CreateRoom");
 		StartPage.player.sendMessage(StartPage.player);
+		StartPage.player.resetChatRoom();
+		StartPage.room = new Room();
+		StartPage.room.addPlayer(StartPage.player);
 		Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
 		Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		System.out.println("switch to scene 2");
-		System.out.println("HIHIHI");
+		//System.out.println("switch to scene 2");
+		//System.out.println("HIHIHI");
 	}
 
 	@FXML
 	public void addRoom(ActionEvent e) throws IOException {
-		int selectID = tableView.getSelectionModel().getSelectedIndex();
-		Room room = tableView.getItems().get(selectID);
+		// int selectID = tableView.getSelectionModel().getSelectedIndex();
+		// Room room = tableView.getItems().get(selectID);
 		// room.addPlayer(new Player("Shang",2,2,2));
-		tableView.refresh();
 
-		Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
-		Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-		System.out.println("switch to scene 2");
+		// tableView.refresh();
+		if (rid != "") {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("成功加入房間");
+
+            alert.showAndWait();
+			StartPage.player.setReady(false);
+			StartPage.player.sendMessage("AddRoom:" + rid);
+			StartPage.player.sendMessage(StartPage.player);
+			StartPage.player.resetChatRoom();
+			Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
+			Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+			//System.out.println("switch to scene 2");
+		}
 	}
 
 	public void returnToMainWindow(ActionEvent e) throws IOException {
@@ -141,8 +168,21 @@ public class RoomChoice implements Initializable {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		System.out.println("switch to scene main");
+		//System.out.println("switch to scene main");
 
 	}
 
+	 public void rowClicked(MouseEvent event) {
+		Room r = tableView.getSelectionModel().getSelectedItem();
+		if(r!=null)
+			rid = r.getId();
+		//System.out.println("rid = " + rid);
+	}
+	 
+	public void display() {
+		NameLabel.setText(StartPage.player.getName());
+    	LevelLabel.setText(String.valueOf(StartPage.player.getLevel()));
+    	CoinLabel.setText(String.valueOf(StartPage.player.getCoin()));
+
+	}
 }

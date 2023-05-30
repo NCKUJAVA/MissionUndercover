@@ -3,5 +3,5 @@
     /* 背景圖片設定 */
     -fx-background-image: url("../../images/start.jpg");
     -fx-background-size: cover;
-    -fx-effect: blur(10px);
+     /*-fx-effect: blur(10px);*/
 }

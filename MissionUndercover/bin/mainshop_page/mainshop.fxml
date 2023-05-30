@@ -61,7 +61,7 @@
       </Label>
       <Button fx:id="increaseHunterButton" layoutX="345.0" layoutY="225.0" mnemonicParsing="false" onAction="#increaseHunterQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
       <Button fx:id="decreaseHunterButton" layoutX="438.0" layoutY="225.0" mnemonicParsing="false" onAction="#decreaseHunterQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
-      <Label fx:id="quantityHunter" layoutX="393.0" layoutY="223.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="quantityHunter" layoutX="393.0" layoutY="223.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <Label fx:id="payHunter" layoutX="541.0" layoutY="222.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="499.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -69,7 +69,7 @@
          </image>
       </ImageView>
       <Button fx:id="increaseTimeButton" layoutX="348.0" layoutY="329.0" mnemonicParsing="false" onAction="#increaseTimeQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Label fx:id="quantityTime" layoutX="393.0" layoutY="327.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="quantityTime" layoutX="393.0" layoutY="327.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <Button fx:id="decreaseTimeButton" layoutX="445.0" layoutY="329.0" mnemonicParsing="false" onAction="#decreaseTimeQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
       <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="501.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -78,7 +78,7 @@
       </ImageView>
       <Label fx:id="payTime" layoutX="541.0" layoutY="326.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <Button fx:id="increaseExpButton" layoutX="348.0" layoutY="419.0" mnemonicParsing="false" onAction="#increaseExpQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Label fx:id="quantityExp" layoutX="400.0" layoutY="417.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="quantityExp" layoutX="400.0" layoutY="417.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <Button fx:id="decreaseExpButton" layoutX="445.0" layoutY="419.0" mnemonicParsing="false" onAction="#decreaseExpQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
       <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="499.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -87,7 +87,7 @@
       </ImageView>
       <Label fx:id="payExp" layoutX="541.0" layoutY="417.0" prefHeight="31.0" prefWidth="73.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <Button fx:id="increaseCoinButton" layoutX="345.0" layoutY="510.0" mnemonicParsing="false" onAction="#increaseCoinQuantity" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: white;" text="＋" />
-      <Label fx:id="quantityCoin" layoutX="400.0" layoutY="508.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center;" textAlignment="CENTER" />
+      <Label fx:id="quantityCoin" layoutX="400.0" layoutY="508.0" prefHeight="31.0" prefWidth="30.0" style="-fx-alignment: center; -fx-background-color: white;" textAlignment="CENTER" />
       <Button fx:id="decreaseCoinButton" layoutX="445.0" layoutY="510.0" mnemonicParsing="false" onAction="#decreaseCoinQuantity" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: white;" text="-" />
       <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="501.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -34,7 +34,7 @@ public class MainwindowController implements Initializable{
 	public void getRoom(ActionEvent e) throws IOException {
 		System.out.println("room");
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/Room/Room.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/RoomChoice/RoomChoice.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
