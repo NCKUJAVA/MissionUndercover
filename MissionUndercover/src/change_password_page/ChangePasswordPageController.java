@@ -9,11 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +26,7 @@ import java.sql.Statement;
 import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
-public class ChangePasswordPageController 
+public class ChangePasswordPageController implements Initializable
 {
 	@FXML
 	private TextField NewPasswordTextField;
@@ -46,6 +49,16 @@ public class ChangePasswordPageController
     private static String old_pwd;
     String new_pwd="";
     String new_pwd_2="";
+    
+    
+    @FXML
+    private AnchorPane changepasswordPage;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 changepasswordPage.getStylesheets().add(getClass().getResource("ChangePasswordPage.css").toExternalForm());
+    }
+    
 	public static void passUserAccount(String user_account,String user_old_pwd)
 	{
 		account=user_account;
@@ -61,10 +74,23 @@ public class ChangePasswordPageController
 		new_pwd_2=CheckNewPasswordTextField.getText();
 		if(new_pwd.compareTo("")==0)
 		{
-			StatusLabel.setText("新密碼不可為空");
+			//StatusLabel.setText("新密碼不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("新密碼不可為空");
+
+            alert.showAndWait();
+			//QuestionLabel.setText(question);
 		}else if(new_pwd.compareTo(new_pwd_2)!=0)
 		{
-			StatusLabel.setText("密碼與確認密碼不符");
+			//StatusLabel.setText("密碼與確認密碼不符");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("密碼與確認密碼不符");
+
+            alert.showAndWait();
 		}else
 		{
 			StartPage.player.sendMessage("NewPassword:"+new_pwd);
@@ -75,14 +101,32 @@ public class ChangePasswordPageController
 			String s=StartPage.player.getNowString();
 			if(s.contains("G"))
 			{
-				StatusLabel.setText("新密碼不可與舊密碼一致");
+				//StatusLabel.setText("新密碼不可與舊密碼一致");
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("提示");
+	            alert.setHeaderText(null);
+	            alert.setContentText("新密碼不可與舊密碼一致");
+
+	            alert.showAndWait();
 			}else if(s.contains("Fail"))
 			{
-				StatusLabel.setText("資料庫發生問題，密碼更改失敗");
+				//StatusLabel.setText("資料庫發生問題，密碼更改失敗");
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("提示");
+	            alert.setHeaderText(null);
+	            alert.setContentText("資料庫發生問題，密碼更改失敗");
+
+	            alert.showAndWait();
 				ChangePasswordButton.setDisable(true);
 			}else if(s.contains("OK"))
 			{
-				StatusLabel.setText("密碼修改成功\n請返回登入頁面並以新密碼登入");
+				//StatusLabel.setText("密碼修改成功\n請返回登入頁面並以新密碼登入");
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setTitle("提示");
+	            alert.setHeaderText(null);
+	            alert.setContentText("密碼修改成功\n請返回登入頁面並以新密碼登入");
+
+	            alert.showAndWait();
 				ChangePasswordButton.setDisable(true);
 			}
 			

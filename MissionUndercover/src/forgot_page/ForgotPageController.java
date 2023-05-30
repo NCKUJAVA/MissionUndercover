@@ -9,11 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +27,7 @@ import java.util.Random;
 import java.time.LocalDateTime;
 import UserPackage.User;
 import change_password_page.ChangePasswordPageController;
-public class ForgotPageController 
+public class ForgotPageController implements Initializable
 {
 	@FXML
 	private Label AccountLabel;
@@ -54,14 +57,28 @@ public class ForgotPageController
     Statement statement;
     ResultSet resultSet;
     int AccountCheck=0;
+    
+    @FXML
+    private AnchorPane forgotPage;
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	 forgotPage.getStylesheets().add(getClass().getResource("ForgotPage.css").toExternalForm());
+    }
     @FXML
     public void ShowQuestion(ActionEvent e) throws Exception
     {
     	StartPage.player.resetNowString();
     	AccountText=AccountTextField.getText();
     	if(AccountText.compareTo("")==0)
-		{
-			AccountLabel.setText("帳號不可為空");
+		{	
+			//AccountLabel.setText("帳號不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("帳號不可為空");
+
+            alert.showAndWait();
 		}else
 		{
 			StartPage.player.sendMessage("Forgot:"+AccountText);
@@ -76,12 +93,24 @@ public class ForgotPageController
 				{
 					String[] parts = s.split("[:]");
 					String question = parts[2];
-					AccountLabel.setText("帳號正確，請回答安全驗證問題");
+					//AccountLabel.setText("帳號正確，請回答安全驗證問題");
+		            Alert alert = new Alert(AlertType.INFORMATION);
+		            alert.setTitle("提示");
+		            alert.setHeaderText(null);
+		            alert.setContentText("帳號正確，請回答安全驗證問題");
+
+		            alert.showAndWait();
 					QuestionLabel.setText(question);
 					ShowQuestionButton.setDisable(true);
 				}else if(s.contains("G"))
 				{
-					AccountLabel.setText("帳號錯誤，請重新輸入");
+					//AccountLabel.setText("帳號錯誤，請重新輸入");
+		            Alert alert = new Alert(AlertType.INFORMATION);
+		            alert.setTitle("提示");
+		            alert.setHeaderText(null);
+		            alert.setContentText("帳號錯誤，請重新輸入");
+
+		            alert.showAndWait();
 				}
 			}
 		}
@@ -98,7 +127,13 @@ public class ForgotPageController
     	AnswerText=AnswerTextField.getText();	
     	if(AnswerText.compareTo("")==0)
 		{
-			AnswerLabel.setText("答案不可為空");
+			//AnswerLabel.setText("答案不可為空");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("答案不可為空");
+
+            alert.showAndWait();
 		}else
 		{
 			StartPage.player.sendMessage("Answer:"+AnswerText);
@@ -111,7 +146,13 @@ public class ForgotPageController
 			{
 				if(s.contains("OK"))
 				{
-					AnswerLabel.setText("答案正確");
+					//AnswerLabel.setText("答案正確");
+		            Alert alert = new Alert(AlertType.INFORMATION);
+		            alert.setTitle("提示");
+		            alert.setHeaderText(null);
+		            alert.setContentText("答案正確");
+
+		            alert.showAndWait();
 		    		System.out.println("change password");
 		            Parent root = FXMLLoader.load(getClass().getResource("/change_password_page/ChangePasswordPageFXML.fxml"));
 		            stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -121,7 +162,13 @@ public class ForgotPageController
 		            System.out.println("switch to change password page");
 				}else if(s.contains("G"))
 				{
-					AnswerLabel.setText("答案錯誤，請重新輸入");
+					//AnswerLabel.setText("答案錯誤，請重新輸入");
+		            Alert alert = new Alert(AlertType.INFORMATION);
+		            alert.setTitle("提示");
+		            alert.setHeaderText(null);
+		            alert.setContentText("答案錯誤，請重新輸入");
+
+		            alert.showAndWait();
 				}
 			}
 			

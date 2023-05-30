@@ -18,7 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import javafx.scene.image.ImageView;
+
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import start_page.StartPage;
 
@@ -76,9 +79,12 @@ public class RoomUIController implements Initializable {
 	ArrayList<Button> choiceBtns = new ArrayList<Button>();
 
 	private boolean btnShow = false;
-
+    @FXML
+    private AnchorPane roomImg;
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+   	 	roomImg.getStylesheets().add(getClass().getResource("Room.css").toExternalForm());
+
 		System.out.println("initialize");
 		StartPage.page = "Room";
 		nameLabels.add(P1Name);
